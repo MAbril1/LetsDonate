@@ -16,7 +16,7 @@
 | Student Name | Student Email | GitHub Username |
 |    :---:     |     :---:     |     :---:       |
 | member1      |               |                 |
-| member2      |               |                 |
+| Milo Abril      |        mabril0526@gmail.com       |        MAbril1         |
 | member3      |               |                 |
 | member4      |               |                 |
 | member5      |               |                 |
