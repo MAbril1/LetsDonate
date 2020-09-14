@@ -24,10 +24,12 @@ function HomePage() {
           image={require("./images/himanshu.jpg")}
         />
         <Developer
-          name="Second Member"
-          role="My Role"
-          bio="My Bio."
-          image={require("./images/no-pic.jpg")}
+          name="Milo Abril"
+          role="Front-End Lead"
+          bio="\"Hello World\"
+                I am a Computer Science Senior at SFSU who was originally planning on obtaining a major in Digital Media.
+                My plans are to be a developer for websites, applications, or video games."
+          image={require("./images/Milo.jpg")}
         />
         <Developer
           name="Suman Basaula"
