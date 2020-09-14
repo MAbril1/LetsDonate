@@ -38,10 +38,11 @@ function HomePage() {
           image={require("./images/suman.jpg")}
         />
         <Developer
-          name="Fourth Member"
-          role="My Role"
-          bio="My Bio"
-          image={require("./images/no-pic.jpg")}
+          name="Marlon Bustamante"
+          role="Back-End Lead"
+          bio="Hello. I am a Computer Science senior. I enjoy tinkering with electronics and modifying existing code to suit my need.
+                In my free time I enjoy reading comic books and watching movies."
+          image={require("./images/marlon.JPG")}
         />
         <Developer
           name="Fifth Member"
