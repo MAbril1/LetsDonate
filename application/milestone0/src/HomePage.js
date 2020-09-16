@@ -26,7 +26,7 @@ function HomePage() {
         <Developer
           name="Milo Abril"
           role="Front-End Lead"
-          bio="\"Hello World\"
+          bio="Hello World
                 I am a Computer Science Senior at SFSU who was originally planning on obtaining a major in Digital Media.
                 My plans are to be a developer for websites, applications, or video games."
           image={require("./images/Milo.jpg")}
