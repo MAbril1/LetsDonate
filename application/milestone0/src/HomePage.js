@@ -45,10 +45,10 @@ function HomePage() {
           image={require("./images/marlon.JPG")}
         />
         <Developer
-          name="Fifth Member"
-          role="My Role"
-          bio="My Bio"
-          image={require("./images/no-pic.jpg")}
+          name="Dipendra Dhoj Rana"
+          role="Database Manager"
+          bio="Hi. I am majoring in Computer Science. This is my second semester here at SF State. I transfered from College of San Mateo last year. I love playing games. I love to keep myself updated about gadgets and electornics"
+          image={require("./images/dipendra.jpg")}
         />
         <Developer
           name="Kunyu Ruan"
