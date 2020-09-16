@@ -51,10 +51,12 @@ function HomePage() {
           image={require("./images/no-pic.jpg")}
         />
         <Developer
-          name="Sixth Member"
-          role="My Role"
-          bio="My Bio"
-          image={require("./images/no-pic.jpg")}
+          name="Kunyu Ruan"
+          role="Full Stack"
+          bio="Hi, I am currently majoring in computer science at SFSU. This is the first time I work as a team to development a web project.
+                   I like playing basketball and hanging out with friends.
+                   I also like playing video games."
+          image={require("./images/kunyu.jpg")}
         />
       </div>
     </div>
