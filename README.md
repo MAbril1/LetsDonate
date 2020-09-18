@@ -20,6 +20,6 @@
 | Marlon Bustamante       |mbustama@mail.sfsu.edu|bustamantemarlon | Back-End Lead    |
 | member4                 |                      |                 |                  |
 | Dipendra Dhoj Rana      | drana1@mail.sfsu.edu | dipendra00      | Database Manager |
-| Kunyu Ruan              | kruan1@mail.sfsu.edu | kunyuruan       |                  |
+| Kunyu Ruan              | kruan1@mail.sfsu.edu | kunyuruan       | Full Stack       |
 
 ## NO code needs to be stored in the root of your repository. You may rename the application folder if you like to your team's application name. But all source code related to your team's application should be stored inside the application folder.
