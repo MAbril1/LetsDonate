@@ -15,7 +15,7 @@
 
 | Student Name.           | Student Email        | GitHub Username | Role             |
 |    :---:                |     :---:            |     :---:       |   :---:          |
-| member1                 |                      |                 |                  |
+| Himanshu Garg           | hgarg@mail.sfsu.edu  | HimanshuGarg701 | Team Lead        |
 | Milo Abril              |  mabril0526@gmail.com|     MAbril1     | Front-End Lead   |
 | Marlon Bustamante       |mbustama@mail.sfsu.edu|bustamantemarlon | Back-End Lead    |
 | member4                 |                      |                 |                  |
