@@ -18,7 +18,7 @@
 | Himanshu Garg           | hgarg@mail.sfsu.edu  | HimanshuGarg701 | Team Lead        |
 | Milo Abril              |  mabril0526@gmail.com|     MAbril1     | Front-End Lead   |
 | Marlon Bustamante       |mbustama@mail.sfsu.edu|bustamantemarlon | Back-End Lead    |
-| member4                 |                      |                 |                  |
+| Suman Basaula           |sbasula@mail.sfsu.edu |   mrsuman3      | Github Master    |
 | Dipendra Dhoj Rana      | drana1@mail.sfsu.edu | dipendra00      | Database Manager |
 | Kunyu Ruan              | kruan1@mail.sfsu.edu | kunyuruan       | Full Stack       |
 
