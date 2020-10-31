@@ -1,65 +1,50 @@
-.topbar{
-    display: flex;
-    align-items: center;
-    position: sticky;
+.logo {
+  height: 70px;
+  width: 70px;
+  margin-left: 30px;
+  margin-top: 20px;
+  margin-bottom: 1px;
 }
 
-.tagLine{
-    display: flex;
-    align-items: center;
-    text-shadow: 2px 2px 4px #000000;
-    -webkit-animation: rainbow 5s infinite; 
-    animation: rainbow 5s infinite;
+.topBar{
+  display: flex;
+  position: sticky;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  top: 0;
+  width: 100%;
 }
 
-@-webkit-keyframes rainbow{
-    0%{color: orange;}	
-    10%{color: purple;}	
-      20%{color: red;}
-    30%{color: CadetBlue;}
-      40%{color: yellow;}
-    50%{color: coral;}
-      60%{color: green;}
-    70%{color: cyan;}
-    80%{color: DeepPink;}
-    90%{color: DodgerBlue;}
-      100%{color: orange;}
-  }
-  
 
-  @-ms-keyframes rainbow{
-     0%{color: orange;}	
-    10%{color: purple;}	
-      20%{color: red;}
-    30%{color: CadetBlue;}
-      40%{color: yellow;}
-    50%{color: coral;}
-      60%{color: green;}
-    70%{color: cyan;}
-    80%{color: DeepPink;}
-    90%{color: DodgerBlue;}
-      100%{color: orange;}
-  }
-  
+.topRight{
+  display: flex;
+  align-items: center;
+  margin-right: 70px;
+  justify-content: space-between;
+  width: 10vw;
+}
 
-  @keyframes rainbow{
-      0%{color: orange;}	
-    10%{color: purple;}	
-      20%{color: red;}
-    30%{color: CadetBlue;}
-      40%{color: yellow;}
-    50%{color: coral;}
-      60%{color: green;}
-    70%{color: cyan;}
-    80%{color: DeepPink;}
-    90%{color: DodgerBlue;}
-      100%{color: orange;}
-  }
+.topRight > button{
+  color: white;
+  background-color: #ff7779;
+  text-transform: inherit;
+}
 
-.logo{
-    height: 70px;
-    margin-left: 30px;
-    margin-top: 20px;
-    margin-bottom: 1px;
-    object-fit: contain;
+.search{
+  display: flex;
+  align-items: center;
+  height: 35px;
+  padding: 15px;
+  max-width: fit-content;
+  border: 1px solid lightgray;
+  border-radius: 900px;
+  flex: 1;
+}
+
+.search > input{
+  outline-width: 0;
+  padding: 15px;
+  border: none;
+  width: 300px;
 }
