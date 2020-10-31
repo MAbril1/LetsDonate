@@ -4,6 +4,7 @@
   margin-left: 30px;
   margin-top: 20px;
   margin-bottom: 1px;
+  padding-bottom: 10px;
 }
 
 .topBar{
@@ -14,6 +15,7 @@
   z-index: 100;
   top: 0;
   width: 100%;
+  background-color: slategrey;
 }
 
 
@@ -31,6 +33,10 @@
   text-transform: inherit;
 }
 
+.topRight > button:hover{
+  transform: scale(1.08);
+}
+
 .search{
   display: flex;
   align-items: center;
@@ -40,6 +46,7 @@
   border: 1px solid lightgray;
   border-radius: 900px;
   flex: 1;
+  background-color: white;
 }
 
 .search > input{

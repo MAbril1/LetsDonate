@@ -2,6 +2,8 @@ import React from 'react';
 import "./Card.css";
 import charity from './images/charity.png';
 
+
+
 function Card( {product} ) {
     return (
         <div className="card">
