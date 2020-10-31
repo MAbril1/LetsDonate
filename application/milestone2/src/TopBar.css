@@ -31,6 +31,12 @@
   text-transform: inherit;
 }
 
+.createPostButton > button{
+  color: white;
+  background-color: #ff7779;
+  text-transform: inherit;
+}
+
 .search{
   display: flex;
   align-items: center;
