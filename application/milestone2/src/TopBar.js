@@ -5,6 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Button } from "@material-ui/core";
+import axios from 'axios';
 
 import {Form, Label, Input, FormGroup, CustomInput, Modal, ModalBody} from 'reactstrap';
 
@@ -13,6 +14,29 @@ function TopBar() {
     const [formIsOpen, setformISOpen] = useState(false);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+
+    const makePost = () => {
+        setformISOpen(false);
+        if(name.length>0 && description.length>0){
+            var productImage = document.getElementById("productImage");
+            var form = new FormData();
+            form.append("productImage", productImage.files[0]);
+            form.append("name", name);
+            form.append("description", description);
+            axios.post("/api/postProduct", form, { headers: { 'content-type': "multipart/form-data"}})
+            .then(result => {
+                if(result.data.success){
+
+                }else{
+                    alert("Post Failure Occurred");
+                }
+            })
+            .catch(exception => {
+                alert(exception);
+            })
+        }
+    };
+    
     return (
         <div className="topBar">
             <div style={{display:"flex", alignItems:"center"}}>
@@ -38,16 +62,16 @@ function TopBar() {
                                 <FormGroup>
                                     <Label>Name of Product</Label>
                                     <Input value={name}
-                                        onChange={ev => {
-                                        setName(ev.target.value);
+                                        onChange={(word) => {
+                                        setName(word.target.value);
                                         }}
                                     />
                                 </FormGroup>
                                 <FormGroup>
                                     <Label>Description of Product</Label>
                                     <Input value={description}
-                                        onChange={ev => {
-                                        setDescription(ev.target.value);
+                                        onChange={(des) => {
+                                        setDescription(des.target.value);
                                         }}
                                     />
                                 </FormGroup>
@@ -58,7 +82,7 @@ function TopBar() {
                             </Form>
                         </ModalBody>
                         <div className='createPostButton'>
-                            <Button variant='outlined' onClick={() => setformISOpen(false)}>Create Post</Button>
+                            <Button variant='outlined' onClick={() => makePost()}>Create Post</Button>
                         </div>
                     </Modal>
                 </div>
