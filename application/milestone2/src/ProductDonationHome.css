@@ -2,4 +2,20 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    padding-top: 1%;
+}
+
+.filters {
+    float: left;
+    width: 15%;
+}
+
+.items {
+    float: left;
+    width: 85%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
 }

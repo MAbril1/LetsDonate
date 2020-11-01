@@ -1,6 +1,5 @@
 .card > img{
-    height: 300px;
-    width: 500px;
+    width: 100%;
     object-fit: contain;
 }
 
@@ -9,13 +8,12 @@
 }
 
 .card{
-    width: 500px;
-    height: 400px;
-    padding: 20px;
-    transition: transform 90ms;
+    width: 300px;
+    padding: 10px;
+    font-family: arial;
+    justify-content: left;
 }
 
 .card > h2{
     padding-top: 12px;
-    padding-left: 36px;
 }

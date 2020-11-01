@@ -2,19 +2,7 @@ import React from 'react';
 import './ProductDonationHome.css';
 import Card from './Card'
 
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(1),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-  }));
 
 /* some notes on how this *MIGHT* work:
 get items from database
@@ -27,37 +15,21 @@ fetch("BACKEND.js")
 */
 
 function ProductDonationHome() {
-    const classes = useStyles();
+    return (
+      <div className="productDonationHome">
+        <div className="filters">
 
-    function FormRow() {
-    return (
-        <React.Fragment>
-          <Grid item xs>
+        </div>
+        <div className="items">
             <Card />
-          </Grid>
-          <Grid item xs>
             <Card />
-          </Grid>
-          <Grid item xs>
             <Card />
-          </Grid>
-        </React.Fragment>
-      );
-    }
-  
-    return (
-      <div className={classes.root}>
-        <Grid container spacing={1}>
-          <Grid container item xs spacing>
-            <FormRow />
-          </Grid>
-          <Grid container item xs spacing>
-            <FormRow />
-          </Grid>
-          <Grid container item xs spacing>
-            <FormRow />
-          </Grid>
-        </Grid>
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+        </div>
       </div>
     );
 }
