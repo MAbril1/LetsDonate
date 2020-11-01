@@ -9,6 +9,7 @@ app.use(parser.json());
 
 app.get('/api', function(req, res){
     config.query(`SELECT * FROM products`, function (e, response, f) {
+      console.log(response);
       res.json(response);
     });
     
@@ -34,27 +35,33 @@ app.post('/api/postProduct', upload.single("imageFile"),function(req, res){
 });
 
 app.post('/api/makeSearch', function(req, res){
+
     
       config.query(`SELECT * FROM products WHERE name LIKE '${req.body.searchItem}'`, function (e, response, f) {
         res.json({success:true, products:response});
+
       });
       
 });
 
 app.post('/api/filterClothes', function(req, res){
+
       config.query("SELECT * FROM products WHERE productType LIKE 'cloth'", function (e, response, f) {
         res.json({success:true, products:response});
       });
       
+
       
 });
 
 app.post('/api/filterFurniture', function(req, res){
     
+
         config.query("SELECT * FROM products WHERE productType LIKE 'furniture'", function (e, response, f) {
           res.json({success:true, products:response});
 
         });
+
 });
 
 app.get("/*", function(req, res){
