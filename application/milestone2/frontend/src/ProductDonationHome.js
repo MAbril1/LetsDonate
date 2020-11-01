@@ -18,6 +18,8 @@ function ProductDonationHome() {
         .then((result) => {
             if(!result.data.success){
                 alert("Failed Search");
+            }else{
+                setItems(result.data.products);
             }
         })
         .catch(exception => {
@@ -30,6 +32,9 @@ function ProductDonationHome() {
         .then((result) => {
             if(!result.data.success){
                 alert("Failed Search");
+            }else{
+                setItems(result.data.products);
+                
             }
         })
         .catch(exception => {
@@ -64,7 +69,6 @@ function ProductDonationHome() {
                 <div className="split"></div>
                 <div className="items">
                     {items.map(item => <Card name={item.name} description={item.description}/> )}
-                    
                 </div>
             </div>
         );
