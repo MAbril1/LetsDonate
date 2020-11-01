@@ -10,7 +10,7 @@ function Card( {product} ) {
             
             alt=""/>
 
-            <h2>Product Name</h2>
+        <h2>Product Name</h2>
         </div>
     )
 }

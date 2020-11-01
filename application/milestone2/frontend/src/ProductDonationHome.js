@@ -2,7 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import './ProductDonationHome.css';
-import Card from './Card'
+import Card from './Card';
+import axios from 'axios';
+
 
 /* some notes on how this *MIGHT* work:
 get items from database
@@ -13,26 +15,24 @@ fetch("BACKEND.js")
 
   In the case that there are filters, the items displayed will only be shown based on said filter.
 */
+/*
+                    {items.map(item => <Card key={item.name} item={item} /> )}
+                    */
 
 function ProductDonationHome() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
 
-    // Note: the empty deps array [] means
-    // this useEffect will run once
-    // similar to componentDidMount()
+    
     useEffect(() => {
-        fetch("https://api.example.com/items")
-        .then(res => res.json())
+        axios.get("/api")
         .then(
             (result) => {
                 setIsLoaded(true);
-                setItems(result);
+                setItems(result.data);
+                console.log(result);
             },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
             (error) => {
                 setIsLoaded(true);
                 setError(error);
@@ -40,25 +40,20 @@ function ProductDonationHome() {
         )
     }, [])
 
-    // if (error) {
-    //     return <div>Error: {error.message}</div>;
-    // } else if (!isLoaded) {
-    //     return <div>Loading...</div>;
-    // } else {
         return (
             <div className="productDonationHome">
                 <div className="filters">
                     <h1>Filters</h1>
-                    <div class="checkbox">
+                    <div className="checkbox">
                         <label><input type="checkbox" rel="clothes" /*onchange="change();"*//>Clothes</label>
                     </div>
-                    <div class="checkbox">
+                    <div className="checkbox">
                         <label><input type="checkbox" rel="food" /*onchange="change();"*//>Food</label>
                     </div>
                 </div>
                 <div className="split"></div>
                 <div className="items">
-                    {items.map(item => <Card key={item.name} item={item} /> )}
+                    {console.log(items)}
                     <Card />
                     <Card />
                     <Card />

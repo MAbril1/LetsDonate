@@ -14,6 +14,19 @@ function TopBar() {
     const [formIsOpen, setformISOpen] = useState(false);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [search, setSearch] = useState("");
+
+    const makeSearch = () => {
+        axios.post("/api/makeSearch", {searchItem: search})
+        .then((result) => {
+            if(!result.data.success){
+                alert("Failed Search");
+            }
+        })
+        .catch(exception => {
+            alert("Failed Search");
+        })
+    }
 
     const makePost = () => {
         setformISOpen(false);
@@ -24,7 +37,7 @@ function TopBar() {
             form.append("name", name);
             form.append("description", description);
             axios.post("/api/postProduct", form, { headers: { 'content-type': "multipart/form-data"}})
-            .then(result => {
+            .then((result) => {
                 if(result.data.success){
 
                 }else{
@@ -32,7 +45,7 @@ function TopBar() {
                 }
             })
             .catch(exception => {
-                alert(exception);
+                alert("Post Failure Occurred");
             })
         }
     };
@@ -44,13 +57,18 @@ function TopBar() {
                     src={charity}
                     alt=""
             />
-            <p>letsDonate</p>
+
+            <div className='appTitle'>
+                <p>letsDonate</p>
             </div>
+        </div>
             
             
             <div className="search">
-                <input type="text" />
-                <SearchIcon />
+                <input type="text" onChange={(lookFor) => {
+                        setSearch(lookFor.target.value);
+                }}/>
+                <SearchIcon onClick={() => makeSearch()}/>
             </div>
 
             <div className="topRight">
@@ -63,7 +81,7 @@ function TopBar() {
                                     <Label>Name of Product</Label>
                                     <Input value={name}
                                         onChange={(word) => {
-                                        setName(word.target.value);
+                                            setName(word.target.value);
                                         }}
                                     />
                                 </FormGroup>
@@ -71,7 +89,7 @@ function TopBar() {
                                     <Label>Description of Product</Label>
                                     <Input value={description}
                                         onChange={(des) => {
-                                        setDescription(des.target.value);
+                                            setDescription(des.target.value);
                                         }}
                                     />
                                 </FormGroup>
