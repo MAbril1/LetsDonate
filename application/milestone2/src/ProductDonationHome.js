@@ -18,8 +18,15 @@ function ProductDonationHome() {
     return (
       <div className="productDonationHome">
         <div className="filters">
-
+            <h1>Filters</h1>
+            <div class="checkbox">
+                <label><input type="checkbox" rel="clothes" /*onchange="change();"*//>Clothes</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" rel="food" /*onchange="change();"*//>Food</label>
+            </div>
         </div>
+        <div className="split"></div>
         <div className="items">
             <Card />
             <Card />
