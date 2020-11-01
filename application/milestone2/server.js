@@ -12,18 +12,27 @@ app.get('/api', function(req, res){
     ];
     console.log("Hello There");
     res.json(products);
-})
+});
 
-app.get('/api/postProduct', function(req, res){
+app.post('/api/postProduct', function(req, res){
     console.log(req);
     res.send({success:true});
-})
+});
 
-app.get('/api/makeSearch', function(req, res){
+app.post('/api/makeSearch', function(req, res){
     console.log("Making Search");
-    console.log(req);
     res.send({success:true});
-})
+});
+
+app.post('/api/filterClothes', function(req, res){
+    console.log("Filtering Clothes");
+    res.send({success:true});
+});
+
+app.post('/api/filterFurniture', function(req, res){
+    console.log("Filtering Furniture");
+    res.send({success:true});
+});
 
 app.get("/*", function(req, res){
     res.sendFile(path.join(__dirname, "build", "index.html"));

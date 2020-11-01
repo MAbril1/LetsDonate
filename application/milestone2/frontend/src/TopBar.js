@@ -16,15 +16,19 @@ function TopBar() {
     const [description, setDescription] = useState("");
     const [search, setSearch] = useState("");
 
+    let searchable = {};
+
+    
     const makeSearch = () => {
-        axios.post("/api/makeSearch", {searchItem: search})
+        searchable["searchItem"] = search;
+        axios.post("api/makeSearch", searchable)
         .then((result) => {
             if(!result.data.success){
                 alert("Failed Search");
             }
         })
         .catch(exception => {
-            alert("Failed Search");
+            alert(exception);
         })
     }
 

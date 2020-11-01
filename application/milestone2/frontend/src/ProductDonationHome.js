@@ -22,9 +22,32 @@ fetch("BACKEND.js")
 function ProductDonationHome() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [check, setChecked] = useState(false);
     const [items, setItems] = useState([]);
 
+    const filterClothes = () => {
+        axios.post("api/filterClothes", {"clothes": "cloth"})
+        .then((result) => {
+            if(!result.data.success){
+                alert("Failed Search");
+            }
+        })
+        .catch(exception => {
+            alert(exception);
+        })
+    }
     
+    const filterFurniture = () => {
+        axios.post("api/filterFurniture", {"furniture": "furniture"})
+        .then((result) => {
+            if(!result.data.success){
+                alert("Failed Search");
+            }
+        })
+        .catch(exception => {
+            alert(exception);
+        })
+    }
     useEffect(() => {
         axios.get("/api")
         .then(
@@ -45,10 +68,10 @@ function ProductDonationHome() {
                 <div className="filters">
                     <h1>Filters</h1>
                     <div className="checkbox">
-                        <label><input type="checkbox" rel="clothes" /*onchange="change();"*//>Clothes</label>
+                        <label><input type="checkbox" rel="clothes" onClick={() => filterClothes()}/>Clothes</label>
                     </div>
                     <div className="checkbox">
-                        <label><input type="checkbox" rel="food" /*onchange="change();"*//>Food</label>
+                        <label><input type="checkbox" rel="furniture" onClick={() => filterFurniture()}/>Furniture</label>
                     </div>
                 </div>
                 <div className="split"></div>
