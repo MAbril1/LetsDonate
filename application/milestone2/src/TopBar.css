@@ -33,8 +33,10 @@
   text-transform: inherit;
 }
 
-.topRight > button:hover{
-  transform: scale(1.08);
+.createPostButton > button{
+  color: white;
+  background-color: #ff7779;
+  text-transform: inherit;
 }
 
 .search{
