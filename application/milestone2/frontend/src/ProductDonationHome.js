@@ -41,6 +41,20 @@ function ProductDonationHome() {
             alert(exception);
         })
     }
+
+    const allProducts = () =>{
+        axios.get("/api")
+        .then((result) => {
+                setIsLoaded(true);
+                setItems(result.data);
+                console.log(result.data[0].name);
+            },
+            (error) => {
+                setIsLoaded(true);
+                setError(error);
+            }
+        )
+    }
     useEffect(() => {
         axios.get("/api")
         .then((result) => {
@@ -64,6 +78,9 @@ function ProductDonationHome() {
                     </div>
                     <div className="checkbox">
                         <label><input type="checkbox" rel="furniture" onClick={() => filterFurniture()}/>Furniture</label>
+                    </div>
+                    <div className="checkbox">
+                        <label><input type="checkbox" rel="allItems" onClick={() => allProducts()}/>All Items</label>
                     </div>
                 </div>
                 <div className="split"></div>

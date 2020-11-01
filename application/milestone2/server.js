@@ -36,7 +36,6 @@ app.post('/api/postProduct', upload.single("imageFile"),function(req, res){
 
 app.post('/api/makeSearch', function(req, res){
 
-    
       config.query(`SELECT * FROM products WHERE name LIKE '${req.body.searchItem}'`, function (e, response, f) {
         res.json({success:true, products:response});
 
@@ -55,11 +54,8 @@ app.post('/api/filterClothes', function(req, res){
 });
 
 app.post('/api/filterFurniture', function(req, res){
-    
-
         config.query("SELECT * FROM products WHERE productType LIKE 'furniture'", function (e, response, f) {
           res.json({success:true, products:response});
-
         });
 
 });
