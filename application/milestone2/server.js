@@ -47,7 +47,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.post('/api/postProduct', upload.single("imageFile"),function(req, res){
-      config.query(`INSERT INTO products VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}')`, function (e, response, f) {
+      config.query(`INSERT INTO products VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}', '')`, function (e, response, f) {
+        console.log(response);
       });
       
 
@@ -56,22 +57,22 @@ app.post('/api/postProduct', upload.single("imageFile"),function(req, res){
 
 app.post('/api/makeSearch', function(req, res){
     
-      config.query("SELECT * FROM products WHERE name LIKE ", function (e, response, f) {});
+      config.query(`SELECT * FROM products WHERE name LIKE '${req.body}'`, function (e, response, f) {});
       
     res.send({success:true});
 });
 
 app.post('/api/filterClothes', function(req, res){
-      config.query("SELECT * FROM products WHERE type LIKE ", function (e, response, f) {});
+      config.query("SELECT * FROM products WHERE type LIKE clothes", function (e, response, f) {});
       
       res.send({success:true});
 });
 
 app.post('/api/filterFurniture', function(req, res){
     
-        config.query("SELECT * FROM products WHERE type LIKE ", function (e, response, f) {});
+        config.query("SELECT * FROM products WHERE type LIKE furniture", function (e, response, f) {});
       
-    res.send({success:true});
+        res.send({success:true});
 });
 
 app.get("/*", function(req, res){

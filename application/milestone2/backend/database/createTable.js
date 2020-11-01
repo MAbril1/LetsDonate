@@ -15,7 +15,9 @@ config.connect(function(fault){
     if(!fault){
         console.log("Connected");
         config.query("Create Database if not exists letsDonate;");
+        console.log("Before Use");
         config.query("USE letsDonate;", function (e, r, f) {});
+        console.log("After Use");
         config.query("CREATE TABLE IF NOT EXISTS products("+ 
                     "name varchar(30), " + 
                     "description varchar(30), " + 
