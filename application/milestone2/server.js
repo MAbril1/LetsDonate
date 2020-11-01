@@ -8,33 +8,10 @@ app.use(parser.json());
 
 
 app.get('/api', function(req, res){
-    const products = [
-        { name: 'Piano', description:'An Old Piano', productType:'Furniture'},
-        { name: 'Guitar', description:'An Old Guitar', productType:'Furniture'},
-        {name: 'Flute', description:'An Old Flute', productType:'Furniture'},
-        { name: 'Sitar', description:'An Old Sitar', productType:'Furniture'},
-        { name: 'Tabla', description:'An Old Tabla', productType:'Furniture'},
-        {name: 'Harmonium', description:'An Old Harmonium', productType:'Furniture'},
-        { name: 'Mouth Organ', description:'An Old Mouth Organ', productType:'Furniture'},
-        { name: 'Trumpet', description:'An Old Trumpet', productType:'Furniture'},
-        {name: 'Bell', description:'An Old Bell', productType:'Furniture'},
-        { name: 'Conga', description:'An Old Conga', productType:'Furniture'},
-        { name: 'Drum', description:'An Old Drum', productType:'Furniture'},
-        {name: 'Ukelele', description:'An Old Ukelele', productType:'Furniture'},
-        { name: 'Piano', description:'An Old Piano', productType:'Furniture'},
-        { name: 'Guitar', description:'An Old Guitar', productType:'Furniture'},
-        {name: 'Flute', description:'An Old Flute', productType:'Furniture'},
-        { name: 'Sitar', description:'An Old Sitar', productType:'Furniture'},
-        { name: 'Tabla', description:'An Old Tabla', productType:'Furniture'},
-        {name: 'Harmonium', description:'An Old Harmonium', productType:'Furniture'},
-        { name: 'Mouth Organ', description:'An Old Mouth Organ', productType:'Furniture'},
-        { name: 'Trumpet', description:'An Old Trumpet', productType:'Furniture'},
-        {name: 'Bell', description:'An Old Bell', productType:'Furniture'},
-        { name: 'Conga', description:'An Old Conga', productType:'Furniture'},
-        { name: 'Drum', description:'An Old Drum', productType:'Furniture'},
-        {name: 'Ukelele', description:'An Old Ukelele', productType:'Furniture'}
-    ];
-    res.json(products);
+    config.query(`SELECT * FROM products`, function (e, response, f) {
+      res.json(response);
+    });
+    
 });
 
 const multer = require("multer");
