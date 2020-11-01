@@ -16,21 +16,48 @@ function TopBar() {
     const [description, setDescription] = useState("");
     const [search, setSearch] = useState("");
     const [type, setType] = useState("");
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
 
-    let searchable = {};
+    // const makeSearch = () => {
+    //     axios.post("api/makeSearch", search)
+    //     .then((result) => {
+    //         if(!result.data.success){
+    //             alert("Failed Search");
+    //         } else {
+    //             //handle search
+    //             const searchfilter = result.filter(item =>
+    //                 item.toLowerCase().includes(search)
+    //             );
+    //             window.alert(search);
+    //         }
+    //     })
+    //     .catch(exception => {
+    //         alert(exception);
+    //     })
+    // }
 
-    
     const makeSearch = () => {
-        searchable["searchItem"] = search;
-        axios.post("api/makeSearch", searchable)
+        axios.get("/api")
         .then((result) => {
-            if(!result.data.success){
-                alert("Failed Search");
+                setIsLoaded(true);
+                window.alert(search);
+                if(this.state.search == null) {
+                    const searchresults = result.data;
+                    window.alert(searchresults[0].name);
+                } else {
+                    const searchresults = result.data.filter(name => 
+                        name.toString().toLowerCase().includes(search.toLowerCase())
+                    );
+                    window.alert(searchresults[0].name);
+                }
+                // window.alert(searchresults[0].name);
+            },
+            (error) => {
+                setIsLoaded(true);
+                setError(error);
             }
-        })
-        .catch(exception => {
-            alert(exception);
-        })
+        )
     }
 
     const makePost = () => {
