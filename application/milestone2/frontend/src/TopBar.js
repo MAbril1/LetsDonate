@@ -34,18 +34,18 @@ function TopBar() {
     }
 
     const makePost = () => {
-        setformISOpen(false);
         if(name.length>0 && description.length>0){
             var productImage = document.getElementById("productImage");
-            var form = new FormData();
-            form.append("productImage", productImage.files[0]);
-            form.append("name", name);
-            form.append("description", description);
-            form.append("type", type);
-            axios.post("/api/postProduct", form, { headers: { 'content-type': "multipart/form-data"}})
+            var formData = new FormData();
+            formData.append("imageFile", productImage.files[0]);
+            formData.append("name", name);
+            formData.append("description", description);
+            formData.append("type", type);
+            console.log(formData.getAll("name"), formData.getAll("imageFile"));
+            axios.post("/api/postProduct", formData, { headers: { 'content-type': "multipart/form-data"}})
             .then((result) => {
                 if(result.data.success){
-
+                    setformISOpen(false);
                 }else{
                     alert("Post Failure Occurred");
                 }
@@ -114,7 +114,7 @@ function TopBar() {
                             </Form>
                         </ModalBody>
                         <div className='createPostButton'>
-                            <Button variant='outlined' onClick={() => makePost()}>Create Post</Button>
+                            <Button variant='outlined' onClick={() => {makePost()}}>Create Post</Button>
                         </div>
                     </Modal>
                 </div>

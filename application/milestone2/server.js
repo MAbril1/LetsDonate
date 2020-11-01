@@ -37,59 +37,40 @@ app.get('/api', function(req, res){
     res.json(products);
 });
 
-app.post('/api/postProduct', function(req, res){
-    /*
-    config.connect(function(e) {
-        if (e) throw err;
-        config.query("INSERT INTO products VALUES('')", function (e, response, f) {
-          if (e) throw e;
-          console.log(response);
-        });
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: "frontend/src/images",
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
+
+app.post('/api/postProduct', upload.single("imageFile"),function(req, res){
+      config.query(`INSERT INTO products VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}')`, function (e, response, f) {
       });
-      */
+      
 
     res.send({success:true});
 });
 
 app.post('/api/makeSearch', function(req, res){
-    console.log("Making Search");
-    /*
-    config.connect(function(e) {
-        if (e) throw err;
-        config.query("SELECT * FROM products WHERE name LIKE ", function (e, response, f) {
-          if (e) throw e;
-          console.log(response);
-        });
-      });
-      */
+    
+      config.query("SELECT * FROM products WHERE name LIKE ", function (e, response, f) {});
+      
     res.send({success:true});
 });
 
 app.post('/api/filterClothes', function(req, res){
-    console.log("Filtering Clothes");
-    /*
-    config.connect(function(e) {
-        if (e) throw err;
-        config.query("SELECT * FROM products WHERE type LIKE ", function (e, response, f) {
-          if (e) throw e;
-          console.log(response);
-        });
-      });
-      */
-    res.send({success:true});
+      config.query("SELECT * FROM products WHERE type LIKE ", function (e, response, f) {});
+      
+      res.send({success:true});
 });
 
 app.post('/api/filterFurniture', function(req, res){
-    console.log("Filtering Furniture");
-    /*
-    config.connect(function(e) {
-        if (e) throw err;
-        config.query("SELECT * FROM products WHERE type LIKE ", function (e, response, f) {
-          if (e) throw e;
-          console.log(response);
-        });
-      });
-      */
+    
+        config.query("SELECT * FROM products WHERE type LIKE ", function (e, response, f) {});
+      
     res.send({success:true});
 });
 
