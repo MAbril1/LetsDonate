@@ -16,7 +16,7 @@ fetch("BACKEND.js")
   In the case that there are filters, the items displayed will only be shown based on said filter.
 */
 /*
-                    {items.map(item => <Card key={item.name} item={item} /> )}
+                    
                     */
 
 function ProductDonationHome() {
@@ -50,11 +50,10 @@ function ProductDonationHome() {
     }
     useEffect(() => {
         axios.get("/api")
-        .then(
-            (result) => {
+        .then((result) => {
                 setIsLoaded(true);
                 setItems(result.data);
-                console.log(result);
+                console.log(result.data[0].name);
             },
             (error) => {
                 setIsLoaded(true);
@@ -76,23 +75,8 @@ function ProductDonationHome() {
                 </div>
                 <div className="split"></div>
                 <div className="items">
-                    {console.log(items)}
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
+                    {items.map(item => <Card name={item.name} description={item.description}/> )}
+                    
                 </div>
             </div>
         );

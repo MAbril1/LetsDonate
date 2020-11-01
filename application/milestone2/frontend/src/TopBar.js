@@ -15,6 +15,7 @@ function TopBar() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [search, setSearch] = useState("");
+    const [type, setType] = useState("");
 
     let searchable = {};
 
@@ -40,6 +41,7 @@ function TopBar() {
             form.append("productImage", productImage.files[0]);
             form.append("name", name);
             form.append("description", description);
+            form.append("type", type);
             axios.post("/api/postProduct", form, { headers: { 'content-type': "multipart/form-data"}})
             .then((result) => {
                 if(result.data.success){
@@ -94,6 +96,14 @@ function TopBar() {
                                     <Input value={description}
                                         onChange={(des) => {
                                             setDescription(des.target.value);
+                                        }}
+                                    />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>Type (Example: Furniture, Cloth)</Label>
+                                    <Input value={type}
+                                        onChange={(productType) => {
+                                            setType(productType.target.value);
                                         }}
                                     />
                                 </FormGroup>

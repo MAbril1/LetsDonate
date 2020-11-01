@@ -2,7 +2,7 @@ import React from 'react';
 import "./Card.css";
 import charity from './images/charity.png';
 
-function Card( {product} ) {
+function Card( {name, description} ) {
     return (
         <div className="card">
             <img className="cardImage" 
@@ -10,7 +10,7 @@ function Card( {product} ) {
             
             alt=""/>
 
-        <h2>Product Name</h2>
+    <h2>{name}</h2>
         </div>
     )
 }
