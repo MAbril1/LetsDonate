@@ -1,23 +1,44 @@
 import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import './ProductDonationHome.css';
 import Card from './Card';
 import axios from 'axios';
+import { AppContext } from './App'
 
                     
 
 function ProductDonationHome() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [check, setChecked] = useState(false);
     const [items, setItems] = useState([]);
+
+    const {state, dispatch} = useContext(AppContext);
+
+    const getFromSearchBar = (newValue) => {
+        // alert(newValue);
+        dispatch({ type: 'UPDATE_INPUT', data: newValue,});
+        axios.post("api/makeSearch", newValue)
+        .then((result) => {
+            if(!result.data.success){
+                alert("Failed Search");
+            } else {
+                //handle search
+                setItems(result.data.products);
+                // window.alert(items.name);
+            }
+        })
+        .catch(exception => {
+            alert(exception);
+        })
+    };
 
     const filterClothes = () => {
         axios.post("api/filterClothes", {"clothes": "cloth"})
         .then((result) => {
             if(!result.data.success){
                 alert("Failed Search");
+            }else{
+                setItems(result.data.products);
             }
         })
         .catch(exception => {
@@ -30,6 +51,9 @@ function ProductDonationHome() {
         .then((result) => {
             if(!result.data.success){
                 alert("Failed Search");
+            }else{
+                setItems(result.data.products);
+                
             }
         })
         .catch(exception => {
@@ -60,15 +84,14 @@ function ProductDonationHome() {
                     <div className="checkbox">
                         <label><input type="checkbox" rel="furniture" onClick={() => filterFurniture()}/>Furniture</label>
                     </div>
+                    <input hidden='hidden' type="text" value={state.inputText} onChange={e => getFromSearchBar(e.target.value)}/>
                 </div>
                 <div className="split"></div>
                 <div className="items">
                     {items.map(item => <Card name={item.name} description={item.description}/> )}
-                    
                 </div>
             </div>
         );
-    // }
 }
 
 export default ProductDonationHome

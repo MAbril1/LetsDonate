@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext }  from 'react';
 import './TopBar.css';
 import charity from './images/charity.png';
 import SearchIcon from '@material-ui/icons/Search';
@@ -6,6 +6,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Button } from "@material-ui/core";
 import axios from 'axios';
+import { AppContext } from './App'
 
 import {Form, Label, Input, FormGroup, CustomInput, Modal, ModalBody} from 'reactstrap';
 
@@ -14,62 +15,27 @@ function TopBar() {
     const [formIsOpen, setformISOpen] = useState(false);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [search, setSearch] = useState("");
     const [type, setType] = useState("");
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
 
-    // const makeSearch = () => {
-    //     axios.post("api/makeSearch", search)
-    //     .then((result) => {
-    //         if(!result.data.success){
-    //             alert("Failed Search");
-    //         } else {
-    //             //handle search
-    //             const searchfilter = result.filter(item =>
-    //                 item.toLowerCase().includes(search)
-    //             );
-    //             window.alert(search);
-    //         }
-    //     })
-    //     .catch(exception => {
-    //         alert(exception);
-    //     })
-    // }
+    let searchable = {};
 
-    const makeSearch = () => {
-        axios.get("/api")
-        .then((result) => {
-                setIsLoaded(true);
-                window.alert(search);
-                if(this.state.search == null) {
-                    const searchresults = result.data;
-                    window.alert(searchresults[0].name);
-                } else {
-                    const searchresults = result.data.filter(name => 
-                        name.toString().toLowerCase().includes(search.toLowerCase())
-                    );
-                    window.alert(searchresults[0].name);
-                }
-                // window.alert(searchresults[0].name);
-            },
-            (error) => {
-                setIsLoaded(true);
-                setError(error);
-            }
-        )
-    }
+    const {state, dispatch} = useContext(AppContext);
+
+    const filterbyKey = (newValue) => {
+        dispatch({ type: 'UPDATE_INPUT', data: newValue,});
+        // alert(newValue);
+    };
 
     const makePost = () => {
         if(name.length>0 && description.length>0){
             var productImage = document.getElementById("productImage");
-            var formData = new FormData();
-            formData.append("imageFile", productImage.files[0]);
-            formData.append("name", name);
-            formData.append("description", description);
-            formData.append("type", type);
-            console.log(formData.getAll("name"), formData.getAll("imageFile"));
-            axios.post("/api/postProduct", formData, { headers: { 'content-type': "multipart/form-data"}})
+            var form = new FormData();
+            form.append("imageFile", productImage.files[0]);
+            form.append("name", name);
+            form.append("description", description);
+            form.append("type", type);
+            console.log(form.getAll("name"), form.getAll("imageFile"));
+            axios.post("/api/postProduct", form, { headers: { 'content-type': "multipart/form-data"}})
             .then((result) => {
                 if(result.data.success){
                     setformISOpen(false);
@@ -98,10 +64,8 @@ function TopBar() {
             
             
             <div className="search">
-                <input type="text" onChange={(lookFor) => {
-                        setSearch(lookFor.target.value);
-                }}/>
-                <SearchIcon onClick={() => makeSearch()}/>
+                <input type="text" value={state.inputText} onChange={e => filterbyKey(e.target.value)}/>
+                <SearchIcon /*onClick={() => alert(e.target.value)}*//>
             </div>
 
             <div className="topRight">
