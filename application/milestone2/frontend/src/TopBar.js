@@ -6,7 +6,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Button } from "@material-ui/core";
 import axios from 'axios';
-import { AppContext } from './App'
+import { AppContext } from './App';
+import Card from './Card';
 
 import {Form, Label, Input, FormGroup, CustomInput, Modal, ModalBody} from 'reactstrap';
 
@@ -36,7 +37,8 @@ function TopBar() {
                 alert("Failed Search");
             }else{
                 setItems(result.data.products);
-                window.alert(items.name);
+                console.log(items.products);
+                // alert(items.products);
             }
         })
         .catch(exception => {
@@ -133,9 +135,11 @@ function TopBar() {
                 <ExpandMoreIcon />
                 <AccountCircleIcon />
             </div>
-
+            <div>
+                {items.map(item => <Card name={item.name} description={item.description}/> )}
+            </div>
         </div>
-
+    
     )
 }
 
