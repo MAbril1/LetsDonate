@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext }  from 'react';
 import './TopBar.css';
 import charity from './images/charity.png';
 import SearchIcon from '@material-ui/icons/Search';
@@ -6,6 +6,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Button } from "@material-ui/core";
 import axios from 'axios';
+import { AppContext } from './App';
+import Card from './Card';
+
 import {Form, Label, Input, FormGroup, CustomInput, Modal, ModalBody} from 'reactstrap';
 import ProductDonationHome from './ProductDonationHome';
 
@@ -14,13 +17,19 @@ function TopBar() {
     const [formIsOpen, setformISOpen] = useState(false);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [search, setSearch] = useState("");
     const [type, setType] = useState("");
+    const [search, setSearch] = useState("");
     const [items, setItems] = useState([]);
 
     let searchable = {};
 
-    
+    const {state, dispatch} = useContext(AppContext);
+
+    const filterbyKey = (newValue) => {
+        dispatch({ type: 'UPDATE_INPUT', data: newValue,});
+        // alert(newValue);
+    };
+
     const makeSearch = () => {
         searchable["searchItem"] = search;
         axios.post("api/makeSearch", searchable)
@@ -29,6 +38,8 @@ function TopBar() {
                 alert("Failed Search");
             }else{
                 setItems(result.data.products);
+                console.log(items.products);
+                // alert(items.products);
             }
         })
         .catch(exception => {
@@ -74,10 +85,11 @@ function TopBar() {
             
             
             <div className="search">
+                {/* <input type="text" value={state.inputText} onChange={e => filterbyKey(e.target.value)}/> */}
                 <input type="text" onChange={(lookFor) => {
                         setSearch(lookFor.target.value);
                 }}/>
-                <SearchIcon onClick={() => makeSearch()}/>
+                <SearchIcon onClick={() => {makeSearch()}}/>
             </div>
 
             <div className="topRight">
@@ -124,9 +136,11 @@ function TopBar() {
                 <ExpandMoreIcon />
                 <AccountCircleIcon />
             </div>
-
+            <div>
+                {items.map(item => <Card name={item.name} description={item.description}/> )}
+            </div>
         </div>
-
+    
     )
 }
 
