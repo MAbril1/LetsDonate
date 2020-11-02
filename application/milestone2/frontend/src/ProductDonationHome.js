@@ -1,17 +1,36 @@
 import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import './ProductDonationHome.css';
 import Card from './Card';
 import axios from 'axios';
+import { AppContext } from './App'
 
                     
 
 function ProductDonationHome(props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [check, setChecked] = useState(false);
     const [items, setItems] = useState([]);
+
+    const {state, dispatch} = useContext(AppContext);
+
+    const getFromSearchBar = (newValue) => {
+        // alert(newValue);
+        dispatch({ type: 'UPDATE_INPUT', data: newValue,});
+        axios.post("api/makeSearch", newValue)
+        .then((result) => {
+            if(!result.data.success){
+                alert("Failed Search");
+            } else {
+                //handle search
+                setItems(result.data.products);
+                // window.alert(items.name);
+            }
+        })
+        .catch(exception => {
+            alert(exception);
+        })
+    };
 
     const filterClothes = () => {
         axios.post("api/filterClothes", {"clothes": "cloth"})
@@ -93,7 +112,6 @@ function ProductDonationHome(props) {
                 </div>
             </div>
         );
-    // }
 }
 
 export default ProductDonationHome
