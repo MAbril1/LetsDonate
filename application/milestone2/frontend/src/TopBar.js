@@ -10,6 +10,7 @@ import { AppContext } from './App';
 import Card from './Card';
 
 import {Form, Label, Input, FormGroup, CustomInput, Modal, ModalBody} from 'reactstrap';
+import ProductDonationHome from './ProductDonationHome';
 
 
 function TopBar() {
@@ -53,7 +54,7 @@ function TopBar() {
             form.append("imageFile", productImage.files[0]);
             form.append("name", name);
             form.append("description", description);
-            form.append("type", type);
+            form.append("productType", type);
             console.log(form.getAll("name"), form.getAll("imageFile"));
             axios.post("/api/postProduct", form, { headers: { 'content-type': "multipart/form-data"}})
             .then((result) => {

@@ -1,9 +1,7 @@
 const mysql = require('mysql');
 
 
-/*
-TODO: Fill out the databse host, username, pass, etc
-*/
+
 const config = mysql.createConnection({
     host: "csc648db.cfv7ws6h9rfu.us-east-2.rds.amazonaws.com",
     user: "csc648team3" ,
@@ -15,9 +13,7 @@ config.connect(function(fault){
     if(!fault){
         console.log("Connected");
         config.query("Create Database if not exists letsDonate;");
-        console.log("Before Use");
         config.query("USE letsDonate;", function (e, r, f) {});
-        console.log("After Use");
         config.query("CREATE TABLE IF NOT EXISTS products("+ 
                     "name varchar(30), " + 
                     "description varchar(30), " + 

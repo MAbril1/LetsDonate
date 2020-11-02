@@ -7,7 +7,7 @@ import { AppContext } from './App'
 
                     
 
-function ProductDonationHome() {
+function ProductDonationHome(props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
@@ -53,13 +53,27 @@ function ProductDonationHome() {
                 alert("Failed Search");
             }else{
                 setItems(result.data.products);
-                
             }
         })
         .catch(exception => {
             alert(exception);
         })
     }
+
+    const allProducts = () =>{
+        axios.get("/api")
+        .then((result) => {
+                setIsLoaded(true);
+                setItems(result.data);
+                console.log(result.data[0].name);
+            },
+            (error) => {
+                setIsLoaded(true);
+                setError(error);
+            }
+        )
+    }
+    
     useEffect(() => {
         axios.get("/api")
         .then((result) => {
@@ -73,9 +87,12 @@ function ProductDonationHome() {
             }
         )
     }, [])
+    
 
         return (
+            
             <div className="productDonationHome">
+                
                 <div className="filters">
                     <h1>Filters</h1>
                     <div className="checkbox">
@@ -85,12 +102,13 @@ function ProductDonationHome() {
                         <label><input type="checkbox" rel="furniture" onClick={() => filterFurniture()}/>Furniture</label>
                     </div>
                     <div className="checkbox">
-                        <label><input type="checkbox" value={state.inputText} />{e => getFromSearchBar(e.target.value)}</label>
+                        <label><input type="checkbox" rel="allItems" onClick={() => allProducts()}/>All Items</label>
                     </div>
+                    
                 </div>
                 <div className="split"></div>
                 <div className="items">
-                    {items.map(item => <Card name={item.name} description={item.description}/> )}
+                    {items.map(item => <Card name={item.name} description={item.description} productImage={item.productImage}/> )}
                 </div>
             </div>
         );

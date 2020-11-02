@@ -25,18 +25,16 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.post('/api/postProduct', upload.single("imageFile"),function(req, res){
-      console.log(req.body.name);
-      config.query(`INSERT INTO products VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}', '')`, function (e, response, f) {
+      console.log(req.file.originalname);
+      config.query(`INSERT INTO products VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}', '${req.file.originalname}')`, function (e, response, f) {
         
       });
-      
 
     res.send({success:true});
 });
 
 app.post('/api/makeSearch', function(req, res){
 
-    
       config.query(`SELECT * FROM products WHERE name LIKE '${req.body.searchItem}'`, function (e, response, f) {
         res.json({success:true, products:response});
 
@@ -55,11 +53,8 @@ app.post('/api/filterClothes', function(req, res){
 });
 
 app.post('/api/filterFurniture', function(req, res){
-    
-
         config.query("SELECT * FROM products WHERE productType LIKE 'furniture'", function (e, response, f) {
           res.json({success:true, products:response});
-
         });
 
 });
