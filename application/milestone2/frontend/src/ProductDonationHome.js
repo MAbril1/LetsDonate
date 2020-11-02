@@ -7,7 +7,7 @@ import axios from 'axios';
 
                     
 
-function ProductDonationHome() {
+function ProductDonationHome(props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [check, setChecked] = useState(false);
@@ -34,7 +34,6 @@ function ProductDonationHome() {
                 alert("Failed Search");
             }else{
                 setItems(result.data.products);
-                
             }
         })
         .catch(exception => {
@@ -55,6 +54,7 @@ function ProductDonationHome() {
             }
         )
     }
+    
     useEffect(() => {
         axios.get("/api")
         .then((result) => {
@@ -68,9 +68,12 @@ function ProductDonationHome() {
             }
         )
     }, [])
+    
 
         return (
+            
             <div className="productDonationHome">
+                
                 <div className="filters">
                     <h1>Filters</h1>
                     <div className="checkbox">
@@ -82,10 +85,11 @@ function ProductDonationHome() {
                     <div className="checkbox">
                         <label><input type="checkbox" rel="allItems" onClick={() => allProducts()}/>All Items</label>
                     </div>
+                    
                 </div>
                 <div className="split"></div>
                 <div className="items">
-                    {items.map(item => <Card name={item.name} description={item.description}/> )}
+                    {items.map(item => <Card name={item.name} description={item.description} productImage={item.productImage}/> )}
                 </div>
             </div>
         );

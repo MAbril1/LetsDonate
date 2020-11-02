@@ -6,8 +6,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Button } from "@material-ui/core";
 import axios from 'axios';
-
 import {Form, Label, Input, FormGroup, CustomInput, Modal, ModalBody} from 'reactstrap';
+import ProductDonationHome from './ProductDonationHome';
 
 
 function TopBar() {
@@ -16,6 +16,7 @@ function TopBar() {
     const [description, setDescription] = useState("");
     const [search, setSearch] = useState("");
     const [type, setType] = useState("");
+    const [items, setItems] = useState([]);
 
     let searchable = {};
 
@@ -27,7 +28,7 @@ function TopBar() {
             if(!result.data.success){
                 alert("Failed Search");
             }else{
-
+                setItems(result.data.products);
             }
         })
         .catch(exception => {
@@ -42,7 +43,7 @@ function TopBar() {
             form.append("imageFile", productImage.files[0]);
             form.append("name", name);
             form.append("description", description);
-            form.append("type", type);
+            form.append("productType", type);
             console.log(form.getAll("name"), form.getAll("imageFile"));
             axios.post("/api/postProduct", form, { headers: { 'content-type': "multipart/form-data"}})
             .then((result) => {
