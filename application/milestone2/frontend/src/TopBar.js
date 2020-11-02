@@ -16,6 +16,8 @@ function TopBar() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [type, setType] = useState("");
+    const [search, setSearch] = useState("");
+    const [items, setItems] = useState([]);
 
     let searchable = {};
 
@@ -25,6 +27,22 @@ function TopBar() {
         dispatch({ type: 'UPDATE_INPUT', data: newValue,});
         // alert(newValue);
     };
+
+    const makeSearch = () => {
+        searchable["searchItem"] = search;
+        axios.post("api/makeSearch", searchable)
+        .then((result) => {
+            if(!result.data.success){
+                alert("Failed Search");
+            }else{
+                setItems(result.data.products);
+                window.alert(items.name);
+            }
+        })
+        .catch(exception => {
+            alert("Failed Search");
+        })
+    }
 
     const makePost = () => {
         if(name.length>0 && description.length>0){
@@ -64,8 +82,11 @@ function TopBar() {
             
             
             <div className="search">
-                <input type="text" value={state.inputText} onChange={e => filterbyKey(e.target.value)}/>
-                <SearchIcon /*onClick={() => alert(e.target.value)}*//>
+                {/* <input type="text" value={state.inputText} onChange={e => filterbyKey(e.target.value)}/> */}
+                <input type="text" onChange={(lookFor) => {
+                        setSearch(lookFor.target.value);
+                }}/>
+                <SearchIcon onClick={() => {makeSearch()}}/>
             </div>
 
             <div className="topRight">

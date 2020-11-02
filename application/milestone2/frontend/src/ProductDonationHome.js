@@ -84,7 +84,9 @@ function ProductDonationHome() {
                     <div className="checkbox">
                         <label><input type="checkbox" rel="furniture" onClick={() => filterFurniture()}/>Furniture</label>
                     </div>
-                    <input hidden='hidden' type="text" value={state.inputText} onChange={e => getFromSearchBar(e.target.value)}/>
+                    <div className="checkbox">
+                        <label><input type="checkbox" value={state.inputText} />{e => getFromSearchBar(e.target.value)}</label>
+                    </div>
                 </div>
                 <div className="split"></div>
                 <div className="items">
