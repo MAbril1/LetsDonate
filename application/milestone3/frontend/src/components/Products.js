@@ -1,13 +1,21 @@
 import React, { Component, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Card from './Card.js';
+import './Products.css';
 
 class Products extends Component {
     state = {
         items: []
       }
 
-      componentDidMount() {
+      constructor(props) {
+        super(props);
+        this.filterClothes = this.filterClothes.bind(this);
+        this.filterFurniture = this.filterFurniture.bind(this);
+        this.allProducts = this.allProducts.bind(this);
+      }
+
+    componentDidMount() {
         axios.get(`/api`)
           .then(res => {
             const items = res.data;
@@ -15,20 +23,58 @@ class Products extends Component {
           })
       }
 
+    filterClothes() {
+        axios.post("api/filterClothes", {"clothes": "cloth"})
+        .then((result) => {
+            if(!result.data.success){
+                alert("Failed Search");
+            }else{
+                const items = result.data.products;
+                this.setState({ items });
+            }
+        })
+        .catch(exception => {
+            alert(exception);
+        })
+    }
+
+    filterFurniture() {
+        axios.post("api/filterFurniture", {"furniture": "furniture"})
+        .then((result) => {
+            if(!result.data.success){
+                alert("Failed Search");
+            }else{
+                const items = result.data.products;
+                this.setState({ items });
+            }
+        })
+        .catch(exception => {
+            alert(exception);
+        })
+    }
+
+    allProducts() {
+        axios.get(`/api`)
+          .then(res => {
+            const items = res.data;
+            this.setState({ items });
+          })
+    }
+
   render() {
     return (
-        <div className="productDonationHome">    
+        <div className="Products">    
             <div className="filters">
                 <h1>Filters</h1>
-                {/* <div className="checkbox">
-                    <label><input type="checkbox" rel="clothes" onClick={() => filterClothes()}/>Clothes</label>
+                <div className="checkbox">
+                    <label><input type="checkbox" rel="clothes" onClick={this.filterClothes}/>Clothes</label>
                 </div>
                 <div className="checkbox">
-                    <label><input type="checkbox" rel="furniture" onClick={() => filterFurniture()}/>Furniture</label>
+                    <label><input type="checkbox" rel="furniture" onClick={this.filterFurniture}/>Furniture</label>
                 </div>
                 <div className="checkbox">
-                    <label><input type="checkbox" rel="allItems" onClick={() => allProducts()}/>All Items</label>
-                </div>             */}
+                    <label><input type="checkbox" rel="allItems" onClick={this.allProducts}/>All Items</label>
+                </div>            
             </div>
             <div className="split"></div>
             <div className="items">
