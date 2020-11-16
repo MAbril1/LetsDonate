@@ -1,4 +1,5 @@
-import React, { Component, useState, useEffect, useContext } from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card from './Card.js';
 import './Products.css';
@@ -65,7 +66,7 @@ class Products extends Component {
     return (
         <div className="Products">    
             <div className="filters">
-                <h1>Filters</h1>
+                <h1 className="leftSide">Filters</h1>
                 <div className="checkbox">
                     <label><input type="checkbox" rel="clothes" onClick={this.filterClothes}/>Clothes</label>
                 </div>
@@ -78,7 +79,10 @@ class Products extends Component {
             </div>
             <div className="split"></div>
             <div className="items">
-                {this.state.items.map(item => <Card name={item.name} description={item.description} productImage={item.productImage}/> )}
+                {this.state.items.map(item => <Link className='link' to={{
+                    pathname:"/ProductPost",
+                    name: item.name
+                    }}><Card name={item.name} description={item.description} productImage={item.productImage}/></Link> )}
             </div>
         </div>
     );

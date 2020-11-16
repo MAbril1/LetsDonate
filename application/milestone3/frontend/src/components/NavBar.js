@@ -10,7 +10,7 @@ class NavBar extends Component {
     render() {
       return (
         <div className="NavBar">
-            <Link to={"/"}>
+            <Link className='link' to={"/"}>
             <div style={{display:"flex", alignItems:"center"}}>
                 <img className="logo" 
                     src={charity}
@@ -25,13 +25,11 @@ class NavBar extends Component {
             <div className="search">
                 <input type="text" />
                 <ExpandMoreIcon />
-                <SearchIcon />
+                <Link className='link' to={"/Products"}><SearchIcon /></Link>
             </div>
-            <Link to={"/User"}><AccountCircleIcon /></Link>
-            <Link to={"/Products"}>Products</Link>
-            <Link to={"/Fundraisers"}>Fundraisers</Link>
-            <Link to={"/ProductPost"}>ProductPost</Link>
-            <Link to={"/FundraiserPost"}>FundraiserPost</Link>
+            <Link className='link' to={"/User"}><AccountCircleIcon /></Link>
+            <Link className='link' to={"/Fundraisers"}>Fundraisers</Link>
+            <Link className='link' to={"/FundraiserPost"}>FundraiserPost</Link>
         </div>
       );
     }
