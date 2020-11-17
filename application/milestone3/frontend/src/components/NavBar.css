@@ -63,3 +63,7 @@
   border: none;
   width: 300px;
 }
+
+.dropDown {
+  min-width: 120,
+}
