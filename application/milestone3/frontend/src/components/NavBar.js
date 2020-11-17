@@ -16,10 +16,10 @@ class NavBar extends Component {
         browseType: "/Products"
     }
 
-    handleChange() {
-        const browseType = value
-        this.setState({ browseType })
-    }
+    // handleChange() {
+    //     const browseType = value
+    //     this.setState({ browseType })
+    // }
         
     render() { return (
         <div className="NavBar">
