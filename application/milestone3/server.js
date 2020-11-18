@@ -17,7 +17,7 @@ app.get('/api', function(req, res){
 
 const multer = require("multer");
 const storage = multer.diskStorage({
-  destination: "frontend/src/images",
+  destination: "frontend/public/images",
   filename: function(req, file, a) {
     a(null, file.originalname);
   }

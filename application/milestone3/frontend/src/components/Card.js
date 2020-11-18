@@ -8,7 +8,7 @@ function Card( {name, description, productImage} ) {
     if(productImage !== '' && productImage !== null) // checks if product has an image from the database
     {
         // checks if the image exists on the server, if not, use the default image
-        fetch("../images/" + productImage)
+        fetch("../../public/images/" + productImage)
             .then(res => {
             if(res.status == 404)
             {
@@ -16,7 +16,7 @@ function Card( {name, description, productImage} ) {
             }
             else
             {
-                image = "../images/" + productImage;
+                image = "../../public/images/" + productImage;
             }
         })
         .catch(err=>{image = "../images/charity.png";})
