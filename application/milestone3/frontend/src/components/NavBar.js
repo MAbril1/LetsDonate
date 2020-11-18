@@ -50,9 +50,11 @@ class NavBar extends Component {
                 </FormControl>
                 <Link className='link' to={this.browseType}><SearchIcon /></Link>
             </div>
-            <Link className='link' to={"/User"}><AccountCircleIcon /></Link>
-            <Link className='link' to={"/Fundraisers"}>Fundraisers</Link>
-            <Link className='link' to={"/FundraiserPost"}>FundraiserPost</Link>
+            <div>
+                <Link className='buttonLink' to={"/Fundraisers"}>Fundraisers</Link>
+                <Link className='buttonLink' to={"/Products"}>Products</Link>
+                <Link className='userLink' to={"/User"}><AccountCircleIcon /></Link>
+            </div>
         </div>
     );}
 }

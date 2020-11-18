@@ -42,7 +42,7 @@ export class FundraiserCard extends Component {
                                     </p>
                             </div>
                             <div className="amountRequired">
-                                <h2>{this.props.requiredAmount}</h2>
+                                <h2>Aiming {this.props.requiredAmount}</h2>
                             </div>
                         </div>
                     </div>

@@ -67,3 +67,17 @@
 .dropDown {
   min-width: 120,
 }
+
+.buttonLink{
+  text-decoration: none;
+  color: white;
+  background-color: #ff7779;
+  text-transform: inherit;
+  padding: 10px;
+  margin: 10px;
+}
+
+.userLink{
+  margin: 30px;
+  padding: 10px;
+}
