@@ -46,7 +46,11 @@ class NavBar extends Component {
                 </Select>
                 <Link className='link' to={this.state.browseType}><SearchIcon /></Link>
             </div>
-            <Link className='link' to={"/User"}><AccountCircleIcon className="user" /></Link>
+            <div>
+                <Link className='buttonLink' to={"/Fundraisers"}>Fundraisers</Link>
+                <Link className='buttonLink' to={"/Products"}>Products</Link>
+                <Link className='userLink' to={"/User"}><AccountCircleIcon /></Link>
+            </div>
         </div>
     );}
 }
