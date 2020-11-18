@@ -28,7 +28,7 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <div className="LandingBanner">
+        <div className="LandingBanner-bg"><div className="LandingBanner">
           <h1>Let's Donate</h1>
           <p>
             Let's Donate is the inbetween <br/>
@@ -37,7 +37,7 @@ class Home extends Component {
             need it and people that seek <br/>
             out help i their time of need. <br/>
           </p>
-        </div>
+        </div></div>
         <hr className="separator"></hr>
         <div className="Featured">
           <h2>Featured</h2>
