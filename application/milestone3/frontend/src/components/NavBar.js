@@ -5,22 +5,20 @@ import charity from '../images/charity.png';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 class NavBar extends Component {
-    state = {
-        browseType: "/Products"
-    }
-
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
+        this.state = { browseType: "/Products" };
     }
 
-    handleChange() {
-        const browseType = document.getElementById("browseType").value
-        this.setState({ browseType })
+    getType(selected) {
+        console.log(selected.value)
+        this.setState({ 
+            browseType: selected.value 
+        })
+        console.log(this.browseType)
     }
         
     render() { return (
@@ -39,20 +37,16 @@ class NavBar extends Component {
             </Link>
             <div className="search">
                 <input type="text" />
-                <FormControl className="dropDown">
-                    <Select
-                        id="browseType"
-                        value={this.state.browseType}
-                        onChange={this.state.handleChange}
-                    >
-                        <MenuItem value={"/Products"}>Products</MenuItem>
-                        <MenuItem value={"/Fundraisers"}>Fundraisers</MenuItem>
-                    </Select>
-                </FormControl>
+                <Select
+                    id="browseType"
+                    onChange={this.getType.bind(this)}
+                >
+                    <MenuItem value="/Products">Products</MenuItem>
+                    <MenuItem value="/Fundraisers">Fundraisers</MenuItem>
+                </Select>
                 <Link className='link' to={this.state.browseType}><SearchIcon /></Link>
             </div>
-            <Link className='link' to={"/User"}><AccountCircleIcon /></Link>
-            <Link className='link' to={"/FundraiserPost"}>FundraiserPost</Link>
+            <Link className='link' to={"/User"}><AccountCircleIcon className="user" /></Link>
         </div>
     );}
 }

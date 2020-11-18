@@ -67,3 +67,8 @@
 .dropDown {
   min-width: 120,
 }
+
+.user {
+  margin-right: 30px;
+  margin-bottom: 1px;
+}
