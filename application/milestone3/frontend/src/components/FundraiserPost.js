@@ -6,7 +6,6 @@ import Star from "@material-ui/icons/Star";
 class FundraiserPost extends Component {
   
   render() {
-
         const image = this.props.location.details.image.image;
         const title = this.props.location.details.title.title;
         const requiredAmount = this.props.location.details.requiredAmount.requiredAmount;
