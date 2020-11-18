@@ -9,7 +9,7 @@ class Fundraisers extends Component {
     return (
       <div>
         <div className="donationHeading">
-          <h1>Donations</h1>
+          <h1>Fundraisers</h1>
         </div>
         <FundraiserCard title="Hospital Expenses" 
                         description="Money required for the hospital and medicine expenses."
