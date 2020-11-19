@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
+import './PopUps.css';
 import charity from '../images/charity.png';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -52,7 +53,7 @@ class NavBar extends Component {
                 <Link className='buttonLink' to={"/Fundraisers"}>Fundraisers</Link>
                 <Link className='buttonLink' to={"/Products"}>Products</Link>
                 <Popup
-                    trigger={<button className="button"> Login/SignUp </button>}
+                    trigger={<button className="buttonLink"> Login/SignUp </button>}
                     modal
                     nested
                 >
@@ -63,7 +64,8 @@ class NavBar extends Component {
                             </button>
                             <div className="header"> Login/Sign Up </div>
                             <div className="content">
-                            
+                                <div className="forms">Username: <input type="text" /></div>
+                                <div className="forms">Password: <input type="text" /></div>
                             </div>
                             <div className="actions">
                                 <button

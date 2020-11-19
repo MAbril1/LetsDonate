@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './FundraiserPost.css';
 import { Button } from "@material-ui/core";
 import Star from "@material-ui/icons/Star";
+import Report from './Report.js';
 
 class FundraiserPost extends Component {
   
@@ -43,7 +44,7 @@ class FundraiserPost extends Component {
                         </p>
             </div>
             <div className="spamProduct">
-              <Button variant='outlined'>Report Spam</Button>
+              <Report />
             </div>
           </div>
             <h3>{description}</h3>

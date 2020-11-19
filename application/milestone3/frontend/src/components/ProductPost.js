@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './FundraiserPost.css';
 import { Button } from "@material-ui/core";
-import Star from "@material-ui/icons/Star";
+import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
+import Report from './Report.js';
 
 class ProductPost extends Component {
   
@@ -23,13 +24,13 @@ class ProductPost extends Component {
               <h2>{name}</h2>
             </div>
             <div className="starRating">
-                  <Star className="star" />
+                  <FavoriteBorder className="star" />
                         <p>
                           {/* <strong>{likes}</strong> */}
                         </p>
             </div>
             <div className="spamProduct">
-              <Button variant='outlined'>Report Spam</Button>
+              <Report />
             </div>
           </div>
             <h3>[This is the description]{description}</h3>

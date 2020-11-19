@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import user from '../images/user.jpg';
 import './User.css';
+import './PopUps.css';
 import Star from "@material-ui/icons/Star";
-import { Button } from "@material-ui/core";
 import FundraiserCard from './FundraiserCard';
 import city from '../images/city.jpg';
-import bike from '../images/bike.jpg';
-import shirt from '../images/shirt.jpg';
 import { Link } from 'react-router-dom';
 import Card from './Card';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import Report from './Report.js';
 
 class User extends Component {
   render() {
@@ -29,6 +28,7 @@ class User extends Component {
               <Star className="star" />
               <Star className="star" />
             </div>
+            <Report />
           </div>
           <div className="topRight">
           

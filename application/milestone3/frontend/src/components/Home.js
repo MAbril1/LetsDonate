@@ -42,12 +42,13 @@ class Home extends Component {
         <div className="Featured">
           <h2>Featured</h2>
         </div>
-        <Link className='buttonLink' to={"/Fundraisers"}>Fundraisers</Link>
+        <hr/>
+        <Link className='buttonLink' to={"/Fundraisers"}>Products</Link>
         <div className="scrollmenu">
           {this.state.items.map(item => <Card name={item.name} description={item.description} productImage={item.productImage}/> )}
         </div>
         <hr/>
-        <Link className='buttonLink' to={"/Products"}>Products</Link>
+        <Link className='buttonLink' to={"/Products"}>Fundraisers</Link>
         <div className="scrollmenu">
           <FundraiserCard title="Hospital Expenses" 
                         description="Money required for the hospital and medicine expenses."
@@ -65,6 +66,7 @@ class Home extends Component {
                                 requiredAmount="$100,000"
                                 image={candies}/>
         </div>
+        <hr/>
       </div>
     );
   }
