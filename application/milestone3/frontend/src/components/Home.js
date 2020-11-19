@@ -35,7 +35,7 @@ class Home extends Component {
             for people that want to give  <br/>
             donations directly to those that <br/>
             need it and people that seek <br/>
-            out help i their time of need. <br/>
+            out help in their time of need. <br/>
           </p>
         </div></div>
         <hr className="separator"></hr>
@@ -43,24 +43,24 @@ class Home extends Component {
           <h2>Featured</h2>
         </div>
         <hr/>
-        <Link className='buttonLink' to={"/Fundraisers"}>Products</Link>
+        <Link className='buttonLink' to={"/Products"}>Products</Link>
         <div className="scrollmenu">
           {this.state.items.map(item => <Card name={item.name} description={item.description} productImage={item.productImage}/> )}
         </div>
         <hr/>
-        <Link className='buttonLink' to={"/Products"}>Fundraisers</Link>
+        <Link className='buttonLink' to={"/Fundraisers"}>Fundraisers</Link>
         <div className="scrollmenu">
           <FundraiserCard title="Hospital Expenses" 
                         description="Money required for the hospital and medicine expenses."
                         rating={4.6}
                         requiredAmount="$10,000"
                         image={clinic}/>
-        <FundraiserCard title="College Expenses" 
+          <FundraiserCard title="College Expenses" 
                                 description="Unable to pay tuition fees. Need money to pay all the money to the university."
                                 rating={4.2}
                                 requiredAmount="$5,000"
                                 image={college}/>
-        <FundraiserCard title="Money for Candies" 
+          <FundraiserCard title="Money for Candies" 
                                 description="Money required to buy whole lot of candies."
                                 rating={0.4}
                                 requiredAmount="$100,000"

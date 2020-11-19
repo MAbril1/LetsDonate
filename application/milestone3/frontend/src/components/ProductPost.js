@@ -15,8 +15,6 @@ class ProductPost extends Component {
       <div>
         <div className="topSection">
           <img src={productImage} alt="" />
-          {console.log('../images/' + this.props.productImage)}
-          {console.log(productImage)}
         </div>
         <div className="bottomSection">
           <div className="heading">
