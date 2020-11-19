@@ -81,7 +81,9 @@ class Products extends Component {
             <div className="items">
                 {this.state.items.map(item => <Link className='link' to={{
                     pathname:"/ProductPost",
-                    name: item.name
+                    name: item.name,
+                    description: item.description,
+                    productImage: item.productImage
                     }}><Card name={item.name} description={item.description} productImage={item.productImage}/></Link> )}
             </div>
         </div>

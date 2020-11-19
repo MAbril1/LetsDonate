@@ -7,8 +7,6 @@ function Card( {name, description, productImage} ) {
     
     if(productImage !== '' && productImage !== null) // checks if product has an image from the database
     {
-        
-
         image = '../images/' + productImage;
     }  
     else
