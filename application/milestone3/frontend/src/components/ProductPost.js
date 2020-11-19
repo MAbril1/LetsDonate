@@ -6,17 +6,16 @@ import Star from "@material-ui/icons/Star";
 class ProductPost extends Component {
   
   render() {
-        const productImage = '../images/' + this.props.productImage;
+        const productImage = '../images/' + this.props.location.productImage;
         const name = this.props.location.name;
-        const description = this.props.location.description; 
-        // const likes = this.props.location.details.likes.likes;
+        const description = this.props.location.description;
 
     return (
       <div>
         <div className="topSection">
           <img src={productImage} alt="" />
           {console.log('../images/' + this.props.productImage)}
-          {console.log(this.props.location.description)}
+          {console.log(productImage)}
         </div>
         <div className="bottomSection">
           <div className="heading">
@@ -33,7 +32,7 @@ class ProductPost extends Component {
               <Button variant='outlined'>Report Spam</Button>
             </div>
           </div>
-            <h3>{description}</h3>
+            <h3>[This is the description]{description}</h3>
         </div>
       </div>
     )
