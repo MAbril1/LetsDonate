@@ -4,6 +4,11 @@ import { Button } from "@material-ui/core";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import Report from './Report.js';
 
+/*
+**  ProductPost.js
+**
+**  This page is for the details of any singular item from backend
+*/
 class ProductPost extends Component {
   
   render() {
@@ -15,8 +20,6 @@ class ProductPost extends Component {
       <div>
         <div className="topSection">
           <img src={productImage} alt="" />
-          {console.log('../images/' + this.props.productImage)}
-          {console.log(productImage)}
           <div className="donationPrompt">
             <div className="textArea">
               <textarea>Send a message...</textarea>
@@ -37,9 +40,9 @@ class ProductPost extends Component {
                           {/* <strong>{likes}</strong> */}
                         </p>
             </div>
-            <div className="spamProduct">
+            {/* <div className="spamProduct">
               <Report />
-            </div>
+            </div> */}
           </div>
             <h3>{description}</h3>
         </div>

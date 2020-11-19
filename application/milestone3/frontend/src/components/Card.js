@@ -2,6 +2,11 @@ import React, {useState, useEffect} from 'react';
 import "./Card.css"; 
 import { Link } from 'react-router-dom';
 
+/*
+**  Card.js
+**
+**  This component is the thumbnail for each product post
+*/
 function Card( {name, description, productImage} ) {
 
     let image;

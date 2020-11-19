@@ -4,7 +4,11 @@ import Star from "@material-ui/icons/Star";
 import './FundraiserCard.css';
 import { Link } from 'react-router-dom';
 
-
+/*
+**  FundraiserCard.js
+**
+**  This component is the thumbnail for each fundraiser post
+*/
 export class FundraiserCard extends Component {
     render() {
         const image = this.props.image;

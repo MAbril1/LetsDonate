@@ -4,7 +4,14 @@ import axios from 'axios';
 import Card from './Card.js';
 import './Products.css';
 
+/*
+**  Products.js
+**
+**  This displays a map of all the available products from the database
+**  and should allow the user to filter and sort the map.
+*/
 class Products extends Component {
+    // The items that will appear in the map.
     state = {
         items: []
       }
@@ -16,6 +23,7 @@ class Products extends Component {
         this.allProducts = this.allProducts.bind(this);
       }
 
+    //gets the whole list of items from the backend.
     componentDidMount() {
         axios.get(`/api`)
           .then(res => {
@@ -24,6 +32,7 @@ class Products extends Component {
           })
       }
 
+    //The next three functions filter the map based on categories
     filterClothes() {
         axios.post("api/filterClothes", {"clothes": "cloth"})
         .then((result) => {
@@ -38,7 +47,6 @@ class Products extends Component {
             alert(exception);
         })
     }
-
     filterFurniture() {
         axios.post("api/filterFurniture", {"furniture": "furniture"})
         .then((result) => {
@@ -53,7 +61,6 @@ class Products extends Component {
             alert(exception);
         })
     }
-
     allProducts() {
         axios.get(`/api`)
           .then(res => {
@@ -65,7 +72,8 @@ class Products extends Component {
   render() {
     return (
         <div className="Products">
-            {console.log( this.props.keySearch )}
+
+            {/* left sticky side of filters and sort bys */}
             <div className="filters">
                 <h1 className="leftSide">Filters</h1>
                 <div className="checkbox">
@@ -78,7 +86,10 @@ class Products extends Component {
                     <label><input type="checkbox" rel="allItems" onClick={this.allProducts}/>All Items</label>
                 </div>            
             </div>
+
             <div className="split"></div>
+
+            {/* map of items from backend */}
             <div className="items">
                 {this.state.items.map(item => 
                     <Card name={item.name} description={item.description} productImage={item.productImage}/>
