@@ -8,6 +8,7 @@ import Fundraisers from './components/Fundraisers.js';
 import User from './components/User.js';
 import ProductPost from './components/ProductPost.js';
 import FundraiserPost from './components/FundraiserPost.js';
+import SearchResult from './components/searchResult.js';
 
 class App extends Component {
   render() { return (
@@ -21,6 +22,7 @@ class App extends Component {
           <Route path="/User" component={User} />
           <Route path="/ProductPost" component={ProductPost} />
           <Route path="/FundraiserPost" component={FundraiserPost} />
+          <Route path="/searchResult" component={SearchResult} />
           <Route component={Error} />
         </Switch>
       </div>

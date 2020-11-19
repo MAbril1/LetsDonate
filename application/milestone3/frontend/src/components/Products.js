@@ -64,7 +64,8 @@ class Products extends Component {
 
   render() {
     return (
-        <div className="Products">    
+        <div className="Products">
+            {console.log( this.props.keySearch )}
             <div className="filters">
                 <h1 className="leftSide">Filters</h1>
                 <div className="checkbox">
@@ -79,12 +80,9 @@ class Products extends Component {
             </div>
             <div className="split"></div>
             <div className="items">
-                {this.state.items.map(item => <Link className='link' to={{
-                    pathname:"/ProductPost",
-                    name: item.name,
-                    description: item.description,
-                    productImage: item.productImage
-                    }}><Card name={item.name} description={item.description} productImage={item.productImage}/></Link> )}
+                {this.state.items.map(item => 
+                    <Card name={item.name} description={item.description} productImage={item.productImage}/>
+                )}
             </div>
         </div>
     );
