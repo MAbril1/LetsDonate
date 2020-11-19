@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import "./Card.css"; 
+import { Link } from 'react-router-dom';
 
 function Card( {name, description, productImage} ) {
 
@@ -15,16 +16,22 @@ function Card( {name, description, productImage} ) {
     }
     
     return (
-        <div className="card">
-            <img  className="cardImage" 
-            src={image}
-            onError={(e) => {
-                e.target.src = '../images/charity.png' // fallback image
-             }} 
-            alt=""/>
+        <Link className='link' to={{
+            pathname: "/ProductPost",
+            name: name,
+            productImage: productImage
+          }}>
+            <div className="card">
+                <img  className="cardImage" 
+                    src={image}
+                    onError={(e) => {
+                        e.target.src = '../images/charity.png' // fallback image
+                    }} 
+                alt=""/>
 
-    <h2>{name}</h2>
-        </div>
+                <h2>{name}</h2>
+            </div>
+        </Link>
     )
 }
 

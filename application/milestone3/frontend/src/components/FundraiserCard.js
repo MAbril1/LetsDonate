@@ -11,7 +11,7 @@ export class FundraiserCard extends Component {
         const title = this.props.title;
         const requiredAmount = this.props.requiredAmount;
         const description = this.props.description; 
-        const rating = this.props.rating;
+        const endorsements = this.props.endorsements;
         return (
             <Link to={{
                 pathname:'/FundraiserPost',
@@ -20,7 +20,7 @@ export class FundraiserCard extends Component {
                     title: {title},
                     description: {description},
                     requiredAmount: {requiredAmount},
-                    rating: {rating},
+                    endorsements: {endorsements},
                 }
             }}  style={{textDecoration:'none', color:"black"}}>
                 <div className="fundCard">
@@ -38,7 +38,7 @@ export class FundraiserCard extends Component {
                             <div className="starRating">
                                 <Star className="star" />
                                     <p>
-                                        <strong>{this.props.rating}</strong>
+                                        <strong>{this.props.endorsements}</strong>
                                     </p>
                             </div>
                             <div className="amountRequired">
