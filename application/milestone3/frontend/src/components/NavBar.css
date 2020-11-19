@@ -24,6 +24,13 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.button{
+  margin: 2px;
+}
+
+input{
+  margin: 3px;
+}
 
 .topRight{
   display: flex;
