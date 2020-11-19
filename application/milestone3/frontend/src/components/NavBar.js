@@ -11,8 +11,13 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import axios from 'axios';
 
+/*
+**  NavBar.js
+**
+**  This component remains at the top of the application at all times and serves as a means to navigate the website.
+*/
 class NavBar extends Component {
-    
+    // These are the filtered items that will be passed should a user add keywords for the search.
     state = {
         allProducts: [],
         items: []
@@ -20,9 +25,9 @@ class NavBar extends Component {
 
     constructor(props) {
         super(props);
-        // this.state = { browseType: "/Products" };
     }
 
+    // This function uses the keyword input in the searchbar to get a filtered list of items from the backend
     getKey() {
         const keySearch = document.getElementById("searchType").value;
         
@@ -44,35 +49,40 @@ class NavBar extends Component {
         })
     }
 
-    getType(selected) {
+    // getType(selected) {
         // console.log(selected.value)
-        this.setState({ 
-            browseType: selected.value 
-        })
+        // this.setState({ 
+        //     browseType: selected.value 
+        // })
         // console.log(this.browseType)
-    }
+    // }
         
     render() { 
         
         return (
         <div className="NavBar">
-            <Link className='link' to={"/"}>
-            <div style={{display:"flex", alignItems:"center"}}>
-                <img className="logo" 
-                    src={charity}
-                    alt=""
-                />
 
-                <div className='appTitle'>
-                    <p>letsDonate</p>
+            {/* This is the logo at the top left of the screen that also takes the user to the landing page */}
+            <Link className='link' to={"/"}>
+                <div style={{display:"flex", alignItems:"center"}}>
+                    <img className="logo" 
+                        src={charity}
+                        alt=""
+                    />
+                    <div className='appTitle'>
+                        <p>letsDonate</p>
+                    </div>
                 </div>
-            </div>
             </Link>
+
+            {/* This is the searchbar */}
             <div className="search">
                 <input id="searchType" type="text" onChange={this.getKey.bind(this)}/>
+                
+                {/* At the moment, the dropdown acts as the links to the browsing pages */}
                 <Select
                     id="browseType"
-                    onChange={this.getType.bind(this)}
+                    // onChange={this.getType.bind(this)}
                 >
                     <Link className='link' to={{
                         pathname: "/Products",
@@ -83,6 +93,8 @@ class NavBar extends Component {
                 {console.log(this.state.items)}
                 <Link className='link' to={{pathname: "/searchResult", products: this.state.items}}><SearchIcon /></Link>
             </div>
+
+            {/* This is the button to allow users to log in/sign up through a pop up */}
             <div>
                 <Popup
                     trigger={<button className="buttonLink"> Login/SignUp </button>}
@@ -127,6 +139,8 @@ class NavBar extends Component {
                         </div>
                     )}
                 </Popup>
+
+                {/* This button takes a user to their user page if their signed in */}
                 <Link className='userLink' to={"/User"}><AccountCircleIcon /></Link>
             </div>
         </div>

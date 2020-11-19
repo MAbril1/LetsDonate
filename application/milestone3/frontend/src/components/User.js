@@ -11,8 +11,14 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Report from './Report.js';
 import axios from 'axios';
-import {Form, Label, Input, FormGroup, CustomInput, Modal, ModalBody} from 'reactstrap';
+import { Form, Label, Input, FormGroup, CustomInput } from 'reactstrap';
 
+/*
+**  User.js
+**
+**  This displays a users dashboard.
+**  This should also contain the items and posts they have put up (if any).
+*/
 class User extends Component {
   render() {
     var name;
@@ -22,9 +28,13 @@ class User extends Component {
       <div className="profile"> 
         <div className="topSection">
           <div className="topLeft">
+
+            {/* Users profile picture */}
             <div className="userImage">
                 <img src={user} alt="" />
             </div>
+
+            {/* User's username and rating */}
             <div className="userName">
               <h1>David Beven</h1>
               <Star className="star" />
@@ -32,13 +42,17 @@ class User extends Component {
               <Star className="star" />
               <Star className="star" />
             </div>
-            <Report />
+
+            {/* Report button */}
+            {/* <Report /> */}
           </div>
           <div className="topRight">
           
           </div>
         </div>
         <div className="bottomSection">
+          
+          {/* This is a pop up for creating a new post */}
           <Popup
             trigger={<button className="postButton"> Create a new Post </button>}
             modal
@@ -85,6 +99,8 @@ class User extends Component {
                 </Form>
                 </div>
                 <div className="actions">
+
+                  {/* This posts the input data into the backend */}
                   <button
                     className="button"
                     onClick={() => {
@@ -123,6 +139,8 @@ class User extends Component {
               </div>
             )}
           </Popup>
+
+          {/* These are lists of the items and fundraisers a user has posted */}
           <h2>ITEMS POSTED</h2>
           <div className="scrollmenu">
             <Card name="Bike" description="Three year old bike available in San Bruno for pick up. Please feel free to reach out. Bike is in great condition" productImage="bike.jpg"/>
@@ -130,16 +148,11 @@ class User extends Component {
           </div>
           <h2>FUNDRAISERS POSTED</h2>
           <div className="scrollmenu">
-              <Link className='link' to={{
-                        pathname:"/FundraiserPost",
-                        title: "Help required for new city Expenses" 
-                        }}>
             <FundraiserCard title="Help required for new city Expenses" 
                                     description="Recently shifted to the city of New York and it is highly difficult for me to manage daily expenses."
                                     rating={2.6}
                                     requiredAmount="$3500"
                                     image={city}/>
-            </Link>
           </div>
         </div>
       </div>
