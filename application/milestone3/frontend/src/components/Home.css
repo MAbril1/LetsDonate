@@ -37,8 +37,22 @@ div.scrollmenu {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    margin: 15px 0;
 }
 
 h3 {
     margin-bottom: 0;
 }
+
+.buttonLink{
+    text-decoration: none;
+    color: white;
+    background-color: #ff7779;
+    text-transform: inherit;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  hr {
+      margin: 15px;
+  }

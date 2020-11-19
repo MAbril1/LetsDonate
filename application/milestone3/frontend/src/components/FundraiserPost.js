@@ -10,7 +10,7 @@ class FundraiserPost extends Component {
         const title = this.props.location.details.title.title;
         const requiredAmount = this.props.location.details.requiredAmount.requiredAmount;
         const description = this.props.location.details.description.description; 
-        const rating = this.props.location.details.rating.rating;
+        const endorsements = this.props.location.details.endorsements.endorsements;
 
     return (
       <div>
@@ -39,7 +39,7 @@ class FundraiserPost extends Component {
             <div className="starRating">
                   <Star className="star" />
                         <p>
-                          <strong>{rating}</strong>
+                          <strong>{endorsements}</strong>
                         </p>
             </div>
             <div className="spamProduct">
