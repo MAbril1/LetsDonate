@@ -12,7 +12,7 @@ import 'reactjs-popup/dist/index.css';
 
 class NavBar extends Component {
     state = {
-        keySearch: []
+        keySearch: ""
       }
 
     constructor(props) {
@@ -22,15 +22,16 @@ class NavBar extends Component {
 
     getKey() {
         const keySearch = document.getElementById("searchType").value;
-        this.setState({ keySearch });
+        this.setState({ keySearch })
+        // console.log( this.keySearch );
     }
 
     getType(selected) {
-        console.log(selected.value)
+        // console.log(selected.value)
         this.setState({ 
             browseType: selected.value 
         })
-        console.log(this.browseType)
+        // console.log(this.browseType)
     }
         
     render() { return (
@@ -48,13 +49,14 @@ class NavBar extends Component {
             </div>
             </Link>
             <div className="search">
-                <input id="searchType" type="text" onChange={this.getKey.bind(this)} />
+                <input id="searchType" type="text" onChange={this.getKey.bind(this)}/>
                 <Select
                     id="browseType"
                     onChange={this.getType.bind(this)}
                 >
                     <Link className='link' to={{
                         pathname: "/Products",
+                        keySearch: this.keySearch,
                     }}><MenuItem value="/Products">Products</MenuItem></Link>
                     <Link className='link' to={"/Fundraisers"}><MenuItem value="/Fundraisers">Fundraisers</MenuItem></Link>
                 </Select>
