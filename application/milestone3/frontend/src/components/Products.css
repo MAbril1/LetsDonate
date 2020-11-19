@@ -1,0 +1,38 @@
+.Products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 1%;
+}
+
+.filters {
+    margin-top: 2%;
+    float: left;
+    width: 13.5%;
+    text-align: left;
+    vertical-align: top;
+    position: fixed;
+    left: 0;
+}
+
+.leftSide { padding-left: 40%; }
+.checkbox { padding-left: 40%; }
+
+.split {
+    margin-top: 2%;
+    border-left: 4px solid black;
+    height: 75%;
+    float: left;
+    position: fixed;
+    left: 15%;
+}
+
+.items {
+    float: left;
+    margin-left: 17.5%;
+    width: 82.5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+}
