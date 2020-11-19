@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import './Login.js';
+import Login from './Login.js';
+
 
 class User extends Component {
   render() {
-    return <h1>User</h1>;
+    return (
+        <Login />
+    );
   }
 }
 export default User;
