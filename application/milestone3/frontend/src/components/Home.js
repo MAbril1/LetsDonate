@@ -8,8 +8,13 @@ import candies from '../images/candies.jpg';
 import clinic from '../images/clinic.jpg';
 import college from '../images/college.jpg';
 
-
+/*
+**  Home.js
+**
+**  This is the landing page, the first page users will see when they reach the website.
+*/
 class Home extends Component {
+  // These are to be the products that appear on the featured lists within the page.
   state = {
     items: []
   }
@@ -18,6 +23,7 @@ class Home extends Component {
     super(props);
   }
 
+  // This gets all the items from the backend.
   componentDidMount() {
     axios.get(`/api`)
       .then(res => {
@@ -31,6 +37,8 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
+
+        {/* This is the landing banner and is supposed to be what draws users in and explains what the website is about. */}
         <div className="LandingBanner-bg"><div className="LandingBanner">
           <h1>Let's Donate</h1>
           <p>
@@ -42,15 +50,25 @@ class Home extends Component {
           </p>
         </div></div>
         <hr className="separator"></hr>
-        <div className="Featured">
+        <div>
           <h2>Featured</h2>
         </div>
         <hr/>
+
+        {/* 
+          This is the featured list of products available with a button to the products page
+          and each of the cards links to their post.
+         */}
         <Link className='buttonLink' to={"/Products"}>View All Products</Link>
         <div className="scrollmenu">
           {this.state.items.map(item => <Card name={item.name} description={item.description} productImage={item.productImage}/> )}
         </div>
         <hr/>
+
+        {/* 
+          This is the featured list of fundraisers available with a button to the fundraisers page
+          and each of the cards links to their post.
+         */}
         <Link className='buttonLink' to={"/Fundraisers"}>View All Fundraisers</Link>
         <div className="scrollmenu">
           <FundraiserCard title="Hospital Expenses" 

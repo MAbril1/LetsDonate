@@ -4,6 +4,11 @@ import { Button } from "@material-ui/core";
 import Star from "@material-ui/icons/Star";
 import Report from './Report.js';
 
+/*
+**  FundraiserPost.js
+**
+**  This page is for the details of any singular fundraiser from backend
+*/
 class FundraiserPost extends Component {
   
   render() {
@@ -43,9 +48,9 @@ class FundraiserPost extends Component {
                           <strong>{endorsements}</strong>
                         </p>
             </div>
-            <div className="spamProduct">
+            {/* <div className="spamProduct">
               <Report />
-            </div>
+            </div> */}
           </div>
             <h3>{description}</h3>
         </div>

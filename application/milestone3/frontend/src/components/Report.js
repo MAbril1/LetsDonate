@@ -3,6 +3,11 @@ import './PopUps.css';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
+/*
+**  Report.js
+**
+**  This component is popup for reporting a user or post
+*/
 function Report( {} ) {
     
     return (
