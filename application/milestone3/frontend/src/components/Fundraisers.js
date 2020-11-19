@@ -51,12 +51,16 @@ class Fundraisers extends Component {
                                 image={candies}/>
         </Link>                        
 
-         
+        <Link className='link' to={{
+                    pathname:"/FundraiserPost",
+                    title: "Help required for new city Expenses" 
+                    }}>
          <FundraiserCard title="Help required for new city Expenses" 
                                 description="Recently shifted to the city of New York and it is highly difficult for me to manage daily expenses."
                                 rating={2.6}
                                 requiredAmount="$3500"
                                 image={city}/>
+        </Link>
 
           <FundraiserCard title="Recently turned Homeless" 
                                 description="Lost house during forest fires and lost house. Turned homeless and therefore need money to manage apartment rent."
