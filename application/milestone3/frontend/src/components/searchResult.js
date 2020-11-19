@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 export class searchResult extends Component {
     render() {
 
-        console.log(this.props.match.params);
+        const products = this.props.location.products;
+
+        console.log(products);
         return (
             <div>
                 
