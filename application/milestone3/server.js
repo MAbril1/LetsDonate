@@ -15,18 +15,23 @@ app.get('/api', function(req, res){
     
 });
 
+let fn; // create variable used to save filename
+
 const multer = require("multer");
 const storage = multer.diskStorage({
   destination: "frontend/public/images",
   filename: function(req, file, a) {
-    a(null, file.originalname);
+    // creates a filename adding the date uploaded between filename and extension, also removes any spaces from filename
+    fn = file.originalname.split(path.extname(file.originalname))[0] + '-' + Date.now() + path.extname(file.originalname);
+    fn = fn.replace(/\s/g, '');
+    a(null, fn);
   }
 });
 const upload = multer({ storage: storage });
 
 app.post('/api/postProduct', upload.single("imageFile"),function(req, res){
-      console.log(req.file.originalname);
-      config.query(`INSERT INTO products VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}', '${req.file.originalname}')`, function (e, response, f) {
+      console.log(fn);
+      config.query(`INSERT INTO products VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}', '${fn}')`, function (e, response, f) {
         
       });
 
