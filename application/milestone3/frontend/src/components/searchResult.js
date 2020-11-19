@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import Card from './Card.js';
 
 export class searchResult extends Component {
     render() {
 
-        const products = this.props.location.products;
+        const items = this.props.location.products;
 
-        console.log(products);
+        console.log(items);
         return (
-            <div>
-                
+            <div className="items">
+                {items.map(item => 
+                    <Card name={item.name} description={item.description} productImage={item.productImage}/>
+                )}
             </div>
         )
     }

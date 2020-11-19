@@ -39,7 +39,7 @@ app.post('/api/postProduct', upload.single("imageFile"),function(req, res){
 });
 
 app.post('/api/makeSearch', function(req, res){
-      config.query(`SELECT * FROM products WHERE name LIKE '${req.body.searchItem}'`, function (e, response, f) {
+      config.query(`SELECT * FROM products WHERE name LIKE '%${req.body.searchItem}%'`, function (e, response, f) {
         res.json({success:true, products:response});
         console.log(response);
       });
