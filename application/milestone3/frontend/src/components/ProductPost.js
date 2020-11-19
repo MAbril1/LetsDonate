@@ -14,7 +14,9 @@ class ProductPost extends Component {
     return (
       <div>
         <div className="topSection">
-          <img src={productImage} alt="" />
+          <img src={productImage} onError={(e) => {
+                        e.target.src = '../images/charity.png' // fallback image
+                    }} alt="" />
           {console.log('../images/' + this.props.productImage)}
           {console.log(productImage)}
           <div className="donationPrompt">
