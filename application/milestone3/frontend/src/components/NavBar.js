@@ -9,20 +9,38 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import axios from 'axios';
 
 class NavBar extends Component {
+    
     state = {
-        keySearch: ""
+        allProducts: [],
       }
 
     constructor(props) {
         super(props);
-        this.state = { browseType: "/Products" };
+        // this.state = { browseType: "/Products" };
     }
 
     getKey() {
         const keySearch = document.getElementById("searchType").value;
-        this.setState({ keySearch })
+        let searchable = {};
+        searchable["searchItem"] = keySearch;
+        axios.post("api/makeSearch", searchable)
+        .then((result) => {
+            if(!result.data.success){
+                alert("Failed Search");
+            }else{
+                const products = result.data;
+                this.setState( {products} );
+                
+            }
+        })
+        .catch(exception => {
+            alert("Failed Search");
+        })
+
+        //this.setState({ keySearch })
         // console.log( this.keySearch );
     }
 
@@ -34,7 +52,9 @@ class NavBar extends Component {
         // console.log(this.browseType)
     }
         
-    render() { return (
+    render() { 
+        
+        return (
         <div className="NavBar">
             <Link className='link' to={"/"}>
             <div style={{display:"flex", alignItems:"center"}}>
@@ -60,7 +80,8 @@ class NavBar extends Component {
                     }}><MenuItem value="/Products">Products</MenuItem></Link>
                     <Link className='link' to={"/Fundraisers"}><MenuItem value="/Fundraisers">Fundraisers</MenuItem></Link>
                 </Select>
-                <Link className='link' to={this.state.browseType}><SearchIcon /></Link>
+                {console.log(this.state.allProducts)}
+                <Link className='link' to={"/searchResult"} params={{products:this.state.allProducts}}><SearchIcon /></Link>
             </div>
             <div>
                 <Popup

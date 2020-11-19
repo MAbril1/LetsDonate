@@ -8,6 +8,7 @@ import candies from '../images/candies.jpg';
 import clinic from '../images/clinic.jpg';
 import college from '../images/college.jpg';
 
+
 class Home extends Component {
   state = {
     items: []
@@ -22,6 +23,8 @@ class Home extends Component {
       .then(res => {
         const items = res.data;
         this.setState({ items });
+        console.log("See Below");
+        console.log(this.state.items);
       })
   }
 
