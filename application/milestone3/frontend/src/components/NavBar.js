@@ -7,6 +7,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
+import SearchData from '../SearchData';
+
 class NavBar extends Component {
     constructor(props) {
         super(props);
@@ -20,8 +22,11 @@ class NavBar extends Component {
         })
         console.log(this.browseType)
     }
-        
-    render() { return (
+
+    render() { 
+        let searchterm;
+
+        return (
         <div className="NavBar">
             <Link className='link' to={"/"}>
             <div style={{display:"flex", alignItems:"center"}}>
@@ -36,7 +41,7 @@ class NavBar extends Component {
             </div>
             </Link>
             <div className="search">
-                <input type="text" />
+                <input type="text" onChange={(lookFor) => {searchterm = lookFor.target.value;}}/>
                 <Select
                     id="browseType"
                     onChange={this.getType.bind(this)}
@@ -44,7 +49,7 @@ class NavBar extends Component {
                     <MenuItem value="/Products">Products</MenuItem>
                     <MenuItem value="/Fundraisers">Fundraisers</MenuItem>
                 </Select>
-                <Link className='link' to={this.state.browseType}><SearchIcon /></Link>
+                <Link className='link' to={this.state.browseType}><SearchIcon onClick={() => {SearchData(searchterm)}}/></Link>
             </div>
             <div>
                 <Link className='buttonLink' to={"/Fundraisers"}>Fundraisers</Link>
