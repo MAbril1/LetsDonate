@@ -43,12 +43,12 @@ class Home extends Component {
           <h2>Featured</h2>
         </div>
         <hr/>
-        <Link className='buttonLink' to={"/Fundraisers"}>Products</Link>
+        <Link className='buttonLink' to={"/Products"}>Products</Link>
         <div className="scrollmenu">
           {this.state.items.map(item => <Card name={item.name} description={item.description} productImage={item.productImage}/> )}
         </div>
         <hr/>
-        <Link className='buttonLink' to={"/Products"}>Fundraisers</Link>
+        <Link className='buttonLink' to={"/Fundraisers"}>Fundraisers</Link>
         <div className="scrollmenu">
           <FundraiserCard title="Hospital Expenses" 
                         description="Money required for the hospital and medicine expenses."
