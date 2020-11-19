@@ -17,6 +17,14 @@ class ProductPost extends Component {
           <img src={productImage} alt="" />
           {console.log('../images/' + this.props.productImage)}
           {console.log(productImage)}
+          <div className="donationPrompt">
+            <div className="textArea">
+              <textarea>Send a message...</textarea>
+            </div>
+            <div className="donateButton">
+              <Button variant='outlined'>Message</Button>
+            </div>
+          </div>
         </div>
         <div className="bottomSection">
           <div className="heading">
@@ -33,7 +41,7 @@ class ProductPost extends Component {
               <Report />
             </div>
           </div>
-            <h3>[This is the description]{description}</h3>
+            <h3>{description}</h3>
         </div>
       </div>
     )

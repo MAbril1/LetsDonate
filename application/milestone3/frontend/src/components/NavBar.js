@@ -10,6 +10,8 @@ import Select from '@material-ui/core/Select';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
+import SearchData from '../SearchData';
+
 class NavBar extends Component {
     state = {
         keySearch: []
@@ -22,6 +24,9 @@ class NavBar extends Component {
 
     getKey() {
         const keySearch = document.getElementById("searchType").value;
+
+        SearchData(keySearch); // passes search term to function
+
         this.setState({ keySearch });
     }
 

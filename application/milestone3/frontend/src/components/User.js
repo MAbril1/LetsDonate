@@ -78,8 +78,8 @@ class User extends Component {
           </Popup>
           <h2>ITEMS POSTED</h2>
           <div className="scrollmenu">
-            <Card name="Bike" description="" productImage="bike.jpg"/>
-            <Card name="Shirt" description="" productImage="shirt.jpg"/>
+            <Card name="Bike" description="Three year old bike available in San Bruno for pick up. Please feel free to reach out. Bike is in great condition" productImage="bike.jpg"/>
+            <Card name="Shirt" description="One year old shirt available in Sunnyvale for pick up. Please feel free to reach out. Shirt is in great condition with no marks." productImage="shirt.jpg"/>
           </div>
           <h2>FUNDRAISERS POSTED</h2>
           <div className="scrollmenu">

@@ -19,6 +19,7 @@ function Card( {name, description, productImage} ) {
         <Link className='link' to={{
             pathname: "/ProductPost",
             name: name,
+            description: description,
             productImage: productImage
           }}>
             <div className="card">
