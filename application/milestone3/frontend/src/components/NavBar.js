@@ -11,9 +11,18 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 
 class NavBar extends Component {
+    state = {
+        keySearch: []
+      }
+
     constructor(props) {
         super(props);
         this.state = { browseType: "/Products" };
+    }
+
+    getKey() {
+        const keySearch = document.getElementById("searchType").value;
+        this.setState({ keySearch });
     }
 
     getType(selected) {
@@ -39,19 +48,19 @@ class NavBar extends Component {
             </div>
             </Link>
             <div className="search">
-                <input type="text" />
+                <input id="searchType" type="text" onChange={this.getKey.bind(this)} />
                 <Select
                     id="browseType"
                     onChange={this.getType.bind(this)}
                 >
-                    <MenuItem value="/Products">Products</MenuItem>
-                    <MenuItem value="/Fundraisers">Fundraisers</MenuItem>
+                    <Link className='link' to={{
+                        pathname: "/Products",
+                    }}><MenuItem value="/Products">Products</MenuItem></Link>
+                    <Link className='link' to={"/Fundraisers"}><MenuItem value="/Fundraisers">Fundraisers</MenuItem></Link>
                 </Select>
                 <Link className='link' to={this.state.browseType}><SearchIcon /></Link>
             </div>
             <div>
-                <Link className='buttonLink' to={"/Fundraisers"}>Fundraisers</Link>
-                <Link className='buttonLink' to={"/Products"}>Products</Link>
                 <Popup
                     trigger={<button className="buttonLink"> Login/SignUp </button>}
                     modal
