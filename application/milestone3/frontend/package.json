@@ -17,7 +17,7 @@
     "react-horizontal-scroll-container": "^1.0.1",
     "react-modal": "^3.11.2",
     "react-scripts": "4.0.0",
-    "reactstrap": "^8.7.0",
+    "reactstrap": "^8.7.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

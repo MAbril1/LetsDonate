@@ -10,10 +10,14 @@ import Card from './Card';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Report from './Report.js';
+import axios from 'axios';
+import {Form, Label, Input, FormGroup, CustomInput, Modal, ModalBody} from 'reactstrap';
 
 class User extends Component {
   render() {
-    
+    var name;
+    var description;
+    var type;
     return(
       <div className="profile"> 
         <div className="topSection">
@@ -36,7 +40,7 @@ class User extends Component {
         </div>
         <div className="bottomSection">
           <Popup
-            trigger={<button className="button"> Create a new Post </button>}
+            trigger={<button className="postButton"> Create a new Post </button>}
             modal
             nested
           >
@@ -45,33 +49,76 @@ class User extends Component {
                 <button className="close" onClick={close}>
                   &times;
                 </button>
-                <div className="header"> Login/Sign Up </div>
+                <div className="header"> <strong>CREATE A POST </strong></div>
                 <div className="content">
+                <Form>
+                    <FormGroup>
+                        <Label><strong>Name of Product: </strong></Label>
+                        <Input value={name}
+                            onChange={(word) => {
+                                name=(word.target.value);
+                            }}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                      <br />
+                        <Label><strong>Description of Product: </strong></Label>
+                        <Input className="descriptionText" value={description}
+                            onChange={(des) => {
+                                description=(des.target.value);
+                            }}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <br />
+                        <Label><strong>Type (Example: Furniture, Cloth): </strong></Label>
+                        <Input value={type}
+                            onChange={(productType) => {
+                                type=(productType.target.value);
+                            }}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                      <br />
+                        <CustomInput type="file" id="productImage" accept="image/jpg,image/jpeg,image/png"/>
+                    </FormGroup>
+                </Form>
                 </div>
                 <div className="actions">
                   <button
                     className="button"
                     onClick={() => {
-                      
+                      if(name.length>0 && description.length>0){
+                        var productImage = document.getElementById("productImage");
+                        var form = new FormData();
+                        form.append("imageFile", productImage.files[0]);
+                        form.append("name", name);
+                        form.append("description", description);
+                        form.append("productType", type);
+                        console.log(form.getAll("name"), form.getAll("imageFile"));
+                        axios.post("/api/postProduct", form, { headers: { 'content-type': "multipart/form-data"}})
+                        .then((result) => {
+                            if(result.data.success){
+                                alert("Successfully Posted");
+                            }else{
+                                alert("Post Failure Occurred");
+                            }
+                        })
+                        .catch(exception => {
+                            alert("Post Failure Occurred");
+                        })
+                    }
                     }}
                   >
-                    Login
-                  </button>
-                  <button
-                    className="button"
-                    onClick={() => {
-                      
-                    }}
-                  >
-                    Sign Up
+                    SUBMIT
                   </button>
                 </div>
-                <button
+                <button className="button"
                     onClick={() => {
                       
                     }}
                   >
-                    Trouble signing in?
+                    Trouble Posting?
                   </button>
               </div>
             )}
