@@ -29,8 +29,8 @@
 
 .items {
     float: left;
-    margin-left: 15%;
-    width: 85%;
+    margin-left: 17.5%;
+    width: 82.5%;
     display: flex;
     flex-wrap: wrap;
     justify-content: left;

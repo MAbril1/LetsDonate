@@ -1,6 +1,8 @@
 .card > img{
-    width: 100%;
-    object-fit: contain;
+    width: 175px;
+    height: auto;
+    margin: auto auto;
+    display: block;
 }
 
 .card:hover{
@@ -8,10 +10,12 @@
 }
 
 .card{
-    width: 300px;
+    width: 250px;
+    height: 300px;
     padding: 10px;
     font-family: arial;
-    justify-content: left;
+    justify-content: center;
+    margin: 0px 5px;
 }
 
 .card > h2{

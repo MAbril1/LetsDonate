@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import user from '../images/user.jpg';
 import './User.css';
+import './PopUps.css';
 import Star from "@material-ui/icons/Star";
-import { Button } from "@material-ui/core";
 import FundraiserCard from './FundraiserCard';
 import city from '../images/city.jpg';
-import bike from '../images/bike.jpg';
-import shirt from '../images/shirt.jpg';
 import { Link } from 'react-router-dom';
 import Card from './Card';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import Report from './Report.js';
 
 class User extends Component {
   render() {
@@ -27,12 +28,54 @@ class User extends Component {
               <Star className="star" />
               <Star className="star" />
             </div>
+            <Report />
           </div>
           <div className="topRight">
           
           </div>
         </div>
         <div className="bottomSection">
+          <Popup
+            trigger={<button className="button"> Create a new Post </button>}
+            modal
+            nested
+          >
+            {close => (
+              <div className="popup">
+                <button className="close" onClick={close}>
+                  &times;
+                </button>
+                <div className="header"> Login/Sign Up </div>
+                <div className="content">
+                </div>
+                <div className="actions">
+                  <button
+                    className="button"
+                    onClick={() => {
+                      
+                    }}
+                  >
+                    Login
+                  </button>
+                  <button
+                    className="button"
+                    onClick={() => {
+                      
+                    }}
+                  >
+                    Sign Up
+                  </button>
+                </div>
+                <button
+                    onClick={() => {
+                      
+                    }}
+                  >
+                    Trouble signing in?
+                  </button>
+              </div>
+            )}
+          </Popup>
           <h2>ITEMS POSTED</h2>
           <div className="scrollmenu">
             <Card name="Bike" description="" productImage="bike.jpg"/>

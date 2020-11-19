@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './FundraiserPost.css';
 import { Button } from "@material-ui/core";
 import Star from "@material-ui/icons/Star";
+import Report from './Report.js';
 
 class FundraiserPost extends Component {
   
@@ -10,7 +11,7 @@ class FundraiserPost extends Component {
         const title = this.props.location.details.title.title;
         const requiredAmount = this.props.location.details.requiredAmount.requiredAmount;
         const description = this.props.location.details.description.description; 
-        const rating = this.props.location.details.rating.rating;
+        const endorsements = this.props.location.details.endorsements.endorsements;
 
     return (
       <div>
@@ -39,11 +40,11 @@ class FundraiserPost extends Component {
             <div className="starRating">
                   <Star className="star" />
                         <p>
-                          <strong>{rating}</strong>
+                          <strong>{endorsements}</strong>
                         </p>
             </div>
             <div className="spamProduct">
-              <Button variant='outlined'>Report Spam</Button>
+              <Report />
             </div>
           </div>
             <h3>{description}</h3>
