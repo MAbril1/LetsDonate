@@ -44,12 +44,7 @@ class Home extends Component {
         </div>
         <Link className='buttonLink' to={"/Fundraisers"}>Fundraisers</Link>
         <div className="scrollmenu">
-          {this.state.items.map(item => <Link className='link' to={{
-            pathname:"/ProductPost",
-            name: item.name,
-            productImage: item.productImage
-          }}>
-          {console.log(item.productImage)}<Card name={item.name} description={item.description} productImage={item.productImage}/></Link> )}
+          {this.state.items.map(item => <Card name={item.name} description={item.description} productImage={item.productImage}/> )}
         </div>
         <hr/>
         <Link className='buttonLink' to={"/Products"}>Products</Link>

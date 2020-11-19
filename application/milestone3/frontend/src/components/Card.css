@@ -10,9 +10,11 @@
 
 .card{
     width: 250px;
+    height: 300px;
     padding: 10px;
     font-family: arial;
     justify-content: left;
+    margin: 2px 2px;
 }
 
 .card > h2{
