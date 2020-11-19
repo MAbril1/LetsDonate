@@ -3,30 +3,28 @@ import SearchIcon from '@material-ui/icons/Search';
 import axios from 'axios';
 
 function SearchData(searchTerm) {
-    // const [search, setSearch] = useState("");
-    // const [items, setItems] = useState([]);
+    let searchable = {};
+    let items;
 
-    // let searchable = {};
+    const makeSearch = () => {
+        searchable["searchItem"] = searchTerm;
+        axios.post("api/makeSearch", searchable)
+        .then((result) => {
+            if(!result.data.success){
+                alert("Failed Search");
+            }else{
+                items = result.data.products;
+                console.log(items);
+            }
+        })
+        .catch(exception => {
+            alert("Failed Search");
+        })
+    }
 
-    // setSearch(searchTerm);
+    makeSearch();
 
-    // const makeSearch = () => {
-    //     searchable["searchItem"] = search;
-    //     axios.post("api/makeSearch", searchable)
-    //     .then((result) => {
-    //         if(!result.data.success){
-    //             alert("Failed Search");
-    //         }else{
-    //             setItems(result.data.products);
-    //             console.log(items.products);
-    //         }
-    //     })
-    //     .catch(exception => {
-    //         alert("Failed Search");
-    //     })
-    // }
-
-    return console.log(searchTerm);
+    return items;
 }
 
 export default SearchData
