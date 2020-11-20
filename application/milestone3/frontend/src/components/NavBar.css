@@ -89,3 +89,76 @@ input{
   margin: 30px;
   padding: 10px;
 }
+
+.form-border {
+    /* border: 2px solid rgb(69, 136, 158);
+    border-radius: 5px; */
+    width: 500px;
+    margin: auto;
+}
+
+.email {
+    margin-bottom: 20px;
+    width: 250px;
+    height: 40px;
+}
+
+.password {
+    margin-bottom: 20px;
+    width: 250px;
+    height: 40px;
+}
+
+/* log in button style */
+.login-button {
+    background-color: white;
+    border-color: rgb(66, 66, 248);
+    padding: 10px;
+    color: black;  
+    text-align: center;
+    font-size: 16px;
+    width: 150px;
+    margin-bottom: 20px;
+}
+.login-button:hover {
+    background-color:  rgb(66, 66, 248);
+    border-color: rgb(66, 66, 248);
+    padding: 10px;
+    color:  white;  
+    text-align: center;
+    font-size: 16px;
+    width: 150px;
+    margin-bottom: 20px;
+}
+/***************************/
+
+/* sign up button style */
+.signup-button {
+    background-color: white;
+    border-color: rgb(66, 66, 248);
+    padding: 10px;
+    color: black;  
+    text-align: center;
+    font-size: 16px;
+    width: 150px;
+    margin-bottom: 10px;
+}
+.signup-button:hover {
+    background-color:  rgb(66, 66, 248);
+    border-color: rgb(66, 66, 248);
+    padding: 10px;
+    color:  white;  
+    text-align: center;
+    font-size: 16px;
+    width: 150px;
+    margin-bottom: 10px;
+}
+/*************************/
+
+.reset-password-button {
+    border: none;
+    background-color: white;
+    margin-bottom: 20px;
+    color: black;
+    text-decoration: underline
+}

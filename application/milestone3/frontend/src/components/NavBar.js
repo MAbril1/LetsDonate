@@ -102,40 +102,49 @@ class NavBar extends Component {
                     nested
                 >
                     {close => (
-                        <div className="popup">
-                            <button className="close" onClick={close}>
-                                &times;
-                            </button>
-                            <div className="header"> <strong>Login/Sign Up </strong></div>
-                            <div className="content">
-                                <div className="forms"><strong>Username: </strong><input type="text" /></div>
-                                <div className="forms"><strong>Password: </strong><input type="text" /></div>
+                        <div>
+                        <form className='form-border'>
+                            <h1>Login to Let's Donate</h1>
+                            <div>
+                                <input
+                                    className='email'
+                                    type='email'
+                                    name='email'
+                                    placeholder="Email"
+                                //   onChange={this.myChangeHandler}
+                                />
                             </div>
-                            <div className="actions">
-                                <button
-                                    className="button"
-                                    onClick={() => {
-                                        
-                                    }}
-                                >
-                                    Login
-                                </button>
-                                <button
-                                    className="button"
-                                    onClick={() => {
-                      
-                                    }}
-                                >
-                                    Sign Up
-                                </button>
+                            <div>
+                                <input
+                                    className='password'
+                                    type='password'
+                                    name='password'
+                                    placeholder="Password"
+                                //   onChange={this.myChangeHandler}
+                                />
                             </div>
-                            <button className="button"
-                                onClick={() => {
-                                    
-                                }}
-                            >
-                                Trouble signing in?
-                            </button>
+                            <div>
+                                <input
+                                    className='login-button'
+                                    type='submit'
+                                    value='Log In'
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    className='signup-button'
+                                    type='submit'
+                                    value='Sign Up'
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    className='reset-password-button'
+                                    type='submit'
+                                    value='Reset password'
+                                />
+                            </div>
+                        </form>
                         </div>
                     )}
                 </Popup>
