@@ -26,6 +26,7 @@
 }
 .LandingBanner p {
     z-index: 2;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .separator {

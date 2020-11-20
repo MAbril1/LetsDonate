@@ -30,9 +30,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.post('/api/postProduct', upload.single("imageFile"),function(req, res){
-      console.log(fn);
+      req.body.description = req.body.description.replace(/'/g, "''");
       config.query(`INSERT INTO products VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}', '${fn}')`, function (e, response, f) {
-        
       });
 
     res.send({success:true});

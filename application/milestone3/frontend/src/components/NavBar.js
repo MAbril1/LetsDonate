@@ -106,10 +106,10 @@ class NavBar extends Component {
                             <button className="close" onClick={close}>
                                 &times;
                             </button>
-                            <div className="header"> Login/Sign Up </div>
+                            <div className="header"> <strong>Login/Sign Up </strong></div>
                             <div className="content">
-                                <div className="forms">Username: <input type="text" /></div>
-                                <div className="forms">Password: <input type="text" /></div>
+                                <div className="forms"><strong>Username: </strong><input type="text" /></div>
+                                <div className="forms"><strong>Password: </strong><input type="text" /></div>
                             </div>
                             <div className="actions">
                                 <button
@@ -129,7 +129,7 @@ class NavBar extends Component {
                                     Sign Up
                                 </button>
                             </div>
-                            <button
+                            <button className="button"
                                 onClick={() => {
                                     
                                 }}
