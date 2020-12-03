@@ -11,6 +11,8 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import axios from 'axios';
 
+import loginData from './loginBackend.js';
+
 /*
 **  NavBar.js
 **
@@ -103,7 +105,7 @@ class NavBar extends Component {
                 >
                     {close => (
                         <div>
-                        <form className='form-border'>
+                        <form id="loginForm" className='form-border'>
                             <h1>Login to Let's Donate</h1>
                             <div>
                                 <input
@@ -126,14 +128,15 @@ class NavBar extends Component {
                             <div>
                                 <input
                                     className='login-button'
-                                    type='submit'
+                                    type='button'
                                     value='Log In'
+                                    onClick={() => {loginData()}}
                                 />
                             </div>
                             <div>
                                 <input
                                     className='signup-button'
-                                    type='submit'
+                                    type='button'
                                     value='Sign Up'
                                 />
                             </div>

@@ -47,6 +47,15 @@ app.post('/api/registerUser', upload.single("imageFile"), function(req, res){
   res.send({success:true});
 });
 
+// find registered user
+app.post('/api/loginUser', function(req, res){
+  config.query(`SELECT * FROM users WHERE email LIKE '%${req.body.searchEmail}%' LIMIT 1`, function (e, response, f) {
+    res.json({success:true, users:response});
+    console.log(response);
+  });
+  
+});
+
 app.post('/api/makeSearch', function(req, res){
       config.query(`SELECT * FROM products WHERE name LIKE '%${req.body.searchItem}%'`, function (e, response, f) {
         res.json({success:true, products:response});
