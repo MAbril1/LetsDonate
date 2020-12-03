@@ -6,25 +6,31 @@
 }
 
 .filters {
+    margin-top: 2%;
     float: left;
     width: 13.5%;
     text-align: left;
     vertical-align: top;
+    position: fixed;
+    left: 0;
 }
 
-.leftSide { padding-left: 50%; }
-.checkbox { padding-left: 50%; }
+.leftSide { padding-left: 40%; }
+.checkbox { padding-left: 40%; }
 
 .split {
+    margin-top: 2%;
+    border-left: 4px solid black;
+    height: 75%;
     float: left;
-    width: 1.5%;
-    height: 100%;
-    background: black;
+    position: fixed;
+    left: 15%;
 }
 
 .items {
     float: left;
-    width: 85%;
+    margin-left: 17.5%;
+    width: 82.5%;
     display: flex;
     flex-wrap: wrap;
     justify-content: left;

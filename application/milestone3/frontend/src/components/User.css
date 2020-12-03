@@ -1,0 +1,51 @@
+.topLeft{
+    margin-left: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.userImage > img{
+    width: 400px;
+    height: 400px;
+}
+
+.topSection{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.scrollmenu{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.bottomSection > h2{
+    color: black;
+    margin-left: 70px;
+}
+
+.button{
+    color: white;
+    background-color: #ff7779;
+    padding: 10px;
+    border: none;
+}
+
+.descriptionText{
+    height: 80px;
+}
+
+input{
+    padding: 5px;
+}
+
+.postButton{
+    color: white;
+    background-color: #ff7779;
+    padding: 10px;
+    border: none;
+    margin-left: 70px;
+}

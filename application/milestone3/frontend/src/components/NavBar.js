@@ -1,58 +1,156 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
+import './PopUps.css';
 import charity from '../images/charity.png';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import axios from 'axios';
+import { Modal } from '@material-ui/core';
 
+/*
+**  NavBar.js
+**
+**  This component remains at the top of the application at all times and serves as a means to navigate the website.
+*/
 class NavBar extends Component {
+    // These are the filtered items that will be passed should a user add keywords for the search.
     state = {
-        browseType: "/Products"
-    }
+        allProducts: [],
+        items: []
+      }
 
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange() {
-        const browseType = document.getElementById("browseType").value
-        this.setState({ browseType })
-    }
+    // This function uses the keyword input in the searchbar to get a filtered list of items from the backend
+    getKey() {
+        const keySearch = document.getElementById("searchType").value;
         
-    render() { return (
-        <div className="NavBar">
-            <Link className='link' to={"/"}>
-            <div style={{display:"flex", alignItems:"center"}}>
-                <img className="logo" 
-                    src={charity}
-                    alt=""
-                />
+        let searchable = {};
+        
+        searchable["searchItem"] = keySearch;
+        axios.post("api/makeSearch", searchable)
+        .then((result) => {
+            if(!result.data.success){
+                alert("Failed Search");
+            }else{
+                const items = result.data.products;
+                console.log(items);
+                this.setState({ items });
+            }
+        })
+        .catch(exception => {
+            alert("Failed Search");
+        })
+    }
 
-                <div className='appTitle'>
-                    <p>letsDonate</p>
+    // getType(selected) {
+        // console.log(selected.value)
+        // this.setState({ 
+        //     browseType: selected.value 
+        // })
+        // console.log(this.browseType)
+    // }
+        
+    render() { 
+        
+        return (
+        <div className="NavBar">
+
+            {/* This is the logo at the top left of the screen that also takes the user to the landing page */}
+            <Link className='link' to={"/"}>
+                <div style={{display:"flex", alignItems:"center"}}>
+                    <img className="logo" 
+                        src={charity}
+                        alt=""
+                    />
+                    <div className='appTitle'>
+                        <p>letsDonate</p>
+                    </div>
                 </div>
-            </div>
             </Link>
+
+            {/* This is the searchbar */}
             <div className="search">
-                <input type="text" />
-                <FormControl className="dropDown">
-                    <Select
-                        id="browseType"
-                        value={this.state.browseType}
-                        onChange={this.state.handleChange}
-                    >
-                        <MenuItem value={"/Products"}>Products</MenuItem>
-                        <MenuItem value={"/Fundraisers"}>Fundraisers</MenuItem>
-                    </Select>
-                </FormControl>
-                <Link className='link' to={this.state.browseType}><SearchIcon /></Link>
+                <input id="searchType" type="text" onChange={this.getKey.bind(this)}/>
+                
+                {/* At the moment, the dropdown acts as the links to the browsing pages */}
+                <Select
+                    id="browseType"
+                    // onChange={this.getType.bind(this)}
+                >
+                    <Link className='link' to={{
+                        pathname: "/Products",
+                        keySearch: this.keySearch,
+                    }}><MenuItem value="/Products">Products</MenuItem></Link>
+                    <Link className='link' to={"/Fundraisers"}><MenuItem value="/Fundraisers">Fundraisers</MenuItem></Link>
+                </Select>
+                {console.log(this.state.items)}
+                <Link className='link' to={{pathname: "/searchResult", products: this.state.items}}><SearchIcon /></Link>
             </div>
-            <Link className='link' to={"/User"}><AccountCircleIcon /></Link>
-            <Link className='link' to={"/FundraiserPost"}>FundraiserPost</Link>
+
+            {/* This is the button to allow users to log in/sign up through a pop up */}
+            <div>
+                <Popup contentStyle={{width: "auto"}}
+                    trigger={<button className="buttonLink"> Login/SignUp </button>}
+                    modal
+                    nested
+                
+                >
+                    {close => (
+                        <div>
+                        <form className='login-form'>
+                            <h1>Login to Let's Donate</h1>
+                            <div>
+                                <input
+                                    className='email'
+                                    type='email'
+                                    name='email'
+                                    placeholder="Email"
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    className='password'
+                                    type='password'
+                                    name='password'
+                                    placeholder="Password"
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    className='login-button'
+                                    type='submit'
+                                    value='Log In'
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    className='signup-button'
+                                    type='submit'
+                                    value='Sign Up'
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    className='reset-password-button'
+                                    type='submit'
+                                    value='Reset password'
+                                />
+                            </div>
+                        </form>
+                        </div>
+                    )}
+                </Popup>
+                {/* This button takes a user to their user page if their signed in */}
+                <Link className='userLink' to={"/User"}><AccountCircleIcon /></Link>
+            </div>
         </div>
     );}
 }

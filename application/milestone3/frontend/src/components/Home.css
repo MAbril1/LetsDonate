@@ -2,10 +2,59 @@
     height: 89.592vh;
 }
 
-.LandingBanner {
-    height: 60%;
-    background-color: slategrey;
+.LandingBanner-bg {
+    height: 47%;
+    background-repeat: no-repeat;
+    position: relative;
+
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/handshake.jpeg");
 }
 
-.Featured {
+.LandingBanner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    color: #fff;
+    text-align: center;
+    text-shadow: 1px 1px 0 rgba(0,0,0,.75);
+    transform: translate3d(-50%,-50%,0);
 }
+
+.LandingBanner h1 {
+    z-index: 2;
+}
+.LandingBanner p {
+    z-index: 2;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.separator {
+    margin: 0 0;
+    border: 5px solid slategrey;
+}
+
+div.scrollmenu {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 15px 0;
+}
+
+h3 {
+    margin-bottom: 0;
+}
+
+.buttonLink{
+    text-decoration: none;
+    color: white;
+    background-color: #ff7779;
+    text-transform: inherit;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  hr {
+      margin: 15px;
+  }

@@ -24,6 +24,13 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.button{
+  margin: 2px;
+}
+
+input{
+  margin: 3px;
+}
 
 .topRight{
   display: flex;
@@ -66,4 +73,98 @@
 
 .dropDown {
   min-width: 120,
+}
+
+.buttonLink{
+  text-decoration: none;
+  color: white;
+  background-color: #ff7779;
+  text-transform: inherit;
+  padding: 10px;
+  margin: 10px;
+  border: 0;
+}
+
+.userLink{
+  margin: 30px;
+  padding: 10px;
+}
+
+.popup {
+  margin: auto;
+  width: 500px;
+}
+
+.login-form {
+  /* border: 2px solid rgb(69, 136, 158);
+  border-radius: 5px; */
+  padding: 20px;
+  text-align: center;
+  display: inline-block;
+}
+
+.email {
+  margin-bottom: 10px;
+  width: 75%;
+  height: 30px;
+}
+
+.password {
+  margin-bottom: 20px;
+  width: 75%;
+  height: 30px;
+}
+
+/* log in button style */
+.login-button {
+  background-color: white;
+  border-color: rgba(88, 88, 250, 0.979);
+  padding: 10px;
+  color: black;  
+  text-align: center;
+  font-size: 16px;
+  width: 45%;
+  margin-bottom: 20px;
+}
+.login-button:hover {
+  background-color:  rgba(88, 88, 250, 0.979);
+  border-color: rgba(88, 88, 250, 0.979);
+  padding: 10px;
+  color:  white;  
+  text-align: center;
+  font-size: 16px;
+  width: 45%;
+  margin-bottom: 20px;
+}
+/***************************/
+
+/* sign up button style */
+.signup-button {
+  background-color: white;
+  border-color: rgba(88, 88, 250, 0.979);
+  padding: 10px;
+  color: black;  
+  text-align: center;
+  font-size: 16px;
+  width: 45%;
+  margin-bottom: 10px;
+}
+.signup-button:hover {
+  background-color:  rgba(88, 88, 250, 0.979);
+  border-color: rgba(88, 88, 250, 0.979);
+  padding: 10px;
+  color:  white;  
+  text-align: center;
+  font-size: 16px;
+  width: 45%;
+  margin-bottom: 10px;
+}
+/*************************/
+
+.reset-password-button {
+  border: none;
+  background-color: white;
+  margin-bottom: 20px;
+  color: black;
+  text-decoration: underline
 }
