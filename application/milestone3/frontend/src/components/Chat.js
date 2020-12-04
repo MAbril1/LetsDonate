@@ -23,7 +23,7 @@ class Chat extends Component {
                 <form className="form-container">
                     <h1>Chat</h1>
 
-                    <label for="msg"><b>Message</b></label>
+                    <label htmlFor="msg"><b>Message</b></label>
                     <textarea placeholder="Type message.." name="msg" required></textarea>
 
                     <button type="submit" className="btn">Send</button>
