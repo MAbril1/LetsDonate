@@ -1,9 +1,13 @@
 import React from 'react';
 
-import formData from './registerBackend.js';
+// contains function needed to send form information to database
+import formData from './backend/registerBackend.js';
 
 function register() {
 
+    // very basic user registration form
+    // gets information needed to get sent to the database
+    // buttons calls function from registerBackend.js
     
     return (
         <form id="registerForm" method="post">

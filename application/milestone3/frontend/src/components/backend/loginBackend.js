@@ -1,35 +1,39 @@
 const bcrypt = require('bcryptjs');
 const axios = require('axios');
 
+const currentUser = require('./currentUser.js');
+
 const loginData = function() {;
     let email = document.forms.loginForm.email.value;
     let password = document.forms.loginForm.password.value;
 
     console.log(email, password);
 
+    // similar code to searching api
     let user;
-        
     let searchable = {};
     
-    searchable["searchEmail"] = email;
+    searchable["searchEmail"] = email; // login searches registered user database by email
     axios.post("api/loginUser", searchable)
     .then((result) => {
         if(!result.data.success){
             alert("Failed Search");
         }else{
-            user = result.data.users;
-            console.log(user[0].name);
+            user = result.data.users; // returns the data from the database
 
-            // Match Password
+            // compare login password with encrypted password from database
             bcrypt.compare(password, user[0].password, function(err, isMatch){
                 if(err) throw err;
                 if(isMatch)
                 {
-                    console.log("Password Match");
+                    alert("Password Match");
+                    currentUser.setUser(user[0]); // sets the current user
+                    console.log(currentUser.getUser());
+                    window.location.reload(); // reloads page to render proper buttons on navbar
                 }
                 else
                 {
-                    console.log("Wrong Password");
+                    alert("Wrong Password");
                 }
             });
 
