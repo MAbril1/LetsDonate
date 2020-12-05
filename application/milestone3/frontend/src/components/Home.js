@@ -8,6 +8,8 @@ import candies from '../images/candies.jpg';
 import clinic from '../images/clinic.jpg';
 import college from '../images/college.jpg';
 
+import currentUser from './backend/currentUser.js';
+
 /*
 **  Home.js
 **
@@ -31,6 +33,7 @@ class Home extends Component {
         this.setState({ items });
         console.log("See Below");
         console.log(this.state.items);
+        console.log("Current user:", currentUser.getUser());
       })
   }
 

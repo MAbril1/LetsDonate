@@ -29,12 +29,31 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-app.post('/api/postProduct', upload.single("imageFile"),function(req, res){
+app.post('/api/postProduct', upload.single("imageFile"), function(req, res){
       req.body.description = req.body.description.replace(/'/g, "''");
       config.query(`INSERT INTO products VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}', '${fn}')`, function (e, response, f) {
       });
 
     res.send({success:true});
+});
+
+// api to register a new user
+app.post('/api/registerUser', upload.single("imageFile"), function(req, res){
+  
+  console.log(req.body.name);
+
+  config.query(`INSERT INTO users VALUES ('${req.body.name}', '${req.body.email}', '${req.body.zipcode}', '${req.body.password}')`, function (e, response, f) {});
+
+  res.send({success:true});
+});
+
+// find registered user
+app.post('/api/loginUser', function(req, res){
+  config.query(`SELECT * FROM users WHERE email LIKE '%${req.body.searchEmail}%' LIMIT 1`, function (e, response, f) {
+    res.json({success:true, users:response});
+    console.log(response);
+  });
+  
 });
 
 app.post('/api/makeSearch', function(req, res){
