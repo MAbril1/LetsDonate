@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './FundraiserPost.css';
+import './ProductPost.css';
 import { Button } from "@material-ui/core";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import Report from './Report.js';
@@ -10,18 +10,18 @@ import Report from './Report.js';
 **  This page is for the details of any singular item from backend
 */
 class ProductPost extends Component {
-  
+
   render() {
-        const productImage = '../images/' + this.props.location.productImage;
-        const name = this.props.location.name;
-        const description = this.props.location.description;
+    const productImage = '../images/' + this.props.location.productImage;
+    const name = this.props.location.name;
+    const description = this.props.location.description;
 
     return (
       <div>
         <div className="topSection">
           <img src={productImage} onError={(e) => {
-                        e.target.src = '../images/charity.png' // fallback image
-                    }} alt="" />
+            e.target.src = '../images/charity.png' // fallback image
+          }} alt="noimage.png" />
           <div className="donationPrompt">
             <div className="textArea">
               <textarea>Send a message...</textarea>
@@ -37,16 +37,16 @@ class ProductPost extends Component {
               <h2>{name}</h2>
             </div>
             <div className="starRating">
-                  <FavoriteBorder className="star" />
-                        <p>
-                          {/* <strong>{likes}</strong> */}
-                        </p>
+              <FavoriteBorder className="star" />
+              <p>
+                {/* <strong>{likes}</strong> */}
+              </p>
             </div>
             {/* <div className="spamProduct">
               <Report />
             </div> */}
           </div>
-            <h3>{description}</h3>
+          <h3>{description}</h3>
         </div>
       </div>
     )

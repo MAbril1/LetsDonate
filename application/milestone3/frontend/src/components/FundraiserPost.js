@@ -10,13 +10,13 @@ import Report from './Report.js';
 **  This page is for the details of any singular fundraiser from backend
 */
 class FundraiserPost extends Component {
-  
+
   render() {
-        const image = this.props.location.details.image.image;
-        const title = this.props.location.details.title.title;
-        const requiredAmount = this.props.location.details.requiredAmount.requiredAmount;
-        const description = this.props.location.details.description.description; 
-        const endorsements = this.props.location.details.endorsements.endorsements;
+    const image = this.props.location.details.image.image;
+    const title = this.props.location.details.title.title;
+    const requiredAmount = this.props.location.details.requiredAmount.requiredAmount;
+    const description = this.props.location.details.description.description;
+    const endorsements = this.props.location.details.endorsements.endorsements;
 
     return (
       <div>
@@ -43,16 +43,16 @@ class FundraiserPost extends Component {
               <h2>{title}</h2>
             </div>
             <div className="starRating">
-                  <Star className="star" />
-                        <p>
-                          <strong>{endorsements}</strong>
-                        </p>
+              <Star className="star" />
+              <p>
+                <strong>{endorsements}</strong>
+              </p>
             </div>
             {/* <div className="spamProduct">
               <Report />
             </div> */}
           </div>
-            <h3>{description}</h3>
+          <h3>{description}</h3>
         </div>
       </div>
     )
