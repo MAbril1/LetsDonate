@@ -17,6 +17,7 @@
     "react-dropdown": "^1.9.0",
     "react-horizontal-scroll-container": "^1.0.1",
     "react-modal": "^3.11.2",
+    "react-native-elements": "^3.0.0-alpha.1",
     "react-scripts": "4.0.0",
     "reactstrap": "^8.7.1",
     "web-vitals": "^0.2.4"
