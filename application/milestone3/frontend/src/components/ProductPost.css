@@ -1,12 +1,13 @@
-img{
+.productImage{
     margin: 20px;
     margin-top: 40px;
     width: auto;
     height: 350px;
     border-radius: 9px;
     overflow: hidden;
-
 }
+
+
 
 .donationPrompt{
     margin: 40px;
@@ -19,7 +20,7 @@ img{
 }
 
 .donateButton > button{
-    color: black;
+    color: white;
     background-color: #ff7779;
     text-transform: inherit;
 }

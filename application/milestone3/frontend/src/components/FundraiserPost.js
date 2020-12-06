@@ -21,7 +21,7 @@ class FundraiserPost extends Component {
     return (
       <div>
         <div className="topSection">
-          <img src={image} alt="" />
+          <img src={image} alt="" className="fundImage" />
           <div className="donationPrompt">
             <div className="amountRequired">
               <h3>$2500 out of {requiredAmount} raised.</h3>
