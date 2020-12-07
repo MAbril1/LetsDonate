@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 import './PopUps.css';
@@ -10,6 +10,7 @@ import Select from '@material-ui/core/Select';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import axios from 'axios';
+import { Modal } from '@material-ui/core';
 
 import loginData from './backend/loginBackend.js'; // sends login form data to check against the database
 import currentUser from './backend/currentUser.js'; // helper functions to set and get current logged in user
@@ -65,10 +66,11 @@ class NavBar extends Component {
                     trigger={<button className="buttonLink"> Login/SignUp </button>}
                     modal
                     nested
+                
                 >
                     {close => (
                         <div>
-                        <form id="loginForm" className='form-border'>
+                        <form className='login-form'>
                             <h1>Login to Let's Donate</h1>
                             <div>
                                 <input
@@ -76,7 +78,6 @@ class NavBar extends Component {
                                     type='email'
                                     name='email'
                                     placeholder="Email"
-                                //   onChange={this.myChangeHandler}
                                 />
                             </div>
                             <div>
@@ -85,7 +86,6 @@ class NavBar extends Component {
                                     type='password'
                                     name='password'
                                     placeholder="Password"
-                                //   onChange={this.myChangeHandler}
                                 />
                             </div>
                             <div>
@@ -117,7 +117,6 @@ class NavBar extends Component {
                         </div>
                     )}
                 </Popup>
-
                 {/* This button takes a user to their user page if their signed in */}
                 { /* <Link className='userLink' to={"/User"}><AccountCircleIcon /></Link> */}
             </div>
