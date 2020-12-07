@@ -20,6 +20,14 @@ config.connect(function(fault){
                     "productType varchar(30), "+
                     "productImage varchar(255) );",
                   function(e,r,f){console.log(e)});
+
+        config.query("CREATE TABLE IF NOT EXISTS users("+ 
+                  "name varchar(30), " + 
+                  "email varchar(255), " + 
+                  "zipcode varchar(30), "+
+                  "password varchar(255) );",
+                function(e,r,f){console.log(e)});
+
     }else{
         console.log("Not Connected", fault);
         return;

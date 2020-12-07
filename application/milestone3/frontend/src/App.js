@@ -9,6 +9,9 @@ import User from './components/User.js';
 import ProductPost from './components/ProductPost.js';
 import FundraiserPost from './components/FundraiserPost.js';
 import SearchResult from './components/searchResult.js';
+import Chat from './components/Chat.js';
+
+import register from './components/register.js'
 
 /*
 **  App.js
@@ -31,8 +34,10 @@ class App extends Component {
           <Route path="/ProductPost" component={ProductPost} />
           <Route path="/FundraiserPost" component={FundraiserPost} />
           <Route path="/searchResult" component={SearchResult} />
+          <Route path="/register" component={register} />
           <Route component={Error} />
         </Switch>
+        <Chat></Chat>
       </div>
     </Router>
   );}
