@@ -41,11 +41,10 @@ class Chat extends Component {
                     <ul>  
                     {DUMMY_DATA.map(DUMMY_DATA => {
                         return (
-                            <li key={DUMMY_DATA.id} className={`${DUMMY_DATA.user ? "right" : ""}`}>
+                            <li key={DUMMY_DATA.id}> {/*className={`${DUMMY_DATA.user ? "right" : ""}`}>*/}
                                 <div>
-                                    {DUMMY_DATA.senderId}
-                                </div>
-                                <div>
+                                    {/* <b>{DUMMY_DATA.senderId}: </b> */}
+                                    <b>{DUMMY_DATA.user ? "me" : DUMMY_DATA.senderId}: </b>
                                     {DUMMY_DATA.text}
                                 </div>
                             </li>
