@@ -97,21 +97,22 @@ input{
 .login-form {
   /* border: 2px solid rgb(69, 136, 158);
   border-radius: 5px; */
-  padding: 20px;
+  width: 500px;
+  padding: 40px;
   text-align: center;
   display: inline-block;
 }
 
 .email {
   margin-bottom: 10px;
-  width: 75%;
-  height: 30px;
+  width: 330px;
+  height: 45px;
 }
 
 .password {
   margin-bottom: 20px;
-  width: 75%;
-  height: 30px;
+  width: 330px;
+  height: 45px;
 }
 
 /* log in button style */
@@ -123,8 +124,9 @@ input{
   color: black;  
   text-align: center;
   font-size: 16px;
-  width: 45%;
+  width: 150px;
   margin-bottom: 20px;
+  display: inline-block;
 }
 .login-button:hover {
   background-color:  rgba(88, 88, 250, 0.979);
@@ -134,8 +136,9 @@ input{
   color:  white;  
   text-align: center;
   font-size: 16px;
-  width: 45%;
+  width: 150px;
   margin-bottom: 20px;
+  display: inline-block;
 }
 /***************************/
 
@@ -148,8 +151,9 @@ input{
   color: black;  
   text-align: center;
   font-size: 16px;
-  width: 45%;
+  width: 150px;
   margin-bottom: 10px;
+  display: inline-block;
 }
 .signup-button:hover {
   background-color:  rgba(88, 88, 250, 0.979);
@@ -159,8 +163,9 @@ input{
   color:  white;  
   text-align: center;
   font-size: 16px;
-  width: 45%;
+  width: 150px;
   margin-bottom: 10px;
+  display: inline-block;
 }
 /*************************/
 

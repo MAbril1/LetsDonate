@@ -19,19 +19,19 @@ function register() {
             <div className='form-body'>
                 <form id="registerForm" method="post">
                     <label for="name"><b>Name</b></label><br />
-                    <input type="text" name="name" placeholder="John Smith" /><br />
+                    <input type="text" name="name" placeholder="John Smith" required/><br />
 
                     <label for="email"><b>Email</b></label><br />
-                    <input type="email" name="email" placeholder="Enter Email" /><br />
+                    <input type="email" name="email" placeholder="Enter Email" required/><br />
 
                     <label for="password"><b>Password</b></label><br />
-                    <input type="password" name="password" placeholder="Enter Password" /><br />
+                    <input type="password" name="password" placeholder="Enter Password" required/><br />
 
                     <label for="password2"><b>Confirm Password</b></label><br />
-                    <input type="password" name="password2" placeholder="Comfirm Password" /><br />
+                    <input type="password" name="password2" placeholder="Comfirm Password" required/><br />
 
                     <label for="zipcode"><b>Zip Code</b></label><br />
-                    <input type="number" name="zipcode" placeholder="Enter Zip Code" /><br />
+                    <input type="number" name="zipcode" placeholder="Enter Zip Code" required/><br />
 
                     <div className="form-button">
                         <button type="button" onClick={() => { formData() }}>Sign Up</button>
