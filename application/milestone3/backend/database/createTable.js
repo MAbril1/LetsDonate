@@ -25,7 +25,8 @@ config.connect(function(fault){
                   "name varchar(30), " + 
                   "email varchar(255), " + 
                   "zipcode varchar(30), "+
-                  "password varchar(255) );",
+                  "password varchar(255), "+
+                  "userImage varchar(255) );",
                 function(e,r,f){console.log(e)});
 
     }else{

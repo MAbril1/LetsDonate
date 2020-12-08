@@ -70,7 +70,7 @@ class NavBar extends Component {
                 >
                     {close => (
                         <div>
-                        <form className='login-form'>
+                        <form id="loginForm" className='login-form'>
                             <h1>Login to Let's Donate</h1>
                             <div>
                                 <input
