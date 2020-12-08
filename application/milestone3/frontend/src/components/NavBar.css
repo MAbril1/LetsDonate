@@ -118,6 +118,7 @@ input{
 .login-button {
   background-color: white;
   border-color: rgba(88, 88, 250, 0.979);
+  border-radius: 5px;
   padding: 10px;
   color: black;  
   text-align: center;
@@ -128,6 +129,7 @@ input{
 .login-button:hover {
   background-color:  rgba(88, 88, 250, 0.979);
   border-color: rgba(88, 88, 250, 0.979);
+  border-radius: 5px;
   padding: 10px;
   color:  white;  
   text-align: center;
@@ -141,6 +143,7 @@ input{
 .signup-button {
   background-color: white;
   border-color: rgba(88, 88, 250, 0.979);
+  border-radius: 5px;
   padding: 10px;
   color: black;  
   text-align: center;
@@ -151,6 +154,7 @@ input{
 .signup-button:hover {
   background-color:  rgba(88, 88, 250, 0.979);
   border-color: rgba(88, 88, 250, 0.979);
+  border-radius: 5px;
   padding: 10px;
   color:  white;  
   text-align: center;
