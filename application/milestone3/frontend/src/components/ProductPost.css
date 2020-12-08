@@ -1,23 +1,30 @@
-.productImage{
+
+
+.topSection .productImage{
     margin: 20px;
-    margin-top: 40px;
+    margin-top: 0px;
     width: auto;
     height: 350px;
     border-radius: 9px;
     overflow: hidden;
+    align-self: center;
 }
 
-
-
-.donationPrompt{
-    margin: 40px;
+.bottomSection {
+    float: right;
 }
-.donationPrompt .textArea > textarea{
+.bottomSection .donationPrompt .textArea > textarea{
     resize: none;
-    width: 300px;
-    height: 200px;
+    width: 500px;
+    /* height: 100px; */
     margin-bottom: 10px;
+    box-shadow: 1px 1px 1px #999;
+    line-height: 1.5;
+    border-radius: 10px;
+    padding:10px;
+    font-family:"Helvetica Neue", Helvetica, sans-serif;
 }
+
 
 .donateButton > button{
     color: white;
@@ -25,39 +32,84 @@
     text-transform: inherit;
 }
 
+
+
 .topSection{
-    display: flex;
-    align-items: center;
+    display: block;
 
 }
 
+.topSection .descriptionPart .userName{
+    margin-left: 20px;
+    margin-top: 10px;
+    text-align: left;
+}
 
+.topSection .descriptionPart{
 
-.bottomSection .heading .productTitle> h2{
+    width:40%;
+    align-self: baseline;
+    padding-top: 20px;
+    padding-right: 20px;
+}
+
+.topSection .descriptionPart .heading .productTitle> h2{
     margin-left: 20px;
     margin-top: 10px;
     text-align: left;
     margin-right: 30px;
 }
 
-.bottomSection .heading{
+.topSection .descriptionPart .heading{
     display: flex;
     align-items: center;
     justify-content: start;
+    width:40%;
 }
 
-.bottomSection > h3{
+.topSection  .descriptionPart > h3{
     color: gray;
     text-align: left;
     margin-left: 20px;
 }
 
-.bottomSection .heading .spamProduct{
+.topSection .descriptionPart .heading .spamProduct{
     margin-left: 40px;
 }
 
-.bottomSection .heading .spamProduct > button{
+.topSection .descriptionPart .heading .spamProduct > button{
     color: white;
     background-color: #ff7779;
     text-transform: inherit;
+}
+
+.topBar{
+    margin:20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+ .leftSide{
+    display: inline-flex;
+    justify-content: left;
+}
+
+.editButton > button{
+    color: black;
+    background-color: #ffffff;
+    text-transform: inherit;
+
+}
+
+.deleteButton > button{
+    color: white;
+    background-color: #ff7779;
+    text-transform: inherit;
+}
+
+.saveButton > button{
+    color: black;
+    background-color: #ffffff;
+    text-transform: inherit;
+    margin-right: 30px;
 }

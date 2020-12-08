@@ -18,36 +18,64 @@ class ProductPost extends Component {
 
     return (
       <div>
+        <div className="topBar">
+
+
+          <div className="editButton">
+            <Button variant='outlined'>Edit</Button>
+          </div>
+
+          <div className="leftSide">
+            <div className="saveButton">
+              <Button variant='outlined'>Save</Button>
+            </div>
+
+            <div className="deleteButton">
+              <Button variant='outlined'>Delete</Button>
+            </div>
+          </div>
+
+
+        </div>
         <div className="topSection">
           <img src={productImage} className="productImage" onError={(e) => {
             e.target.src = '../images/charity.png' // fallback image
           }} />
+
+
+          <div className="descriptionPart">
+            <div className="heading">
+              <div className="productTitle">
+                <h2>{name}</h2>
+              </div>
+              <div className="starRating">
+                <FavoriteBorder className="star" />
+                <p>
+                  <strong>5</strong>
+                </p>
+              </div>
+              <div className="spamProduct">
+                <Report />
+              </div>
+            </div>
+            <div className="userName">
+              john_doe
+            </div>
+            <h3>{description}</h3>
+          </div>
+
+        </div>
+        <div className="bottomSection">
           <div className="donationPrompt">
             <div className="textArea">
-              <textarea>Send a message...</textarea>
+              <textarea placeholder="Send a message..."  ></textarea>
             </div>
             <div className="donateButton">
               <Button variant='outlined'>Message</Button>
             </div>
           </div>
         </div>
-        <div className="bottomSection">
-          <div className="heading">
-            <div className="productTitle">
-              <h2>{name}</h2>
-            </div>
-            <div className="starRating">
-              <FavoriteBorder className="star" />
-              <p>
-                {/* <strong>{likes}</strong> */}
-              </p>
-            </div>
-            {/* <div className="spamProduct">
-              <Report />
-            </div> */}
-          </div>
-          <h3>{description}</h3>
-        </div>
+
       </div>
     )
   }
