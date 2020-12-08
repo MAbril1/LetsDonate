@@ -8,8 +8,11 @@ const formData = function() {
     let zipcode = document.forms.registerForm.zipcode.value;
     let password = document.forms.registerForm.password.value;
     let password2 = document.forms.registerForm.password2.value;
+    let profileImage = document.forms.registerForm.profileImage;
 
-    console.log(name, email, zipcode, password, password2);
+    console.log(name, email, zipcode, password, password2, profileImage);
+
+    // add logic to prevent registering with the same email
 
     // checks if user entered the correct password twice
     if(password.localeCompare(password2) == 0)
@@ -18,12 +21,13 @@ const formData = function() {
 
         // unsure of this, but needed to push form data to database
         // can be used later for user avatar
-        form.append("imageFile", "productImage.files[0]");
+        form.append("imageFile", profileImage.files[0]);
 
         form.append("name", name);
         form.append("email", email);
         form.append("zipcode", zipcode);
-        
+        console.log(form.getAll("name"), form.getAll("imageFile"));
+
         // generate the salt for user password hash
         bcrypt.genSalt(10, function(err, salt){
             bcrypt.hash(password, salt, function(err, hash){ // hashes the password
