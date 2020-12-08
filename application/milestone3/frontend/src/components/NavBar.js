@@ -62,7 +62,7 @@ class NavBar extends Component {
         {
             return (
                 <div>
-                <Popup
+                <Popup contentStyle={{width: "auto"}}
                     trigger={<button className="buttonLink"> Login/SignUp </button>}
                     modal
                     nested
