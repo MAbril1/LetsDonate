@@ -3,7 +3,7 @@ const axios = require('axios');
 
 const currentUser = require('./currentUser.js');
 
-const loginData = function() {;
+const loginData = function() {
     let email = document.forms.loginForm.email.value;
     let password = document.forms.loginForm.password.value;
 
