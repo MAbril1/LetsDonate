@@ -26,7 +26,7 @@ const loginData = function() {
                 if(err) throw err;
                 if(isMatch)
                 {
-                    alert("Password Match");
+                    console.log("Password Match");
                     currentUser.setUser(user[0]); // sets the current user
                     console.log(currentUser.getUser());
                     window.location.reload(); // reloads page to render proper buttons on navbar

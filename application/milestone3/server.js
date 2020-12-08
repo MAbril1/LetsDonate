@@ -52,7 +52,7 @@ app.post('/api/editUser', upload.single("imageFile"), function(req, res){
   
   console.log(req.body.name);
 
-  config.query(`UPDATE users SET name = '${req.body.name}', email = '${req.body.email}', zipcode = '${req.body.zipcode}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) {});
+  config.query(`UPDATE users SET name = '${req.body.name}', email = '${req.body.email}', password = '${req.body.password}', zipcode = '${req.body.zipcode}', userImage = '${fn}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) {});
 
   res.send({success:true, filename:fn});
 });
