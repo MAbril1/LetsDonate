@@ -69,6 +69,40 @@ class Products extends Component {
           })
     }
 
+    setCategory(filterCategory)
+    {      
+        // change state based on checked box
+        let checkBox = document.getElementById(filterCategory);
+        if(checkBox.checked == true)
+        {
+            // filters to searched category
+            let countCategory = this.state.items.filter((obj) => {return obj.productType === filterCategory});
+            const items = countCategory; 
+            this.setState({items});
+            //console.log("State:", this.state);
+            //console.log("Filtered", countCategory);
+        }
+        else this.allProducts();
+    }
+
+    getCategories()
+    {
+        // gets the list of categories and the count in each
+        let occurrences = { };
+        for(let i = 0, j = this.state.items.length; i < j; i++) 
+        {
+            occurrences[this.state.items[i].productType] = (occurrences[this.state.items[i].productType] || 0) + 1;
+        }
+        //console.log(occurrences);
+
+        // returns a map of the categories and their count
+        return (
+            Object.keys(occurrences).sort().map(item => 
+            <div className="checkbox"><label><input type="checkbox" id={item} onClick={() => {this.setCategory(item)}}/>{item} ({occurrences[item]})</label></div>
+            )
+        );
+    }
+
   render() {
     return (
         <div className="Products">
@@ -76,15 +110,8 @@ class Products extends Component {
             {/* left sticky side of filters and sort bys */}
             <div className="filters">
                 <h1 className="leftSide">Filters</h1>
-                <div className="checkbox">
-                    <label><input type="checkbox" rel="clothes" onClick={this.filterClothes}/>Clothes</label>
-                </div>
-                <div className="checkbox">
-                    <label><input type="checkbox" rel="furniture" onClick={this.filterFurniture}/>Furniture</label>
-                </div>
-                <div className="checkbox">
-                    <label><input type="checkbox" rel="allItems" onClick={this.allProducts}/>All Items</label>
-                </div>            
+                {/* Calls function to get the categories loaded to the state*/}
+                {this.getCategories()}            
             </div>
 
             <div className="split"></div>
