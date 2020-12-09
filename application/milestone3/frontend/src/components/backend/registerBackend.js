@@ -3,12 +3,37 @@ const axios = require('axios');
 
 const formData = function() {
     // form data
-    let name = document.forms.registerForm.name.value;
-    let email = document.forms.registerForm.email.value;
-    let zipcode = document.forms.registerForm.zipcode.value;
-    let password = document.forms.registerForm.password.value;
-    let password2 = document.forms.registerForm.password2.value;
-    let profileImage = document.forms.registerForm.profileImage;
+    let name;
+    let email;
+    let zipcode;
+    let password;
+    let password2;
+    let profileImage;
+
+    if(!document.forms.registerForm.name.value &&
+        !document.forms.registerForm.email.value &&
+        !document.forms.registerForm.zipcode.value &&
+        !document.forms.registerForm.password.value &&
+        !document.forms.registerForm.password2.value)
+    {
+        alert("Form cannot be empty!");
+        return;
+    }
+    else
+    {
+        name = document.forms.registerForm.name.value;
+        email = document.forms.registerForm.email.value;
+        zipcode = document.forms.registerForm.zipcode.value;
+        password = document.forms.registerForm.password.value;
+        password2 = document.forms.registerForm.password2.value;
+        profileImage = document.forms.registerForm.profileImage;
+    }
+
+    if(password.length < 6 && password2.length < 6)
+    {
+        alert("Password should be 6 or more characters");
+        return;
+    }
 
     console.log(name, email, zipcode, password, password2, profileImage);
 
@@ -47,13 +72,13 @@ const formData = function() {
                 axios.post("/api/registerUser", form, { headers: { 'content-type': "multipart/form-data"}})
                 .then((result) => {
                     if(result.data.success){
-                        alert("Successfully Posted");
+                        alert("Successfully created account");
                     }else{
-                        alert("Post Failure Occurred");
+                        alert("Account Failure Occurred");
                     }
                 })
                 .catch(exception => {
-                    alert("Post Failure Occurred");
+                    alert("Account Failure Occurred");
                 })
         });
     });

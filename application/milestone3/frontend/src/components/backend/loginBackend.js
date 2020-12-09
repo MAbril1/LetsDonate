@@ -4,8 +4,19 @@ const axios = require('axios');
 const currentUser = require('./currentUser.js');
 
 const loginData = function() {
-    let email = document.forms.loginForm.email.value;
-    let password = document.forms.loginForm.password.value;
+    let email;
+    let password;
+
+    if(!email || !password) // if text boxes are empty
+    {
+        alert("Text fields are empty!");
+        return;
+    }
+    else
+    {
+       email = document.forms.loginForm.email.value;
+       password = document.forms.loginForm.password.value;
+    }
 
     console.log(email, password);
 
