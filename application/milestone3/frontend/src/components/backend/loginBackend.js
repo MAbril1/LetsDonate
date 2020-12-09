@@ -7,7 +7,7 @@ const loginData = function() {
     let email;
     let password;
 
-    if(!email || !password) // if text boxes are empty
+    if(!document.forms.loginForm.email.value || !document.forms.loginForm.password.value) // if text boxes are empty
     {
         alert("Text fields are empty!");
         return;
