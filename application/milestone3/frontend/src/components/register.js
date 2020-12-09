@@ -12,11 +12,11 @@ function register() {
 
     return (
         <div>
-            <div className='form-header'>
+            <div className='formHeader'>
                 <h1>Sign Up to Let's Donate</h1>
                 <hr /><br />
             </div>
-            <div className='form-body'>
+            <div className='formBody'>
                 <form id="registerForm" method="post">
                     <label for="name"><b>Name</b></label><br />
                     <input type="text" name="name" placeholder="John Smith" required/><br />
@@ -31,9 +31,12 @@ function register() {
                     <input type="password" name="password2" placeholder="Comfirm Password" required/><br />
 
                     <label for="zipcode"><b>Zip Code</b></label><br />
-                    <input type="number" name="zipcode" placeholder="Enter Zip Code" required/><br />
+                    <input type="number" name="zipcode" placeholder="Enter Zip Code" required/><br /><br />
 
-                    <div className="form-button">
+                    <label><b>Profile Image:</b></label><br />
+                    <input type="file" id="profileImage" accept="image/jpg,image/jpeg,image/png" required/>
+
+                    <div className="signupButton">
                         <button type="button" onClick={() => { formData() }}>Sign Up</button>
                     </div>
                 </form>
