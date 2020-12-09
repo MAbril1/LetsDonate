@@ -52,9 +52,16 @@ app.post('/api/editUser', upload.single("imageFile"), function(req, res){
   
   console.log(req.body.name);
 
-  config.query(`UPDATE users SET name = '${req.body.name}', email = '${req.body.email}', password = '${req.body.password}', zipcode = '${req.body.zipcode}', userImage = '${fn}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) {});
-
-  res.send({success:true, filename:fn});
+  if(!fn) 
+  {
+    config.query(`UPDATE users SET name = '${req.body.name}', email = '${req.body.email}', password = '${req.body.password}', zipcode = '${req.body.zipcode}', userImage = '${req.body.imageFile}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) {});
+    res.send({success:true, filename:req.body.imageFile});
+  }
+  else 
+  {
+    config.query(`UPDATE users SET name = '${req.body.name}', email = '${req.body.email}', password = '${req.body.password}', zipcode = '${req.body.zipcode}', userImage = '${fn}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) {});
+    res.send({success:true, filename:fn});
+  }
 });
 
 // find registered user
@@ -91,10 +98,12 @@ app.post('/api/filterFurniture', function(req, res){
 
 });
 
+app.use(express.static(path.join(__dirname, "frontend/build")));
+
 app.get("/*", function(req, res){
     res.sendFile(path.join(__dirname, "build", "index.html"));
 })
 
-app.use(express.static(path.join(__dirname, "frontend/build")));
+
 
 app.listen(5000);

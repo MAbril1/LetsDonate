@@ -72,23 +72,19 @@ class NavBar extends Component {
                         <div>
                         <form id="loginForm" className='login-form'>
                             <h1>Login to Let's Donate</h1>
-                            <div>
                                 <input
                                     className='email'
                                     type='email'
                                     name='email'
                                     placeholder="Email"
                                 />
-                            </div>
-                            <div>
                                 <input
                                     className='password'
                                     type='password'
                                     name='password'
                                     placeholder="Password"
                                 />
-                            </div>
-                            <div>
+                                <br/>
                                 <input
                                     className='login-button'
                                     type='button'
@@ -96,8 +92,7 @@ class NavBar extends Component {
                                     onClick={() => {loginData()}}
                                     // calls function from loginBackend.js and passes login information
                                 />
-                            </div>
-                            <div>
+                                <br/>
                                 <input
                                     className='signup-button'
                                     type='button'
@@ -105,14 +100,12 @@ class NavBar extends Component {
                                     onClick={() => {window.location.href="/register"}}
                                     // redirects to signup page
                                 />
-                            </div>
-                            <div>
+                                <br/>
                                 <input
                                     className='reset-password-button'
                                     type='submit'
                                     value='Reset password'
                                 />
-                            </div>
                         </form>
                         </div>
                     )}
