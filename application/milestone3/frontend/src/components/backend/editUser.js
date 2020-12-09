@@ -75,19 +75,19 @@ const editUserData = function() {
         currentCurrentUser.zipcode = newZipcode;
     }
 
-    if(!document.forms.editUserForm.newProfileImage) 
+    if(!document.forms.editUserForm.newProfileImage.value) 
     {
         // uses current profile picture if no new pciture is uploaded
         newProfileImage = currentUser.getUser().userImage; // string
         form.append("imageFile", newProfileImage);
+        console.log(newProfileImage);
     }
     else 
     {
         newProfileImage = document.forms.editUserForm.newProfileImage; // object
         form.append("imageFile", newProfileImage.files[0]);
+        console.log(newProfileImage);
     }
-    
-    // probably need a conditional statement to enter the database logic
 
     form.append("name", newName);
     form.append("email", newEmail);
@@ -99,7 +99,6 @@ const editUserData = function() {
     axios.post("/api/editUser", form, { headers: { 'content-type': "multipart/form-data"}})
     .then((result) => {
         if(result.data.success){
-            // asynchronous behaviour can occur, if success alert does not show, log out then log back in
             alert("Profile Updated Successfully");
             currentCurrentUser.userImage = result.data.filename;
             currentUser.setUser(currentCurrentUser); // sets the current user with the new data
@@ -111,7 +110,7 @@ const editUserData = function() {
         alert("Profile Update Failed");
     })
 
-    window.location.reload(); // needed to refresh what is rendered on the navbar
+    //window.location.reload(); // needed to refresh what is rendered on the navbar
 }
 
 export default editUserData;
