@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import user from '../images/user.jpg';
+// import user from '../images/user.jpg';
 import './User.css';
 import './PopUps.css';
 import Star from "@material-ui/icons/Star";
@@ -13,15 +13,89 @@ import Report from './Report.js';
 import axios from 'axios';
 import { Form, Label, Input, FormGroup, CustomInput } from 'reactstrap';
 
+import currentUser from './backend/currentUser.js'; // helper functions to set and get current logged in user
+import editUserData from './backend/editUser.js';
+
 /*
 **  User.js
 **
 **  This displays a users dashboard.
 **  This should also contain the items and posts they have put up (if any).
 */
+
 class User extends Component {
+
+  editUserProfile()
+  {    
+
+    return (
+      <Popup
+      trigger={<button className="postButton"> Edit Profile </button>}
+      modal
+      nested
+      >
+      {close => (
+        <div className="popup">
+          <button className="close" onClick={close}>
+            &times;
+          </button>
+          <div className="header"> <strong> Edit Profile </strong></div>
+          <div className="content">
+          <form id="editUserForm" method="post">
+              <label><strong>Name: </strong></label>
+              <input type="text" name="newName" placeholder={currentUser.getUser().name}/>
+
+              <br />
+              <label><strong>Email: </strong></label>
+              <input type="text" name="newEmail" placeholder={currentUser.getUser().email}/>
+
+              <br />
+              <label><strong>Zipcode: </strong></label>
+              <input type="number" name="newZipcode" placeholder={currentUser.getUser().zipcode}/>
+
+              <br />
+              <label><strong>Current Password: </strong></label>
+              <input type="password" name="currentPassword" placeholder="password"/>
+
+              <br />
+              <label><strong>New Password: </strong></label>
+              <input type="password" name="newPassword" placeholder="password"/>
+
+              <br />
+              <label><strong>New Profile Image: </strong></label>
+              <input type="file" id="newProfileImage" accept="image/jpg,image/jpeg,image/png"/>
+          </form>
+          </div>
+          <div className="actions">
+
+            {/* This posts the input data into the backend */}
+            <button
+              className="button"
+              onClick={() => {editUserData()}}
+          >
+            SUBMIT
+          </button>
+        </div>
+
+      </div>
+    )}
+    </Popup>
+    )
+  }
+
   render() {
-    var name;
+    let userImage;
+
+    if(currentUser.getUser().userImage != null)
+    {
+      userImage = '../images/' + currentUser.getUser().userImage;
+    }
+    else
+    {
+      userImage = '../images/user.png';
+    }
+
+    var productName;
     var description;
     var type;
     return(
@@ -31,12 +105,14 @@ class User extends Component {
 
             {/* Users profile picture */}
             <div className="userImage">
-                <img src={user} alt="" />
+                <img src={userImage} alt="" />
             </div>
 
             {/* User's username and rating */}
             <div className="userName">
-              <h1>David Beven</h1>
+              <h1>{currentUser.getUser().name}</h1>
+              <h2>{currentUser.getUser().email}</h2>
+              <h2>Location: {currentUser.getUser().zipcode}</h2>
               <Star className="star" />
               <Star className="star" />
               <Star className="star" />
@@ -51,7 +127,8 @@ class User extends Component {
           </div>
         </div>
         <div className="bottomSection">
-          
+          {/* Edit user profile */}
+          {this.editUserProfile()}
           {/* This is a pop up for creating a new post */}
           <Popup
             trigger={<button className="postButton"> Create a new Post </button>}
@@ -68,9 +145,9 @@ class User extends Component {
                 <Form>
                     <FormGroup>
                         <Label><strong>Name of Product: </strong></Label>
-                        <Input value={name}
+                        <Input value={productName}
                             onChange={(word) => {
-                                name=(word.target.value);
+                                productName=(word.target.value);
                             }}
                         />
                     </FormGroup>
@@ -104,11 +181,11 @@ class User extends Component {
                   <button
                     className="button"
                     onClick={() => {
-                      if(name.length>0 && description.length>0){
+                      if(productName.length>0 && description.length>0){
                         var productImage = document.getElementById("productImage");
                         var form = new FormData();
                         form.append("imageFile", productImage.files[0]);
-                        form.append("name", name);
+                        form.append("name", productName);
                         form.append("description", description);
                         form.append("productType", type);
                         console.log(form.getAll("name"), form.getAll("imageFile"));

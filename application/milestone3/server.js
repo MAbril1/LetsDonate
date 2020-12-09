@@ -42,9 +42,19 @@ app.post('/api/registerUser', upload.single("imageFile"), function(req, res){
   
   console.log(req.body.name);
 
-  config.query(`INSERT INTO users VALUES ('${req.body.name}', '${req.body.email}', '${req.body.zipcode}', '${req.body.password}')`, function (e, response, f) {});
+  config.query(`INSERT INTO users VALUES ('${req.body.name}', '${req.body.email}', '${req.body.zipcode}', '${req.body.password}', '${fn}')`, function (e, response, f) {});
 
   res.send({success:true});
+});
+
+// api to edit a user profile
+app.post('/api/editUser', upload.single("imageFile"), function(req, res){
+  
+  console.log(req.body.name);
+
+  config.query(`UPDATE users SET name = '${req.body.name}', email = '${req.body.email}', password = '${req.body.password}', zipcode = '${req.body.zipcode}', userImage = '${fn}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) {});
+
+  res.send({success:true, filename:fn});
 });
 
 // find registered user
