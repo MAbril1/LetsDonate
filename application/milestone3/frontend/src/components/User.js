@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import user from '../images/user.jpg';
-import './User.css';
-import './PopUps.css';
+import './css/User.css';
+import './css/PopUps.css';
 import Star from "@material-ui/icons/Star";
 import FundraiserCard from './FundraiserCard';
 import city from '../images/city.jpg';
@@ -24,10 +24,33 @@ import editUserData from './backend/editUser.js';
 */
 
 class User extends Component {
+  state = {
+    users: [], // saves entire list of users from database
+    user: {}  // saves a single user which will be displayed
+  }
+
+  componentDidMount()
+  {
+    console.log(this.props.match.params.email);
+    // calls api to get list of all users from database
+    axios.get(`/api/allUsers`)
+          .then(res => {
+            const users = res.data;
+            this.setState({ users }); // sets the array with all database users
+
+            let pageName = this.props.match.params.email; // gets the url parameter
+            let singleUser;
+            if(this.state.user !== undefined)
+            {
+              // sets the variable to the found user. User is found by comparing all user emails to the url paramter
+              singleUser = this.state.users.find((userEmail) => {return userEmail.email == pageName})
+            }
+            this.setState({user: singleUser}); // sets the state of the single user variable with the found user
+    })
+  }
 
   editUserProfile()
   {    
-
     return (
       <Popup
       trigger={<button className="postButton"> Edit Profile </button>}
@@ -43,15 +66,15 @@ class User extends Component {
           <div className="content">
           <form id="editUserForm" method="post">
               <label><strong>Name: </strong></label>
-              <input type="text" name="newName" placeholder={currentUser.getUser().name}/>
+              <input type="text" name="newName" placeholder={this.state.user.name}/>
 
               <br />
               <label><strong>Email: </strong></label>
-              <input type="text" name="newEmail" placeholder={currentUser.getUser().email}/>
+              <input type="text" name="newEmail" placeholder={this.state.user.email}/>
 
               <br />
               <label><strong>Zipcode: </strong></label>
-              <input type="number" name="newZipcode" placeholder={currentUser.getUser().zipcode}/>
+              <input type="number" name="newZipcode" placeholder={this.state.user.zipcode}/>
 
               <br />
               <label><strong>Current Password: </strong></label>
@@ -84,11 +107,13 @@ class User extends Component {
   }
 
   render() {
+    console.log(this.state);
+
     let userImage;
 
-    if(currentUser.getUser().userImage != null)
+    if(this.state.user.userImage != null)
     {
-      userImage = '../images/' + currentUser.getUser().userImage;
+      userImage = '../images/' + this.state.user.userImage;
     }
     else
     {
@@ -110,9 +135,9 @@ class User extends Component {
 
             {/* User's username and rating */}
             <div className="userName">
-              <h1>{currentUser.getUser().name}</h1>
-              <h2>{currentUser.getUser().email}</h2>
-              <h2>Location: {currentUser.getUser().zipcode}</h2>
+              <h1>{this.state.user.name}</h1>
+              <h2>{this.state.user.email}</h2>
+              <h2>Location: {this.state.user.zipcode}</h2>
               <Star className="star" />
               <Star className="star" />
               <Star className="star" />

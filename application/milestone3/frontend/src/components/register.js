@@ -1,5 +1,5 @@
 import React from 'react';
-import './register.css';
+import './css/register.css';
 
 // contains function needed to send form information to database
 import formData from './backend/registerBackend.js';

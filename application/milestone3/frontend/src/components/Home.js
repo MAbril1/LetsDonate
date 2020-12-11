@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card from './Card.js';
-import './Home.css';
+import './css/Home.css';
 import FundraiserCard from './FundraiserCard';
 import candies from '../images/candies.jpg';
 import clinic from '../images/clinic.jpg';
@@ -33,7 +33,7 @@ class Home extends Component {
         this.setState({ items });
         console.log("See Below");
         console.log(this.state.items);
-        console.log("Current user:", currentUser.getUser());
+        //console.log("Current user:", currentUser.getUser());
       })
   }
 

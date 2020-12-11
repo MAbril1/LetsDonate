@@ -30,7 +30,8 @@ class App extends Component {
           <Route path="/" component={Home} exact />
           <Route path="/Products" component={Products} />
           <Route path="/Fundraisers" component={Fundraisers} />
-          <Route path="/User" component={User} />
+          {/* Dynamic route for users by using email */}
+          <Route path="/User/:email" component={User} />
           {/* Dynamic route for products by using the product name */}
           <Route path="/Product/:name" component={ProductPost} />
           <Route path="/FundraiserPost" component={FundraiserPost} />

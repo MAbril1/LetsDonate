@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './FundraiserPost.css';
+import './css/FundraiserPost.css';
 import { Button } from "@material-ui/core";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import Report from './Report.js';

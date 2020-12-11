@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Card from './Card.js';
-import './searchResult.css';
+import './css/searchResult.css';
 
 /*
 **  searchResult.js

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card from './Card.js';
-import './Products.css';
+import './css/Products.css';
 
 /*
 **  Products.js
@@ -16,12 +16,12 @@ class Products extends Component {
         items: []
       }
 
-      constructor(props) {
-        super(props);
-        this.filterClothes = this.filterClothes.bind(this);
-        this.filterFurniture = this.filterFurniture.bind(this);
-        this.allProducts = this.allProducts.bind(this);
-      }
+    //   constructor(props) {
+    //     super(props);
+    //     this.filterClothes = this.filterClothes.bind(this);
+    //     this.filterFurniture = this.filterFurniture.bind(this);
+    //     this.allProducts = this.allProducts.bind(this);
+    //   }
 
     //gets the whole list of items from the backend.
     componentDidMount() {
@@ -32,35 +32,35 @@ class Products extends Component {
           })
       }
 
-    //The next three functions filter the map based on categories
-    filterClothes() {
-        axios.post("api/filterClothes", {"clothes": "cloth"})
-        .then((result) => {
-            if(!result.data.success){
-                alert("Failed Search");
-            }else{
-                const items = result.data.products;
-                this.setState({ items });
-            }
-        })
-        .catch(exception => {
-            alert(exception);
-        })
-    }
-    filterFurniture() {
-        axios.post("api/filterFurniture", {"furniture": "furniture"})
-        .then((result) => {
-            if(!result.data.success){
-                alert("Failed Search");
-            }else{
-                const items = result.data.products;
-                this.setState({ items });
-            }
-        })
-        .catch(exception => {
-            alert(exception);
-        })
-    }
+    // //The next three functions filter the map based on categories
+    // filterClothes() {
+    //     axios.post("api/filterClothes", {"clothes": "cloth"})
+    //     .then((result) => {
+    //         if(!result.data.success){
+    //             alert("Failed Search");
+    //         }else{
+    //             const items = result.data.products;
+    //             this.setState({ items });
+    //         }
+    //     })
+    //     .catch(exception => {
+    //         alert(exception);
+    //     })
+    // }
+    // filterFurniture() {
+    //     axios.post("api/filterFurniture", {"furniture": "furniture"})
+    //     .then((result) => {
+    //         if(!result.data.success){
+    //             alert("Failed Search");
+    //         }else{
+    //             const items = result.data.products;
+    //             this.setState({ items });
+    //         }
+    //     })
+    //     .catch(exception => {
+    //         alert(exception);
+    //     })
+    // }
     allProducts() {
         axios.get(`/api`)
           .then(res => {

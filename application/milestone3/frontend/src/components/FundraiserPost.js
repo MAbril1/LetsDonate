@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './FundraiserPost.css';
+import './css/FundraiserPost.css';
 import { Button } from "@material-ui/core";
 import Star from "@material-ui/icons/Star";
 import Report from './Report.js';
