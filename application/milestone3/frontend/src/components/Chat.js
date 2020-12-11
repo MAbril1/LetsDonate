@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import './Chat.css';
+import './css/Chat.css';
 
 class Chat extends Component {
     componentDidMount() {

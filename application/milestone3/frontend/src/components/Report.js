@@ -1,5 +1,5 @@
 import React from 'react';
-import './PopUps.css';
+import './css/PopUps.css';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import "./Card.css"; 
+import "./css/Card.css"; 
 import { Link } from 'react-router-dom';
 
 /*
@@ -21,12 +21,7 @@ function Card( {name, description, productImage} ) {
     }
     
     return (
-        <Link className='link' to={{
-            pathname: "/ProductPost",
-            name: name,
-            description: description,
-            productImage: productImage
-          }}>
+        <Link className='link' to={`/Product/${name}`/* links to product page using product name */}>
             <div className="card">
                 <img  className="cardImage" 
                     src={image}

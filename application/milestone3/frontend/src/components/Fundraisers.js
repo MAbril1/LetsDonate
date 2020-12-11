@@ -9,7 +9,7 @@ import homeless from '../images/homeless.jpg';
 import city from '../images/city.jpg';
 import grocery from '../images/grocery.jpg';
 import travel from '../images/travel.jpg';
-import './Fundraisers.css';
+import './css/Fundraisers.css';
 
 /*
 **  Fundraiser.js
