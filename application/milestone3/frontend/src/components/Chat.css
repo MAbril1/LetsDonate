@@ -76,7 +76,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 
 ul {
+  overflow-y: auto;
   margin-bottom: 5px;
   list-style-type: none;
-  padding: 0px;
+  padding: 5px 5px;
+  height: 200px;
+  border: solid rgba(0, 0, 0, 0.137) 2.5px;
+  border-radius: 1px;
+}
+li {
+  padding-bottom: 10px;
 }

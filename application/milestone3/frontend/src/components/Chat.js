@@ -3,9 +3,10 @@ import Grid from '@material-ui/core/Grid';
 import './Chat.css';
 
 class Chat extends Component {
-  
     componentDidMount() {
-
+    }
+      
+    componentDidUpdate() {
     }
 
     openForm() {
@@ -27,6 +28,26 @@ class Chat extends Component {
               senderId: "janedoe",
               text: "It's gonna be me of course.",
               user: true,
+            },
+            {
+                senderId: "perborgen",
+                text: "lorem ipsum",
+                user: false,
+            },
+            {
+                senderId: "janedoe",
+                text: "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                user: true,
+            },
+            {
+                senderId: "perborgen",
+                text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                user: false,
+            },
+            {
+                senderId: "janedoe",
+                text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                user: true,
             }
         ]
 
