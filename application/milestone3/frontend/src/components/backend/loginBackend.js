@@ -23,36 +23,34 @@ const loginData = function() {
     // similar code to searching api
     let user;
     let searchable = {};
-    
+
     searchable["searchEmail"] = email; // login searches registered user database by email
     axios.post("api/loginUser", searchable)
-    .then((result) => {
-        if(!result.data.success){
+        .then((result) => {
+            if (!result.data.success) {
+                alert("Failed Search");
+            } else {
+                user = result.data.users; // returns the data from the database
+
+                // compare login password with encrypted password from database
+                bcrypt.compare(password, user[0].password, function (err, isMatch) {
+                    if (err) throw err;
+                    if (isMatch) {
+                        alert("Password Match");
+                        currentUser.setUser(user[0]); // sets the current user
+                        console.log(currentUser.getUser());
+                        window.location.reload(); // reloads page to render proper buttons on navbar
+                    }
+                    else {
+                        alert("Wrong Password");
+                    }
+                });
+
+            }
+        })
+        .catch(exception => {
             alert("Failed Search");
-        }else{
-            user = result.data.users; // returns the data from the database
-
-            // compare login password with encrypted password from database
-            bcrypt.compare(password, user[0].password, function(err, isMatch){
-                if(err) throw err;
-                if(isMatch)
-                {
-                    console.log("Password Match");
-                    currentUser.setUser(user[0]); // sets the current user
-                    console.log(currentUser.getUser());
-                    window.location.reload(); // reloads page to render proper buttons on navbar
-                }
-                else
-                {
-                    alert("Wrong Password");
-                }
-            });
-
-        }
-    })
-    .catch(exception => {
-        alert("Failed Search");
-    })
+        })
 }
 
 export default loginData;

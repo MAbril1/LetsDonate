@@ -1,7 +1,7 @@
-img{
+.fundImage{
     margin: 20px;
     margin-top: 40px;
-    width: 900px;
+    width: auto;
     height: 350px;
     border-radius: 9px;
     overflow: hidden;
