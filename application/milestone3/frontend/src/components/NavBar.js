@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
-import './NavBar.css';
-import './PopUps.css';
+import './css/NavBar.css';
+import './css/PopUps.css';
 import charity from '../images/charity.png';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -93,19 +93,19 @@ class NavBar extends Component {
                                     // calls function from loginBackend.js and passes login information
                                 />
                                 <br/>
-                                <input
-                                    className='signup-button'
+                                <Link 
+                                    className='signup-button' 
                                     type='button'
-                                    value='Sign Up'
-                                    onClick={() => {window.location.href="/register"}}
-                                    // redirects to signup page
-                                />
+                                    to={"/register"}
+                                    onClick={close}
+                                >SignUp</Link>
                                 <br/>
-                                <input
+                                <Link
                                     className='reset-password-button'
-                                    type='submit'
-                                    value='Reset password'
-                                />
+                                    type='button'
+                                    to={"/recovery"}
+                                    onClick={close}
+                                >Reset Password</Link>
                         </form>
                         </div>
                     )}
@@ -122,7 +122,7 @@ class NavBar extends Component {
                     <button className="buttonLink" onClick={() => {currentUser.setUserLogout()}}> Logout </button>
 
                     {/* This button takes a user to their user page if their signed in */}
-                    <Link className='userLink' to={"/User"}><AccountCircleIcon /></Link>
+                    <Link className='userLink' to={`/User/${currentUser.getUser().email}`/* links to product page using product name */}><AccountCircleIcon /></Link>
                 </div>
             )
         }
@@ -156,7 +156,7 @@ class NavBar extends Component {
 
             {/* This is the searchbar */}
             <div className="search">
-                <input id="searchType" type="text" onChange={this.getKey.bind(this)}/>
+                <input id="searchType" type="text" placeholder="Search for products or fundraisers" onChange={this.getKey.bind(this)}/>
                 
                 {/* At the moment, the dropdown acts as the links to the browsing pages */}
                 <Select

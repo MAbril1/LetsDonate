@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './FundraiserPost.css';
+import './css/FundraiserPost.css';
 import { Button } from "@material-ui/core";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import Report from './Report.js';
+import axios from 'axios';
 
 /*
 **  ProductPost.js
@@ -10,11 +11,35 @@ import Report from './Report.js';
 **  This page is for the details of any singular item from backend
 */
 class ProductPost extends Component {
-  
+  state = {
+    items: [], // saves entire list of products from database
+    item: {}  // saves a single product which will be displayed
+  }
+
+  componentDidMount()
+  {
+    // calls api to get list of all products from database
+    axios.get(`/api`)
+          .then(res => {
+            const items = res.data;
+            this.setState({ items }); // sets the array with all database items
+
+            let pageName = this.props.match.params.name; // gets the url parameter
+            let singleProduct;
+            if(this.state.item !== undefined)
+            {
+              // sets the variable to the found product. Product is found by comparing all product names to the url paramter
+              singleProduct = this.state.items.find((product) => {return product.name == pageName})
+            }
+            this.setState({item: singleProduct}); // sets the state of the single product variable with the found product
+    })
+  }
+
   render() {
-        const productImage = '../images/' + this.props.location.productImage;
-        const name = this.props.location.name;
-        const description = this.props.location.description;
+    console.log(this.state.item);
+    const productImage = '../images/' + this.state.item.productImage;
+    const name = this.state.item.name;
+    const description = this.state.item.description;
 
     return (
       <div>

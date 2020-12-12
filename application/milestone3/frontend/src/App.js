@@ -12,6 +12,7 @@ import SearchResult from './components/searchResult.js';
 import Chat from './components/Chat.js';
 
 import register from './components/register.js'
+import recovery from './components/recovery.js'
 
 /*
 **  App.js
@@ -30,11 +31,14 @@ class App extends Component {
           <Route path="/" component={Home} exact />
           <Route path="/Products" component={Products} />
           <Route path="/Fundraisers" component={Fundraisers} />
-          <Route path="/User" component={User} />
-          <Route path="/ProductPost" component={ProductPost} />
+          {/* Dynamic route for users by using email */}
+          <Route path="/User/:email" component={User} />
+          {/* Dynamic route for products by using the product name */}
+          <Route path="/Product/:name" component={ProductPost} />
           <Route path="/FundraiserPost" component={FundraiserPost} />
           <Route path="/searchResult" component={SearchResult} />
           <Route path="/register" component={register} />
+          <Route path="/recovery" component={recovery} />
           <Route component={Error} />
         </Switch>
         <Chat></Chat>

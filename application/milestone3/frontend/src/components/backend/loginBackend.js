@@ -25,7 +25,7 @@ const loginData = function() {
     let searchable = {};
     
     searchable["searchEmail"] = email; // login searches registered user database by email
-    axios.post("api/loginUser", searchable)
+    axios.post('/api/loginUser', searchable)
     .then((result) => {
         if(!result.data.success){
             alert("Failed Search");
