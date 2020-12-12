@@ -44,7 +44,6 @@ app.post('/api/loginUser', function(req, res){
 
 let fn; // create variable used to save filename
 
-
 const storage = multer.diskStorage({
   destination: "frontend/public/images",
   filename: function(req, file, a) {
@@ -60,7 +59,7 @@ app.post('/api/postProduct', upload.single("imageFile"), function(req, res){
       req.body.description = req.body.description.replace(/'/g, "''");
       config.query(`INSERT INTO products VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}', '${fn}')`, function (e, response, f) {
       });
-
+      fn = undefined; // reset the uploaded images filename variable
     res.send({success:true});
 });
 
@@ -69,8 +68,9 @@ app.post('/api/registerUser', upload.single("imageFile"), function(req, res){
   
   console.log(req.body.name);
 
-  config.query(`INSERT INTO users VALUES ('${req.body.name}', '${req.body.email}', '${req.body.zipcode}', '${req.body.password}', '${fn}')`, function (e, response, f) {});
-
+  config.query(`INSERT INTO users (name, email, zipcode, password, userImage, recovery1, recovery2)
+                VALUES ('${req.body.name}', '${req.body.email}', '${req.body.zipcode}', '${req.body.password}', '${fn}', '${req.body.recovery1}', '${req.body.recovery2}')`, function (e, response, f) {});
+  fn = undefined; // reset the uploaded images filename variable
   res.send({success:true});
 });
 
@@ -79,14 +79,17 @@ app.post('/api/editUser', upload.single("imageFile"), function(req, res){
   
   console.log(req.body.name);
 
-  if(!fn) 
+  if(!fn) // if not updating user image
   {
-    config.query(`UPDATE users SET name = '${req.body.name}', email = '${req.body.email}', password = '${req.body.password}', zipcode = '${req.body.zipcode}', userImage = '${req.body.imageFile}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) {});
+    config.query(`UPDATE users SET name = '${req.body.name}', email = '${req.body.email}', password = '${req.body.password}', zipcode = '${req.body.zipcode}', 
+                  userImage = '${req.body.imageFile}', recovery1 = '${req.body.recovery1}', recovery2 = '${req.body.recovery2}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) {});
     res.send({success:true, filename:req.body.imageFile});
   }
   else 
   {
-    config.query(`UPDATE users SET name = '${req.body.name}', email = '${req.body.email}', password = '${req.body.password}', zipcode = '${req.body.zipcode}', userImage = '${fn}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) {});
+    config.query(`UPDATE users SET name = '${req.body.name}', email = '${req.body.email}', password = '${req.body.password}', zipcode = '${req.body.zipcode}',
+                  userImage = '${fn}', recovery1 = '${req.body.recovery1}', recovery2 = '${req.body.recovery2}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) {});
+    fn = undefined; // reset the uploaded images filename variable
     res.send({success:true, filename:fn});
   }
 });

@@ -14,19 +14,29 @@ config.connect(function(fault){
         console.log("Connected");
         config.query("Create Database if not exists letsDonate;");
         config.query("USE letsDonate;", function (e, r, f) {});
-        config.query("CREATE TABLE IF NOT EXISTS products("+ 
+        
+        // creates products table
+        config.query("CREATE TABLE IF NOT EXISTS products("+
+                    "id int NOT NULL AUTO_INCREMENT, " +  
                     "name varchar(30), " + 
                     "description varchar(255), " + 
-                    "productType varchar(30), "+
-                    "productImage varchar(255) );",
+                    "productType varchar(30), " +
+                    "productImage varchar(255), " +
+                    "owner varchar(255), " +
+                    "PRIMARY KEY (id) );",
                   function(e,r,f){console.log(e)});
 
+        // creates users table
         config.query("CREATE TABLE IF NOT EXISTS users("+ 
-                  "name varchar(30), " + 
-                  "email varchar(255), " + 
-                  "zipcode varchar(30), "+
-                  "password varchar(255), "+
-                  "userImage varchar(255) );",
+                    "id int NOT NULL AUTO_INCREMENT, " + 
+                    "name varchar(30) NOT NULL, " + 
+                    "email varchar(255) NOT NULL, " + 
+                    "zipcode varchar(30) NOT NULL, "+
+                    "password varchar(255) NOT NULL, "+
+                    "userImage varchar(255) NOT NULL, "+
+                    "recovery1 varchar(255) NOT NULL, "+
+                    "recovery2 varchar(255) NOT NULL, "+
+                    "PRIMARY KEY (id) );",
                 function(e,r,f){console.log(e)});
 
     }else{
