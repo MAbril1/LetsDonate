@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import user from '../images/user.jpg';
+import user from '../images/user.jpg';
 import './css/User.css';
 import './css/PopUps.css';
 import Star from "@material-ui/icons/Star";
@@ -29,81 +29,183 @@ class User extends Component {
     user: {}  // saves a single user which will be displayed
   }
 
-  componentDidMount()
-  {
+  componentDidMount() {
     console.log(this.props.match.params.email);
     // calls api to get list of all users from database
     axios.get(`/api/allUsers`)
-          .then(res => {
-            const users = res.data;
-            this.setState({ users }); // sets the array with all database users
+      .then(res => {
+        const users = res.data;
+        this.setState({ users }); // sets the array with all database users
 
-            let pageName = this.props.match.params.email; // gets the url parameter
-            let singleUser;
-            if(this.state.user !== undefined)
-            {
-              // sets the variable to the found user. User is found by comparing all user emails to the url paramter
-              singleUser = this.state.users.find((userEmail) => {return userEmail.email == pageName})
-            }
-            this.setState({user: singleUser}); // sets the state of the single user variable with the found user
-    })
+        let pageName = this.props.match.params.email; // gets the url parameter
+        let singleUser;
+        if (this.state.user !== undefined) {
+          // sets the variable to the found user. User is found by comparing all user emails to the url paramter
+          singleUser = this.state.users.find((userEmail) => { return userEmail.email == pageName })
+        }
+        this.setState({ user: singleUser }); // sets the state of the single user variable with the found user
+      })
   }
 
-  editUserProfile()
-  {    
-    return (
-      <Popup
-      trigger={<button className="postButton"> Edit Profile </button>}
-      modal
-      nested
-      >
-      {close => (
-        <div className="popup">
-          <button className="close" onClick={close}>
-            &times;
-          </button>
-          <div className="header"> <strong> Edit Profile </strong></div>
-          <div className="content">
-          <form id="editUserForm" method="post">
-              <label><strong>Name: </strong></label>
-              <input type="text" name="newName" placeholder={this.state.user.name}/>
+  editUserProfile() {
+    let currentUserEmail = currentUser.getUser().email;
+    let currentProfileEmail = this.state.user.email;
 
-              <br />
-              <label><strong>Email: </strong></label>
-              <input type="text" name="newEmail" placeholder={this.state.user.email}/>
+    if ((currentUserEmail.localeCompare("admin@admin.com") === 0) || (currentUserEmail.localeCompare(currentProfileEmail) === 0)) // edit profile if current user is profile owner or an admin
+    {
+      return (
+        <Popup
+          trigger={<button className="postButton"> Edit Profile </button>}
+          modal
+          nested
+        >
+          {close => (
+            <div className="popup">
+              <button className="close" onClick={close}>
+                &times;
+            </button>
+              <div className="header"> <strong> Edit Profile </strong></div>
+              <div className="content">
+                <form id="editUserForm" method="post">
+                  <label><strong>Name: </strong></label>
+                  <input type="text" name="newName" placeholder={this.state.user.name} />
 
-              <br />
-              <label><strong>Zipcode: </strong></label>
-              <input type="number" name="newZipcode" placeholder={this.state.user.zipcode}/>
+                  <br />
+                  <label><strong>Email: </strong></label>
+                  <input type="text" name="newEmail" placeholder={this.state.user.email} />
 
-              <br />
-              <label><strong>Current Password: </strong></label>
-              <input type="password" name="currentPassword" placeholder="password"/>
+                  <br />
+                  <label><strong>Zipcode: </strong></label>
+                  <input type="number" name="newZipcode" placeholder={this.state.user.zipcode} />
 
-              <br />
-              <label><strong>New Password: </strong></label>
-              <input type="password" name="newPassword" placeholder="password"/>
+                  <br />
+                  <label><strong>Current Password: </strong></label>
+                  <input type="password" name="currentPassword" placeholder="password" />
 
-              <br />
-              <label><strong>New Profile Image: </strong></label>
-              <input type="file" id="newProfileImage" accept="image/jpg,image/jpeg,image/png"/>
-          </form>
-          </div>
-          <div className="actions">
+                  <br />
+                  <label><strong>New Password: </strong></label>
+                  <input type="password" name="newPassword" placeholder="password" />
 
-            {/* This posts the input data into the backend */}
-            <button
-              className="button"
-              onClick={() => {editUserData()}}
-          >
-            SUBMIT
-          </button>
-        </div>
+                  <br />
+                  <label><strong>New Profile Image: </strong></label>
+                  <input type="file" id="newProfileImage" accept="image/jpg,image/jpeg,image/png" />
+                </form>
+              </div>
+              <div className="actions">
 
-      </div>
-    )}
-    </Popup>
-    )
+                {/* This posts the input data into the backend */}
+                <button
+                  className="button"
+                  onClick={() => { editUserData() }}
+                >SUBMIT
+              </button>
+              </div>
+
+            </div>
+          )}
+        </Popup>
+      )
+    }
+  }
+
+  createPost() {
+    var productName;
+    var description;
+    var type;
+    let currentUserEmail = currentUser.getUser().email;
+    let currentProfileEmail = this.state.user.email;
+
+    if ((currentUserEmail.localeCompare("admin@admin.com") === 0) || (currentUserEmail.localeCompare(currentProfileEmail) === 0)) // edit profile if current user is profile owner or an admin
+    {
+      return (
+        <Popup
+          trigger={<button className="postButton"> Create a new Post </button>}
+          modal
+          nested
+        >
+          {close => (
+            <div className="popup">
+              <button className="close" onClick={close}>
+                &times;
+                  </button>
+              <div className="header"> <strong>CREATE A POST </strong></div>
+              <div className="content">
+                <Form>
+                  <FormGroup>
+                    <Label><strong>Name of Product: </strong></Label>
+                    <Input value={productName}
+                      onChange={(word) => {
+                        productName = (word.target.value);
+                      }}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <br />
+                    <Label><strong>Description of Product: </strong></Label>
+                    <Input className="descriptionText" value={description}
+                      onChange={(des) => {
+                        description = (des.target.value);
+                      }}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <br />
+                    <Label><strong>Type (Example: Furniture, Cloth): </strong></Label>
+                    <Input value={type}
+                      onChange={(productType) => {
+                        type = (productType.target.value);
+                      }}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <br />
+                    <CustomInput type="file" id="productImage" accept="image/jpg,image/jpeg,image/png" />
+                  </FormGroup>
+                </Form>
+              </div>
+              <div className="actions">
+
+                {/* This posts the input data into the backend */}
+                <button
+                  className="button"
+                  onClick={() => {
+                    if (productName.length > 0 && description.length > 0) {
+                      var productImage = document.getElementById("productImage");
+                      var form = new FormData();
+                      form.append("imageFile", productImage.files[0]);
+                      form.append("name", productName);
+                      form.append("description", description);
+                      form.append("productType", type);
+                      console.log(form.getAll("name"), form.getAll("imageFile"));
+                      axios.post("/api/postProduct", form, { headers: { 'content-type': "multipart/form-data" } })
+                        .then((result) => {
+                          if (result.data.success) {
+                            alert("Successfully Posted");
+                          } else {
+                            alert("Post Failure Occurred");
+                          }
+                        })
+                        .catch(exception => {
+                          alert("Post Failure Occurred");
+                        })
+                    }
+                  }}
+                >
+                  SUBMIT
+                    </button>
+              </div>
+              <button className="button"
+                onClick={() => {
+
+                }}
+              >
+                Trouble Posting?
+                    </button>
+            </div>
+          )}
+        </Popup>
+      )
+    }
   }
 
   render() {
@@ -111,27 +213,22 @@ class User extends Component {
 
     let userImage;
 
-    if(this.state.user.userImage != null)
-    {
-      if(this.state.user.userImage.localeCompare("undefined") == 0) userImage = '../images/user.png';
+    if (this.state.user.userImage != null) {
+      if (this.state.user.userImage.localeCompare("undefined") == 0) userImage = user;
       else userImage = '../images/' + this.state.user.userImage;
     }
-    else
-    {
-      userImage = '../images/user.png';
+    else {
+      userImage = user;
     }
 
-    var productName;
-    var description;
-    var type;
-    return(
-      <div className="profile"> 
+    return (
+      <div className="profile">
         <div className="topSection">
           <div className="topLeft">
 
             {/* Users profile picture */}
             <div className="userImage">
-                <img src={userImage} alt="" />
+              <img src={userImage} alt="" />
             </div>
 
             {/* User's username and rating */}
@@ -149,119 +246,34 @@ class User extends Component {
             {/* <Report /> */}
           </div>
           <div className="topRight">
-          
+
           </div>
         </div>
         <div className="bottomSection">
           {/* Edit user profile */}
           {this.editUserProfile()}
           {/* This is a pop up for creating a new post */}
-          <Popup
-            trigger={<button className="postButton"> Create a new Post </button>}
-            modal
-            nested
-          >
-            {close => (
-              <div className="popup">
-                <button className="close" onClick={close}>
-                  &times;
-                </button>
-                <div className="header"> <strong>CREATE A POST </strong></div>
-                <div className="content">
-                <Form>
-                    <FormGroup>
-                        <Label><strong>Name of Product: </strong></Label>
-                        <Input value={productName}
-                            onChange={(word) => {
-                                productName=(word.target.value);
-                            }}
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                      <br />
-                        <Label><strong>Description of Product: </strong></Label>
-                        <Input className="descriptionText" value={description}
-                            onChange={(des) => {
-                                description=(des.target.value);
-                            }}
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <br />
-                        <Label><strong>Type (Example: Furniture, Cloth): </strong></Label>
-                        <Input value={type}
-                            onChange={(productType) => {
-                                type=(productType.target.value);
-                            }}
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                      <br />
-                        <CustomInput type="file" id="productImage" accept="image/jpg,image/jpeg,image/png"/>
-                    </FormGroup>
-                </Form>
-                </div>
-                <div className="actions">
-
-                  {/* This posts the input data into the backend */}
-                  <button
-                    className="button"
-                    onClick={() => {
-                      if(productName.length>0 && description.length>0){
-                        var productImage = document.getElementById("productImage");
-                        var form = new FormData();
-                        form.append("imageFile", productImage.files[0]);
-                        form.append("name", productName);
-                        form.append("description", description);
-                        form.append("productType", type);
-                        console.log(form.getAll("name"), form.getAll("imageFile"));
-                        axios.post("/api/postProduct", form, { headers: { 'content-type': "multipart/form-data"}})
-                        .then((result) => {
-                            if(result.data.success){
-                                alert("Successfully Posted");
-                            }else{
-                                alert("Post Failure Occurred");
-                            }
-                        })
-                        .catch(exception => {
-                            alert("Post Failure Occurred");
-                        })
-                    }
-                    }}
-                  >
-                    SUBMIT
-                  </button>
-                </div>
-                <button className="button"
-                    onClick={() => {
-                      
-                    }}
-                  >
-                    Trouble Posting?
-                  </button>
-              </div>
-            )}
-          </Popup>
+          {this.createPost()}
 
           {/* These are lists of the items and fundraisers a user has posted */}
           <h2>ITEMS POSTED</h2>
           <div className="scrollmenu">
-            <Card name="Bike" description="Three year old bike available in San Bruno for pick up. Please feel free to reach out. Bike is in great condition" productImage="bike.jpg"/>
-            <Card name="Shirt" description="One year old shirt available in Sunnyvale for pick up. Please feel free to reach out. Shirt is in great condition with no marks." productImage="shirt.jpg"/>
+            <Card name="Bike" description="Three year old bike available in San Bruno for pick up. Please feel free to reach out. Bike is in great condition" productImage="bike.jpg" />
+            <Card name="Shirt" description="One year old shirt available in Sunnyvale for pick up. Please feel free to reach out. Shirt is in great condition with no marks." productImage="shirt.jpg" />
           </div>
           <h2>FUNDRAISERS POSTED</h2>
           <div className="scrollmenu">
-            <FundraiserCard title="Help required for new city Expenses" 
-                                    description="Recently shifted to the city of New York and it is highly difficult for me to manage daily expenses."
-                                    rating={2.6}
-                                    requiredAmount="$3500"
-                                    image={city}/>
+            <FundraiserCard title="Help required for new city Expenses"
+              description="Recently shifted to the city of New York and it is highly difficult for me to manage daily expenses."
+              rating={2.6}
+              requiredAmount="$3500"
+              image={city} />
           </div>
         </div>
       </div>
 
-       
-      )
+
+    )
   }
 }
 export default User;
