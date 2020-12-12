@@ -14,7 +14,7 @@ function register() {
         <div>
             <div className='formHeader'>
                 <h1>Sign Up to Let's Donate</h1>
-                <hr /><br />
+                <hr />
             </div>
             <div className='formBody'>
                 <form id="registerForm" method="post">
@@ -24,17 +24,27 @@ function register() {
                     <label for="email"><b>Email</b></label><br />
                     <input type="email" name="email" placeholder="Enter Email" required/><br />
 
+                    <label for="zipcode"><b>Zip Code</b></label><br />
+                    <input type="number" name="zipcode" placeholder="Enter Zip Code" required/><br />
+
                     <label for="password"><b>Password</b></label><br />
                     <input type="password" name="password" placeholder="Enter Password" required/><br />
 
                     <label for="password2"><b>Confirm Password</b></label><br />
                     <input type="password" name="password2" placeholder="Comfirm Password" required/><br />
 
-                    <label for="zipcode"><b>Zip Code</b></label><br />
-                    <input type="number" name="zipcode" placeholder="Enter Zip Code" required/><br /><br />
-
                     <label><b>Profile Image:</b></label><br />
                     <input type="file" id="profileImage" accept="image/jpg,image/jpeg,image/png" required/>
+
+                    <br />
+                    <h2>Recovery Questions</h2>
+                    <hr /><br />
+
+                    <label for="recovery1"><b>What is your mother's maiden name?</b></label><br />
+                    <input type="text" name="recovery1" placeholder="Smith" required/><br />
+
+                    <label for="recovery2"><b>What is the name of your childhood pet?</b></label><br />
+                    <input type="recovery2" name="recovery2" placeholder="Fido" required/><br />
 
                     <div className="signupButton">
                         <button type="button" onClick={() => { formData() }}>Sign Up</button>

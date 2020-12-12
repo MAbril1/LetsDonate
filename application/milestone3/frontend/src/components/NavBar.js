@@ -93,19 +93,19 @@ class NavBar extends Component {
                                     // calls function from loginBackend.js and passes login information
                                 />
                                 <br/>
-                                <input
-                                    className='signup-button'
+                                <Link 
+                                    className='signup-button' 
                                     type='button'
-                                    value='Sign Up'
-                                    onClick={() => {window.location.href="/register"}}
-                                    // redirects to signup page
-                                />
+                                    to={"/register"}
+                                    onClick={close}
+                                >SignUp</Link>
                                 <br/>
-                                <input
+                                <Link
                                     className='reset-password-button'
-                                    type='submit'
-                                    value='Reset password'
-                                />
+                                    type='button'
+                                    to={"/recovery"}
+                                    onClick={close}
+                                >Reset Password</Link>
                         </form>
                         </div>
                     )}

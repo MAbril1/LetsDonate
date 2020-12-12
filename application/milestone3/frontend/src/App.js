@@ -12,6 +12,7 @@ import SearchResult from './components/searchResult.js';
 import Chat from './components/Chat.js';
 
 import register from './components/register.js'
+import recovery from './components/recovery.js'
 
 /*
 **  App.js
@@ -37,6 +38,7 @@ class App extends Component {
           <Route path="/FundraiserPost" component={FundraiserPost} />
           <Route path="/searchResult" component={SearchResult} />
           <Route path="/register" component={register} />
+          <Route path="/recovery" component={recovery} />
           <Route component={Error} />
         </Switch>
         <Chat></Chat>
