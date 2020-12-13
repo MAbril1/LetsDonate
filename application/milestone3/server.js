@@ -9,8 +9,8 @@ const multer = require("multer");
 const multerS3 = require( 'multer-s3' );
 
 const s3 = new aws.S3({
-	  accessKeyId: 'xxx',
-	  secretAccessKey: 'xxx',
+	  accessKeyId: 'AKIAJ7AFCOWPDWOTZG6Q',
+	  secretAccessKey: '68bjivtuwQUuBjKhw21T5KCF9uee/nW7HLDnf4eZ',
 	  Bucket: 'yourbucketname'
 });
 
@@ -31,6 +31,13 @@ app.get('/api/allUsers', function(req, res){
     res.json(response);
     });
   
+});
+
+app.get('/api/Fundraisers', function(req, res){
+  config.query(`SELECT * FROM fundraisers`, function(e, response, f){
+    console.log(response);
+    res.json(response);
+  });
 });
 
 // find registered user
@@ -62,6 +69,14 @@ app.post('/api/postProduct', upload.single("imageFile"), function(req, res){
       });
       fn = undefined; // reset the uploaded images filename variable
     res.send({success:true});
+});
+
+app.post('/api/postFundraiser', upload.single("image"), function(req, res){
+  req.body.description = req.body.description.replace(/'/g, "''");
+  config.query(`INSERT INTO fundraisers VALUES ('${req.body.title}', '${req.body.description}', '${req.body.requiredAmount}', '${fn}')`, function (e, response, f) {
+  });
+  fn = undefined; // reset the uploaded images filename variable
+res.send({success:true});
 });
 
 // api to register a new user
@@ -126,10 +141,12 @@ app.post('/api/filterFurniture', function(req, res){
 
 });
 
+app.use(express.static(path.join(__dirname, "frontend/build")));
+
 app.get("/*", function(req, res){
     res.sendFile(path.join(__dirname, "build", "index.html"));
 })
 
-app.use(express.static(path.join(__dirname, "frontend/build")));
+
 
 app.listen(5000);

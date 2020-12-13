@@ -39,6 +39,16 @@ config.connect(function(fault){
                     "PRIMARY KEY (id) );",
                 function(e,r,f){console.log(e)});
 
+        config.query("CREATE TABLE IF NOT EXISTS fundraisers("+ 
+                    "id int NOT NULL AUTO_INCREMENT, " + 
+                    "title varchar(30) NOT NULL, " + 
+                    "description varchar(255) NOT NULL, " +
+                    "requiredAmount varchar(30) NOT NULL," +
+                    "image varchar(255) NOT NULL, "+
+                    "endorsement varchar(30) NOT NULL, "+
+                    "PRIMARY KEY (id) );",
+                function(e,r,f){console.log(e)});
+
     }else{
         console.log("Not Connected", fault);
         return;

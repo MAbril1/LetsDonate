@@ -10,6 +10,7 @@ import city from '../images/city.jpg';
 import grocery from '../images/grocery.jpg';
 import travel from '../images/travel.jpg';
 import './css/Fundraisers.css';
+import axios from 'axios';
 
 /*
 **  Fundraiser.js
@@ -18,12 +19,32 @@ import './css/Fundraisers.css';
 **  and should allow the user to filter and sort the list.
 */
 class Fundraisers extends Component {
+
+  state = {
+    items: []
+  }
+
+  componentDidMount() {
+    axios.get(`/api/Fundraisers`)
+      .then(res => {
+        const items = res.data;
+        this.setState({ items });
+      })
+  }
+
   render() {
     return (
       <div>
         <div className="donationHeading">
           <h1>Fundraisers</h1>
         </div>
+
+        <div className="items">
+                {this.state.items.map(item => 
+                    <FundraiserCard title={item.title} description={item.description} image={item.image} endorsement={item.endorsement} requiredAmount={item.requiredAmount}/>
+                )}
+          </div>
+
           <FundraiserCard title="Hospital Expenses" 
                         description="Money required for the hospital and medicine expenses."
                         endorsements={4600}
