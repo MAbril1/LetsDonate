@@ -57,7 +57,8 @@ const upload = multer({ storage: storage });
 
 app.post('/api/postProduct', upload.single("imageFile"), function(req, res){
       req.body.description = req.body.description.replace(/'/g, "''");
-      config.query(`INSERT INTO products VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}', '${fn}')`, function (e, response, f) {
+      config.query(`INSERT INTO products (name, description, productType, productImage, owner)
+                    VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}', '${fn}', '${req.body.owner}')`, function (e, response, f) {
       });
       fn = undefined; // reset the uploaded images filename variable
     res.send({success:true});
@@ -92,6 +93,12 @@ app.post('/api/editUser', upload.single("imageFile"), function(req, res){
     fn = undefined; // reset the uploaded images filename variable
     res.send({success:true, filename:fn});
   }
+});
+
+app.post('/api/deleteUser', function(req, res){
+  config.query(`DELETE FROM users WHERE email = '${req.body.searchEmail}'`, function (e, response, f) {
+    res.json({success:true});
+  });
 });
 
 app.post('/api/makeSearch', function(req, res){

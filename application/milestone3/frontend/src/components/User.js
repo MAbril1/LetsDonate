@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import user from '../images/user.jpg';
 import './css/User.css';
 import './css/PopUps.css';
@@ -15,6 +15,8 @@ import { Form, Label, Input, FormGroup, CustomInput } from 'reactstrap';
 
 import currentUser from './backend/currentUser.js'; // helper functions to set and get current logged in user
 import editUserData from './backend/editUser.js';
+import deleteUserFunction from './backend/deleteUser.js';
+import history from './history';
 
 /*
 **  User.js
@@ -45,6 +47,56 @@ class User extends Component {
         }
         this.setState({ user: singleUser }); // sets the state of the single user variable with the found user
       })
+  }
+
+  deleteUserProfile() {
+    let currentUserEmail = currentUser.getUser().email;
+    let currentProfileEmail = this.state.user.email;
+
+    if ((currentUserEmail.localeCompare("admin@admin.com") === 0) || (currentUserEmail.localeCompare(currentProfileEmail) === 0)) // edit profile if current user is profile owner or an admin
+    {
+      return (
+        <Popup
+          trigger={<button className="postButton"> Delete Profile </button>}
+          modal
+          nested
+        >
+          {close => (
+            <div className="popup">
+              <button className="close" onClick={close}>
+                &times;
+            </button>
+              <div className="header"> <strong> Delete Profile </strong></div>
+              <div className="header"> <strong> This Action Cannot Be Undone </strong></div>
+              <div className="content">
+                <form id="deleteUserForm" method="post">
+                  <label><strong>Type "YES to Confirm Deletion" </strong></label>
+                  <input type="text" name="response" placeholder="YES" />
+                  <br />
+                </form>
+              </div>
+              <div className="actions">
+                <button
+                  className="button"
+                  onClick={() => { 
+                    let pageRedirect = deleteUserFunction(this.props.match.params.email);
+
+                    if(pageRedirect)
+                    {
+                      console.log("HERE");
+                      window.location.replace('/');
+                      //history.push('/');
+                    }
+                }}
+                >DELETE
+              </button>
+              </div>
+
+            </div>
+          )}
+        </Popup>
+      )
+    }
   }
 
   editUserProfile() {
@@ -176,6 +228,7 @@ class User extends Component {
                       form.append("name", productName);
                       form.append("description", description);
                       form.append("productType", type);
+                      form.append("owner", currentProfileEmail);
                       console.log(form.getAll("name"), form.getAll("imageFile"));
                       axios.post("/api/postProduct", form, { headers: { 'content-type': "multipart/form-data" } })
                         .then((result) => {
@@ -270,6 +323,8 @@ class User extends Component {
               image={city} />
           </div>
         </div>
+        {/* This is a pop up for deleting the profile */}
+        {this.deleteUserProfile()}
       </div>
 
 
