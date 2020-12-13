@@ -16,7 +16,32 @@ const s3 = new aws.S3({
 
 app.use(parser.json());
 
+// image upload
+// let fn; // create variable used to save filename
+// const storage = multer.diskStorage({
+//   destination: "frontend/public/images",
+//   filename: function(req, file, a) {
+//     // creates a filename adding the date uploaded between filename and extension, also removes any spaces from filename
+//     fn = file.originalname.split(path.extname(file.originalname))[0] + '-' + Date.now() + path.extname(file.originalname);
+//     fn = fn.replace(/\s/g, '');
+//     a(null, fn);
+//   }
+// });
+// const upload = multer({ storage: storage });
 
+const upload = multer({
+	storage: multerS3({
+		s3: s3,
+		bucket: 'csc648images',
+		acl: 'public-read',
+		key: function (req, file, cb) {
+      cb(null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
+      console.log(file);
+    }
+	})
+});
+
+// loads all items from the three tables tables
 app.get('/api', function(req, res){
     config.query(`SELECT * FROM products`, function (e, response, f) {
       console.log(response);
@@ -40,6 +65,7 @@ app.get('/api/Fundraisers', function(req, res){
   });
 });
 
+// apis related to users
 // find registered user
 app.post('/api/loginUser', function(req, res){
   config.query(`SELECT * FROM users WHERE email LIKE '%${req.body.searchEmail}%' LIMIT 1`, function (e, response, f) {
@@ -47,36 +73,6 @@ app.post('/api/loginUser', function(req, res){
     console.log(response);
   });
   
-});
-
-let fn; // create variable used to save filename
-
-const storage = multer.diskStorage({
-  destination: "frontend/public/images",
-  filename: function(req, file, a) {
-    // creates a filename adding the date uploaded between filename and extension, also removes any spaces from filename
-    fn = file.originalname.split(path.extname(file.originalname))[0] + '-' + Date.now() + path.extname(file.originalname);
-    fn = fn.replace(/\s/g, '');
-    a(null, fn);
-  }
-});
-const upload = multer({ storage: storage });
-
-app.post('/api/postProduct', upload.single("imageFile"), function(req, res){
-      req.body.description = req.body.description.replace(/'/g, "''");
-      config.query(`INSERT INTO products (name, description, productType, productImage, owner)
-                    VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}', '${fn}', '${req.body.owner}')`, function (e, response, f) {
-      });
-      fn = undefined; // reset the uploaded images filename variable
-    res.send({success:true});
-});
-
-app.post('/api/postFundraiser', upload.single("image"), function(req, res){
-  req.body.description = req.body.description.replace(/'/g, "''");
-  config.query(`INSERT INTO fundraisers VALUES ('${req.body.title}', '${req.body.description}', '${req.body.requiredAmount}', '${fn}')`, function (e, response, f) {
-  });
-  fn = undefined; // reset the uploaded images filename variable
-res.send({success:true});
 });
 
 // api to register a new user
@@ -103,10 +99,10 @@ app.post('/api/editUser', upload.single("imageFile"), function(req, res){
   }
   else 
   {
-    config.query(`UPDATE users SET name = '${req.body.name}', email = '${req.body.email}', password = '${req.body.password}', zipcode = '${req.body.zipcode}',
-                  userImage = '${fn}', recovery1 = '${req.body.recovery1}', recovery2 = '${req.body.recovery2}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) {});
-    fn = undefined; // reset the uploaded images filename variable
-    res.send({success:true, filename:fn});
+    // config.query(`UPDATE users SET name = '${req.body.name}', email = '${req.body.email}', password = '${req.body.password}', zipcode = '${req.body.zipcode}',
+    //               userImage = '${fn}', recovery1 = '${req.body.recovery1}', recovery2 = '${req.body.recovery2}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) {});
+    // fn = undefined; // reset the uploaded images filename variable
+    res.send({success:true, filename:req.file.location});
   }
 });
 
@@ -114,6 +110,23 @@ app.post('/api/deleteUser', function(req, res){
   config.query(`DELETE FROM users WHERE email = '${req.body.searchEmail}'`, function (e, response, f) {
     res.json({success:true});
   });
+});
+
+app.post('/api/postProduct', upload.single("imageFile"), function(req, res){
+      req.body.description = req.body.description.replace(/'/g, "''");
+      config.query(`INSERT INTO products (name, description, productType, productImage, owner)
+                    VALUES ('${req.body.name}', '${req.body.description}', '${req.body.productType}', '${fn}', '${req.body.owner}')`, function (e, response, f) {
+      });
+      fn = undefined; // reset the uploaded images filename variable
+    res.send({success:true});
+});
+
+app.post('/api/postFundraiser', upload.single("image"), function(req, res){
+  req.body.description = req.body.description.replace(/'/g, "''");
+  config.query(`INSERT INTO fundraisers VALUES ('${req.body.title}', '${req.body.description}', '${req.body.requiredAmount}', '${fn}')`, function (e, response, f) {
+  });
+  fn = undefined; // reset the uploaded images filename variable
+res.send({success:true});
 });
 
 app.post('/api/makeSearch', function(req, res){

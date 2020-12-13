@@ -30,9 +30,62 @@ class ProductPost extends Component {
             {
               // sets the variable to the found product. Product is found by comparing all product names to the url paramter
               singleProduct = this.state.items.find((product) => {return product.name == pageName})
+
+              // add logic to find owner of product from users table
             }
             this.setState({item: singleProduct}); // sets the state of the single product variable with the found product
     })
+  }
+
+  deletePost() {
+    return console.log(this.props);
+    // let currentUserEmail = currentUser.getUser().email;
+    // let currentProfileEmail = this.state.user.email;
+
+    // if ((currentUserEmail.localeCompare("admin@admin.com") === 0) || (currentUserEmail.localeCompare(currentProfileEmail) === 0)) // edit profile if current user is profile owner or an admin
+    // {
+    //   return (
+    //     <Popup
+    //       trigger={<button className="postButton"> Delete Profile </button>}
+    //       modal
+    //       nested
+    //     >
+    //       {close => (
+    //         <div className="popup">
+    //           <button className="close" onClick={close}>
+    //             &times;
+    //         </button>
+    //           <div className="header"> <strong> Delete Profile </strong></div>
+    //           <div className="header"> <strong> This Action Cannot Be Undone </strong></div>
+    //           <div className="content">
+    //             <form id="deleteUserForm" method="post">
+    //               <label><strong>Type "YES to Confirm Deletion" </strong></label>
+    //               <input type="text" name="response" placeholder="YES" />
+    //               <br />
+    //             </form>
+    //           </div>
+    //           <div className="actions">
+    //             <button
+    //               className="button"
+    //               onClick={() => { 
+    //                 let pageRedirect = deleteUserFunction(this.props.match.params.email);
+
+    //                 if(pageRedirect)
+    //                 {
+    //                   console.log("HERE");
+    //                   window.location.replace('/');
+    //                   //history.push('/');
+    //                 }
+    //             }}
+    //             >DELETE
+    //           </button>
+    //           </div>
+
+    //         </div>
+    //       )}
+    //     </Popup>
+    //   )
+    // }
   }
 
   render() {
@@ -67,6 +120,7 @@ class ProductPost extends Component {
                           {/* <strong>{likes}</strong> */}
                         </p>
             </div>
+            {this.deletePost()}
             {/* <div className="spamProduct">
               <Report />
             </div> */}
