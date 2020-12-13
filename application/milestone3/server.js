@@ -11,7 +11,7 @@ const multerS3 = require( 'multer-s3' );
 const s3 = new aws.S3({
 	  accessKeyId: 'AKIAJ7AFCOWPDWOTZG6Q',
 	  secretAccessKey: '68bjivtuwQUuBjKhw21T5KCF9uee/nW7HLDnf4eZ',
-	  Bucket: 'yourbucketname'
+	  Bucket: 'csc648images'
 });
 
 app.use(parser.json());
