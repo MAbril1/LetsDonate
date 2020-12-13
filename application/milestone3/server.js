@@ -9,8 +9,8 @@ const multer = require("multer");
 const multerS3 = require( 'multer-s3' );
 
 const s3 = new aws.S3({
-	  accessKeyId: 'AKIAJ7AFCOWPDWOTZG6Q',
-	  secretAccessKey: '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',
+	  accessKeyId: 'AKIAU6B7MVGXEDMQVM37',
+	  secretAccessKey: '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 ',
 	  Bucket: 'csc648images'
 });
 
