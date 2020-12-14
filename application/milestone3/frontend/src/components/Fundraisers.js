@@ -11,6 +11,8 @@ import grocery from '../images/grocery.jpg';
 import travel from '../images/travel.jpg';
 import './css/Fundraisers.css';
 import axios from 'axios';
+import { Form, Label, Input, FormGroup, CustomInput } from 'reactstrap';
+import Popup from 'reactjs-popup';
 
 /*
 **  Fundraiser.js
@@ -32,19 +34,131 @@ class Fundraisers extends Component {
       })
   }
 
+  createPost() {
+    var title;
+    var description;
+    var amountRequired;
+    var endorsement = 0;
+
+     // edit profile if current user is profile owner or an admin
+    
+      return (
+        <Popup
+          trigger={<button className="postButton"> Create a new Fundraiser </button>}
+          modal
+          nested
+        >
+          {close => (
+            <div className="popup">
+              <button className="close" onClick={close}>
+                &times;
+                  </button>
+              <div className="header"> <strong>CREATE NEW FUNDRAISER </strong></div>
+              <div className="content">
+                <Form>
+                  <FormGroup>
+                    <Label><strong>Title: </strong></Label>
+                    <Input value={title}
+                      onChange={(word) => {
+                        title = (word.target.value);
+                      }}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <br />
+                    <Label><strong>Description: </strong></Label>
+                    <Input className="descriptionText" value={description}
+                      onChange={(des) => {
+                        description = (des.target.value);
+                      }}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <br />
+                    <Label><strong>Amount Required in USD: </strong></Label>
+                    <Input value={amountRequired}
+                      onChange={(productType) => {
+                        amountRequired = (productType.target.value);
+                      }}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <br />
+                    <CustomInput type="file" id="productImage" accept="image/jpg,image/jpeg,image/png" />
+                  </FormGroup>
+                </Form>
+              </div>
+              <div className="actions">
+
+                {/* This posts the input data into the backend */}
+                <button
+                  className="button"
+                  onClick={() => {
+                    if (title.length > 0 && description.length > 0) {
+                      var productImage = document.getElementById("productImage");
+                      var form = new FormData();
+                      form.append("image", productImage.files[0]);
+                      form.append("title", title);
+                      form.append("description", description);
+                      form.append("requiredAmount", amountRequired);
+                      form.append("endorsement", 0);
+                      axios.post("/api/postFundraiser", form, { headers: { 'content-type': "multipart/form-data" } })
+                        .then((result) => {
+                          if (result.data.success) {
+                            alert("Successfully Posted");
+                          } else {
+                            alert("Post Failure Occurred");
+                          }
+                        })
+                        .catch(exception => {
+                          alert("Post Failure Occurred");
+                        })
+                    }
+                  }}
+                >
+                  SUBMIT
+                    </button>
+              </div>
+              <button className="button"
+                onClick={() => {
+
+                }}
+              >
+                Trouble Posting?
+                    </button>
+            </div>
+          )}
+        </Popup>
+      )
+    
+  }
+
   render() {
+    
     return (
       <div>
         <div className="donationHeading">
-          <h1>Fundraisers</h1>
+          <div className="heading">
+            <h1>Fundraisers</h1>
+          </div>
+          <div classname="fundButton">
+          
+            {/* <button
+                    className="button"
+                    onClick={() => { }}
+                  >Create Fundraiser
+            </button> */}
+          </div>
         </div>
 
-        <div className="items">
+        
+
+          {this.createPost()}
+          <div className="items">
                 {this.state.items.map(item => 
                     <FundraiserCard title={item.title} description={item.description} image={item.image} endorsement={item.endorsement} requiredAmount={item.requiredAmount}/>
                 )}
           </div>
-
           <FundraiserCard title="Hospital Expenses" 
                         description="Money required for the hospital and medicine expenses."
                         endorsements={4600}

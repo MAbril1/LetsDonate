@@ -44,8 +44,8 @@ config.connect(function(fault){
                     "title varchar(30) NOT NULL, " + 
                     "description varchar(255) NOT NULL, " +
                     "requiredAmount varchar(30) NOT NULL," +
-                    "image varchar(255) NOT NULL, "+
                     "endorsement varchar(30) NOT NULL, "+
+                    "image varchar(255) NOT NULL, "+
                     "PRIMARY KEY (id) );",
                 function(e,r,f){console.log(e)});
 

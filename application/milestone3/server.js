@@ -3,6 +3,7 @@ const path = require("path");
 const config = require('./backend/database/createTable');
 const app = express();
 const parser = require('body-parser');
+const uuid = require('uuid');
 
 const aws = require( 'aws-sdk' );
 const multer = require("multer");
@@ -72,7 +73,9 @@ app.post('/api/postProduct', upload.single("imageFile"), function(req, res){
 
 app.post('/api/postFundraiser', upload.single("image"), function(req, res){
   req.body.description = req.body.description.replace(/'/g, "''");
-  config.query(`INSERT INTO fundraisers VALUES ('${req.body.title}', '${req.body.description}', '${req.body.requiredAmount}', '${fn}')`, function (e, response, f) {
+  console.log(req.body.title);
+  console.log(req.body);
+  config.query(`INSERT INTO fundraisers VALUES ('${uuid.v1()}', '${req.body.title}', '${req.body.description}', '${req.body.requiredAmount}', '${req.body.endorsement}','xxxxx')`, function (e, response, f) {
   });
   fn = undefined; // reset the uploaded images filename variable
 res.send({success:true});
@@ -82,7 +85,7 @@ res.send({success:true});
 app.post('/api/registerUser', upload.single("imageFile"), function(req, res){
   
   console.log(req.body.name);
-
+  
   config.query(`INSERT INTO users (name, email, zipcode, password, userImage, recovery1, recovery2)
                 VALUES ('${req.body.name}', '${req.body.email}', '${req.body.zipcode}', '${req.body.password}', '${fn}', '${req.body.recovery1}', '${req.body.recovery2}')`, function (e, response, f) {});
   fn = undefined; // reset the uploaded images filename variable
@@ -122,8 +125,7 @@ app.post('/api/filterClothes', function(req, res){
       config.query("SELECT * FROM products WHERE productType LIKE 'cloth'", function (e, response, f) {
         res.json({success:true, products:response});
       });
-      
-
+    
       
 });
 
