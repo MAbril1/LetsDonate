@@ -26,6 +26,18 @@ config.connect(function(fault){
                     "PRIMARY KEY (id) );",
                   function(e,r,f){console.log(e)});
 
+        // creates fundraisers table
+        config.query("CREATE TABLE IF NOT EXISTS fundraisers("+ 
+                    "id int NOT NULL AUTO_INCREMENT, " + 
+                    "title varchar(30) NOT NULL, " + 
+                    "description varchar(255) NOT NULL, " +
+                    "requiredAmount varchar(30) NOT NULL," +
+                    "image varchar(255) NOT NULL, "+
+                    "endorsement varchar(30) NOT NULL, "+
+                    "owner varchar(255), " +
+                    "PRIMARY KEY (id) );",
+                function(e,r,f){console.log(e)});
+
         // creates users table
         config.query("CREATE TABLE IF NOT EXISTS users("+ 
                     "id int NOT NULL AUTO_INCREMENT, " + 
@@ -36,16 +48,7 @@ config.connect(function(fault){
                     "userImage varchar(255) NOT NULL, "+
                     "recovery1 varchar(255) NOT NULL, "+
                     "recovery2 varchar(255) NOT NULL, "+
-                    "PRIMARY KEY (id) );",
-                function(e,r,f){console.log(e)});
-
-        config.query("CREATE TABLE IF NOT EXISTS fundraisers("+ 
-                    "id int NOT NULL AUTO_INCREMENT, " + 
-                    "title varchar(30) NOT NULL, " + 
-                    "description varchar(255) NOT NULL, " +
-                    "requiredAmount varchar(30) NOT NULL," +
-                    "endorsement varchar(30) NOT NULL, "+
-                    "image varchar(255) NOT NULL, "+
+                    "claimedProducts int NOT NULL, "+
                     "PRIMARY KEY (id) );",
                 function(e,r,f){console.log(e)});
 
