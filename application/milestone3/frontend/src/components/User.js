@@ -16,7 +16,7 @@ import { Form, Label, Input, FormGroup, CustomInput } from 'reactstrap';
 import currentUser from './backend/currentUser.js'; // helper functions to set and get current logged in user
 import editUserData from './backend/editUser.js';
 import deleteUserFunction from './backend/deleteUser.js';
-import history from './history';
+import history from './backend/history.js';
 
 /*
 **  User.js

@@ -11,7 +11,7 @@ import FundraiserPost from './components/FundraiserPost.js';
 import SearchResult from './components/searchResult.js';
 import Chat from './components/Chat.js';
 
-import history from './components/history';
+import history from './components/backend/history.js';
 
 import register from './components/register.js'
 import recovery from './components/recovery.js'

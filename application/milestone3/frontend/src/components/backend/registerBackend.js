@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const axios = require('axios');
+const history = require ('history');
 
 const formData = function() {
     // form data
@@ -86,6 +87,7 @@ const formData = function() {
                     .then((result) => {
                         if(result.data.success){
                             alert("Successfully created account");
+                            history.push('/');
                         }else{
                             alert("Account Failure Occurred");
                         }

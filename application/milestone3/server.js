@@ -66,24 +66,31 @@ app.post('/api/loginUser', function (req, res) {
 app.post('/api/registerUser', upload.single("imageFile"), function (req, res) {
 
   console.log(req.body.name);
-
-  config.query(`INSERT INTO users (name, email, zipcode, password, userImage, recovery1, recovery2, claimedProducts)
+  if (!req.body.imageFile) // not registering with image
+  {
+    config.query(`INSERT INTO users (name, email, zipcode, password, userImage, recovery1, recovery2, claimedProducts)
                 VALUES ('${req.body.name}', '${req.body.email}', '${req.body.zipcode}', '${req.body.password}', '${req.file.location}', '${req.body.recovery1}', '${req.body.recovery2}', '${req.body.claimedProducts}')`, function (e, response, f) { });
-  fn = undefined; // reset the uploaded images filename variable
-  res.send({ success: true });
+    res.send({ success: true });
+  }
+  else // registering with image
+  {
+    config.query(`INSERT INTO users (name, email, zipcode, password, userImage, recovery1, recovery2, claimedProducts)
+                VALUES ('${req.body.name}', '${req.body.email}', '${req.body.zipcode}', '${req.body.password}', '${req.body.imageFile}', '${req.body.recovery1}', '${req.body.recovery2}', '${req.body.claimedProducts}')`, function (e, response, f) { });
+    res.send({ success: true });
+  }
 });
 
 // api to edit a user profile
 app.post('/api/editUser', upload.single("imageFile"), function (req, res) {
   console.log(req.body);
-  
+
   if (!req.body.imageFile) // updating image
   {
     config.query(`UPDATE users SET
                   name = '${req.body.name}', email = '${req.body.email}', zipcode = '${req.body.zipcode}', password = '${req.body.password}', userImage = '${req.file.location}',
-                  recovery1 = '${req.body.recovery1}', recovery2 = '${req.body.recovery2}', claimedProducts = '${req.body.claimedProducts}' WHERE email = '${req.body.currentEmail}'` , function (e, response, f) { });
-    res.send({ success: true, fileLocation:req.file.location});
-    
+                  recovery1 = '${req.body.recovery1}', recovery2 = '${req.body.recovery2}', claimedProducts = '${req.body.claimedProducts}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) { });
+    res.send({ success: true, fileLocation: req.file.location });
+
     console.log("Image URL: ", req.file.location);
   }
   else // if not updating user image
@@ -91,7 +98,7 @@ app.post('/api/editUser', upload.single("imageFile"), function (req, res) {
     config.query(`UPDATE users SET
                   name = '${req.body.name}', email = '${req.body.email}', zipcode = '${req.body.zipcode}', password = '${req.body.password}', userImage = '${req.body.imageFile}',
                   recovery1 = '${req.body.recovery1}', recovery2 = '${req.body.recovery2}', claimedProducts = '${req.body.claimedProducts}' WHERE email = '${req.body.currentEmail}'`, function (e, response, f) { });
-    res.send({ success: true});
+    res.send({ success: true });
   }
 });
 
