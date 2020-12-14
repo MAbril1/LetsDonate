@@ -9,9 +9,9 @@ const multer = require("multer");
 const multerS3 = require('multer-s3');
 
 const s3 = new aws.S3({
-  accessKeyId: 'AKIAURJ5OHF5UD4NHFTF',
-  secretAccessKey: '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',
-  Bucket: 'csc648imagesbucket'
+  accessKeyId: 'AKIAU6B7MVGXEDMQVM37',
+  secretAccessKey: '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',
+  Bucket: 'csc648images'
 });
 
 app.use(parser.json());
@@ -19,7 +19,7 @@ app.use(parser.json());
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'csc648imagesbucket',
+    bucket: 'csc648images',
     acl: 'public-read',
     key: function (req, file, cb) {
       console.log("Multer API: ", file)
