@@ -14,6 +14,7 @@ const editUserData = function() {
     let newPassword;
     let recovery1 = currentUser.getUser().recovery1;
     let recovery2 = currentUser.getUser().recovery2;
+    let claimedProducts = currentUser.getUser().claimedProducts;
 
     // checks if form is empty
     if((!document.forms.editUserForm.newName.value && 
@@ -96,6 +97,7 @@ const editUserData = function() {
     form.append("zipcode", newZipcode);
     form.append("recovery1", recovery1);
     form.append("recovery2", recovery2);
+    form.append("claimedProducts", claimedProducts);
     form.append("currentEmail", currentUser.getUser().email);
     //console.log(form.getAll("password"));
 
@@ -104,7 +106,7 @@ const editUserData = function() {
     .then((result) => {
         if(result.data.success){
             alert("Profile Updated Successfully");
-            currentCurrentUser.userImage = result.data.filename;
+            currentCurrentUser.userImage = result.data.fileLocation;
             currentUser.setUser(currentCurrentUser); // sets the current user with the new data
         }else{
             alert("Profile Update Failed");

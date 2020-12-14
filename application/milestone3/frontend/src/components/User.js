@@ -268,7 +268,7 @@ class User extends Component {
 
     if (this.state.user.userImage != null) {
       if (this.state.user.userImage.localeCompare("undefined") == 0) userImage = user;
-      else userImage = '../images/' + this.state.user.userImage;
+      else userImage = this.state.user.userImage;
     }
     else {
       userImage = user;

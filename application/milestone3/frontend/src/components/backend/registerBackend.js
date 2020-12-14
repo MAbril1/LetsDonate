@@ -68,6 +68,7 @@ const formData = function() {
                     form.append("zipcode", zipcode);
                     form.append("recovery1", recovery1);
                     form.append("recovery2", recovery2);
+                    form.append("claimedProducts", 0);
                     console.log(form.getAll("name"), form.getAll("imageFile"));
 
                     // generate the salt for user password hash
