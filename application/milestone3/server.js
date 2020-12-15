@@ -1,7 +1,12 @@
 const express = require("express");
+const http = require('http');
+
 const path = require("path");
 const config = require('./backend/database/createTable');
 const app = express();
+const server = http.createServer(app);
+const socketio = require('socket.io');
+const io = socketio(server);
 const parser = require('body-parser');
 
 const aws = require('aws-sdk');
@@ -26,6 +31,10 @@ const upload = multer({
       cb(null, path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname))
     }
   })
+});
+
+io.on('connection', (socket) =>{
+  console.log("Connection established");
 });
 
 // loads all items from the three tables tables
