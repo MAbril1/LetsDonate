@@ -119,7 +119,7 @@ class Products extends Component {
             {/* map of items from backend */}
             <div className="items">
                 {this.state.items.map(item => 
-                    <Card name={item.name} description={item.description} productImage={item.productImage}/>
+                    <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage}/>
                 )}
             </div>
         </div>

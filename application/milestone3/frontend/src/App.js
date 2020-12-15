@@ -36,7 +36,7 @@ class App extends Component {
           {/* Dynamic route for users by using email */}
           <Route path="/User/:email" component={User} />
           {/* Dynamic route for products by using the product name */}
-          <Route path="/Product/:name" component={ProductPost} />
+          <Route path="/Product/:id" component={ProductPost} />
           <Route path="/FundraiserPost" component={FundraiserPost} />
           <Route path="/searchResult" component={SearchResult} />
           <Route path="/register" component={register} />

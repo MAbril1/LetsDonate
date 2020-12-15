@@ -108,6 +108,34 @@ app.post('/api/deleteUser', function (req, res) {
   });
 });
 
+// api to edit a post
+app.post('/api/editPost', upload.single("imageFile"), function (req, res) {
+  console.log(req.body);
+
+  if (!req.body.imageFile) // updating image
+  {
+    config.query(`UPDATE products SET
+                  name = '${req.body.name}', description = '${req.body.description}', productType = '${req.body.productType}', productImage = '${req.file.location}',
+                  owner = '${req.body.owner}' WHERE id = '${req.body.id}'`, function (e, response, f) { });
+    res.send({ success: true, fileLocation: req.file.location });
+
+    console.log("Image URL: ", req.file.location);
+  }
+  else // if not updating user image
+  {
+    config.query(`UPDATE products SET
+                  name = '${req.body.name}', description = '${req.body.description}', productType = '${req.body.productType}', productImage = '${req.body.imageFile}',
+                  owner = '${req.body.owner}' WHERE id = '${req.body.id}'`, function (e, response, f) { });
+    res.send({ success: true });
+  }
+});
+
+app.post('/api/deleteProduct', function (req, res) {
+  config.query(`DELETE FROM products WHERE id = '${req.body.id}'`, function (e, response, f) {
+    res.json({ success: true });
+  });
+});
+
 app.post('/api/postProduct', upload.single("imageFile"), function (req, res) {
   req.body.description = req.body.description.replace(/'/g, "''"); // replaces ' so sql will not get confused
 
@@ -126,14 +154,22 @@ app.post('/api/postFundraiser', upload.single("imageFile"), function (req, res) 
   res.send({ success: true });
 });
 
+// searches for product by name
 app.post('/api/makeSearch', function (req, res) {
   config.query(`SELECT * FROM products WHERE name LIKE '%${req.body.searchItem}%'`, function (e, response, f) {
     res.json({ success: true, products: response });
     console.log(response);
   });
-
 });
 
+app.post('/api/findPosts', function (req, res) {
+  config.query(`SELECT * FROM products WHERE owner LIKE '%${req.body.searchEmail}%'`, function (e, response, f) {
+    res.json({ success: true, products: response });
+    console.log(response);
+  });
+});
+
+// category filters
 app.post('/api/filterClothes', function (req, res) {
 
   config.query("SELECT * FROM products WHERE productType LIKE 'cloth'", function (e, response, f) {

@@ -7,13 +7,13 @@ import { Link } from 'react-router-dom';
 **
 **  This component is the thumbnail for each product post
 */
-function Card( {name, description, productImage} ) {
+function Card( {id, name, description, productImage} ) {
 
     let image;
     
     if(productImage !== '' && productImage !== null) // checks if product has an image from the database
     {
-        image = '../images/' + productImage;
+        image = productImage;
     }  
     else
     {
@@ -21,7 +21,7 @@ function Card( {name, description, productImage} ) {
     }
     
     return (
-        <Link className='link' to={`/Product/${name}`/* links to product page using product name */}>
+        <Link className='link' to={`/Product/${id}`/* links to product page using product name */}>
             <div className="card">
                 <img  className="cardImage" 
                     src={image}

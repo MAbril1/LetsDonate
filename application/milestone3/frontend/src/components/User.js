@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import user from '../images/user.jpg';
 import './css/User.css';
 import './css/PopUps.css';
@@ -28,11 +28,11 @@ import history from './backend/history.js';
 class User extends Component {
   state = {
     users: [], // saves entire list of users from database
-    user: {}  // saves a single user which will be displayed
+    user: {},  // saves a single user which will be displayed
+    items: [] // saves all products posted by user
   }
 
   componentDidMount() {
-    console.log(this.props.match.params.email);
     // calls api to get list of all users from database
     axios.get(`/api/allUsers`)
       .then(res => {
@@ -46,6 +46,22 @@ class User extends Component {
           singleUser = this.state.users.find((userEmail) => { return userEmail.email == pageName })
         }
         this.setState({ user: singleUser }); // sets the state of the single user variable with the found user
+      })
+
+    // find products posted by user
+    // similar code to searching api
+    let products;
+    let searchable = {};
+    searchable["searchEmail"] = this.props.match.params.email; // login searches registered user database by email
+    axios.post('/api/findPosts', searchable)
+      .then((result) => {
+        if (!result.data.success) {
+          alert("Failed Search");
+        }
+        else {
+          products = result.data.products; // returns the data from the database
+          this.setState({ items: products });
+        }
       })
   }
 
@@ -78,16 +94,14 @@ class User extends Component {
               <div className="actions">
                 <button
                   className="button"
-                  onClick={() => { 
+                  onClick={() => {
                     let pageRedirect = deleteUserFunction(this.props.match.params.email);
 
-                    if(pageRedirect)
-                    {
-                      console.log("HERE");
+                    if (pageRedirect) {
                       window.location.replace('/');
                       //history.push('/');
                     }
-                }}
+                  }}
                 >DELETE
               </button>
               </div>
@@ -203,11 +217,13 @@ class User extends Component {
                   <FormGroup>
                     <br />
                     <Label><strong>Type (Example: Furniture, Cloth): </strong></Label>
-                    <Input value={type}
-                      onChange={(productType) => {
-                        type = (productType.target.value);
-                      }}
-                    />
+                    <select name="productType" id="productType">
+                      <option value="1" selected disabled>Please select a type</option>
+                      <option value="Furniture">Furniture</option>
+                      <option value="Clothes">Clothes</option>
+                      <option value="Food">Food</option>
+                      <option value="Other">Other</option>
+                    </select>
                   </FormGroup>
                   <FormGroup>
                     <br />
@@ -227,7 +243,7 @@ class User extends Component {
                       form.append("imageFile", productImage.files[0]);
                       form.append("name", productName);
                       form.append("description", description);
-                      form.append("productType", type);
+                      form.append("productType", document.getElementById("productType").value);
                       form.append("owner", currentProfileEmail);
                       console.log(form.getAll("name"), form.getAll("imageFile"));
                       axios.post("/api/postProduct", form, { headers: { 'content-type': "multipart/form-data" } })
@@ -263,7 +279,6 @@ class User extends Component {
 
   render() {
     console.log(this.state);
-
     let userImage;
 
     if (this.state.user.userImage != null) {
@@ -311,8 +326,7 @@ class User extends Component {
           {/* These are lists of the items and fundraisers a user has posted */}
           <h2>ITEMS POSTED</h2>
           <div className="scrollmenu">
-            <Card name="Bike" description="Three year old bike available in San Bruno for pick up. Please feel free to reach out. Bike is in great condition" productImage="bike.jpg" />
-            <Card name="Shirt" description="One year old shirt available in Sunnyvale for pick up. Please feel free to reach out. Shirt is in great condition with no marks." productImage="shirt.jpg" />
+            {this.state.items.map(item => <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage} />)}
           </div>
           <h2>FUNDRAISERS POSTED</h2>
           <div className="scrollmenu">

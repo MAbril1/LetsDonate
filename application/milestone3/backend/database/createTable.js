@@ -33,7 +33,7 @@ config.connect(function(fault){
                     "description varchar(255) NOT NULL, " +
                     "requiredAmount varchar(30) NOT NULL," +
                     "image varchar(255) NOT NULL, "+
-                    "endorsement varchar(30) NOT NULL, "+
+                    "endorsement int NOT NULL, "+
                     "owner varchar(255), " +
                     "PRIMARY KEY (id) );",
                 function(e,r,f){console.log(e)});

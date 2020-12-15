@@ -1,16 +1,16 @@
 const axios = require('axios');
 const currentUser = require('./currentUser.js');
 
-const deleteUserFunction = function (email) {
-    console.log(email);
+const deleteProductsFunction = function (id) {
+    console.log(id);
 
     let pageRedirect = false;
     let searchable = {};
-    searchable["searchEmail"] = email; // login searches registered user database by email
+    searchable["id"] = id; // login searches registered user database by email
 
     if (document.forms.deleteUserForm.response.value.localeCompare("YES") === 0) {
         console.log("DELETE");
-        axios.post("/api/deleteUser", searchable)
+        axios.post("/api/deleteProduct", searchable)
             .then((result) => {
                 if (result.data.success) {
                     alert("Successfully Deleted");
@@ -19,17 +19,16 @@ const deleteUserFunction = function (email) {
                 }
             })
 
-        currentUser.setUserLogout();
         // route to homepage and refresh navbar
         pageRedirect = true;
     }
     else {
         console.log("DON'T DELETE");
-        alert("Profile not deleted");
+        alert("Post not deleted");
         pageRedirect = false;
     }
 
     return pageRedirect;
 }
 
-export default deleteUserFunction;
+export default deleteProductsFunction;
