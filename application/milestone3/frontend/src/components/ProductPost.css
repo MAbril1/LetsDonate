@@ -4,10 +4,12 @@
     margin: 20px;
     margin-top: 0px;
     width: auto;
-    height: 350px;
+    height: auto;
     border-radius: 9px;
     overflow: hidden;
     align-self: center;
+    max-width: 50%;
+    max-height: 400px;
 }
 
 .bottomSection {
