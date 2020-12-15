@@ -118,7 +118,9 @@ class NavBar extends Component {
         {
             return(
                 <div>
-                    <button className="buttonLink" onClick={() => {currentUser.setUserLogout()}}> Logout </button>
+                    <button className="buttonLink" onClick={() => {
+                        currentUser.setUserLogout();
+                        window.location.replace('/');}}> Logout </button>
 
                     {/* This button takes a user to their user page if their signed in */}
                     <Link className='userLink' to={`/User/${currentUser.getUser().email}`/* links to product page using product name */}><AccountCircleIcon /></Link>

@@ -23,8 +23,7 @@ exports.setUser = function (user) {
   sessionStorage.setItem(currentUser, JSON.stringify(user));
 };
 
-// if user logs out, set back to dummy variable and reload page
-exports.setUserLogout = function () {
+// if user logs out, set back to dummy variable
+exports.setUserLogout = function() {
   sessionStorage.setItem(currentUser, JSON.stringify(currentUser));
-  window.location.reload(); // needed to refresh what is rendered on the navbar
 };

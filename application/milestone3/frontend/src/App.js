@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route, Link } from 'react-router-dom';
 import './App.css';
 import NavBar from './components/NavBar.js';
 import Home from './components/Home.js';
@@ -10,6 +10,8 @@ import ProductPost from './components/ProductPost.js';
 import FundraiserPost from './components/FundraiserPost.js';
 import SearchResult from './components/searchResult.js';
 import Chat from './components/Chat.js';
+
+import history from './components/backend/history.js';
 
 import register from './components/register.js'
 import recovery from './components/recovery.js'
@@ -22,7 +24,7 @@ import recovery from './components/recovery.js'
 
 class App extends Component {
   render() { return (
-    <Router>
+    <Router history={history}>
       <div className="App">
         {/* This NavBar component will stay at the top regardless of what page the user is on.*/}
         <NavBar />
@@ -34,7 +36,7 @@ class App extends Component {
           {/* Dynamic route for users by using email */}
           <Route path="/User/:email" component={User} />
           {/* Dynamic route for products by using the product name */}
-          <Route path="/Product/:name" component={ProductPost} />
+          <Route path="/Product/:id" component={ProductPost} />
           <Route path="/FundraiserPost" component={FundraiserPost} />
           <Route path="/searchResult" component={SearchResult} />
           <Route path="/register" component={register} />
