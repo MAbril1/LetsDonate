@@ -29,7 +29,7 @@ function TopBar() {
         dispatch({ type: 'UPDATE_INPUT', data: newValue,});
         // alert(newValue);
     };
-
+    // This is the search function for the search bar.
     const makeSearch = () => {
         searchable["searchItem"] = search;
         axios.post("api/makeSearch", searchable)
@@ -47,14 +47,15 @@ function TopBar() {
         })
     }
 
+    // This function call creates a form for the new post
     const makePost = () => {
-        if(name.length>0 && description.length>0){
+        if(name.length > 0 && description.length > 0){  //check for vaild info for a new post
             var productImage = document.getElementById("productImage");
             var form = new FormData();
-            form.append("imageFile", productImage.files[0]);
-            form.append("name", name);
-            form.append("description", description);
-            form.append("productType", type);
+            form.append("imageFile", productImage.files[0]);    // image of the product
+            form.append("name", name);                          // name of the product
+            form.append("description", description);            // description of the product
+            form.append("productType", type);                   // product type
             console.log(form.getAll("name"), form.getAll("imageFile"));
             axios.post("/api/postProduct", form, { headers: { 'content-type': "multipart/form-data"}})
             .then((result) => {
@@ -64,7 +65,7 @@ function TopBar() {
                     alert("Post Failure Occurred");
                 }
             })
-            .catch(exception => {
+            .catch(exception => {   //error handling
                 alert("Post Failure Occurred");
             })
         }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import Star from "@material-ui/icons/Star";
-import './FundraiserCard.css';
+import './css/FundraiserCard.css';
 import { Link } from 'react-router-dom';
 
 /*
