@@ -16,7 +16,8 @@ class FundraiserPost extends Component {
   state = {
     items: [], // saves entire list of products from database
     item: {},  // saves a single product which will be displayed
-    owner: {} // saves the owner of the product
+    owner: {}, // saves the owner of the product
+    random: 0 // stores random raised amount
   }
 
   componentDidMount() {
@@ -51,6 +52,13 @@ class FundraiserPost extends Component {
 
         }
         this.setState({ item: singleFund }); // sets the state of the single product variable with the found product
+
+        // generates a random raised amount
+        let min = 0;
+        let max = this.state.item.requiredAmount;
+        let rand = parseInt(min + (Math.random() * (max - min)));
+        this.setState({ random: this.state.random + rand });
+        //
       })
   }
 
@@ -82,7 +90,7 @@ class FundraiserPost extends Component {
     let fundraiserItem = this.state.item;
     let productOwner = this.state.owner;
 
-    let receviedDonations = parseInt(fundraiserItem.requiredAmount / 3); // random value
+    let receviedDonations = this.state.random; // random value
 
     // code to update progress bar
     if (document.getElementById("myBar") !== null) {
@@ -101,7 +109,6 @@ class FundraiserPost extends Component {
             <div className="amountRequired">
               <h3>${receviedDonations} out of ${fundraiserItem.requiredAmount} raised.</h3>
               <div id="myProgress">
-                { }
                 <div id="myBar"></div>
               </div>
             </div>
