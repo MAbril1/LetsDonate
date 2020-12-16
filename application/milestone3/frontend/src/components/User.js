@@ -265,12 +265,10 @@ class User extends Component {
                         .then((result) => {
                           if (result.data.success) {
                             alert("Successfully Posted");
+                            window.location.reload(); // reloads page to render proper buttons on navbar
                           } else {
                             alert("Post Failure Occurred");
                           }
-                        })
-                        .catch(exception => {
-                          alert("Post Failure Occurred");
                         })
                     }
                   }}
@@ -341,11 +339,11 @@ class User extends Component {
           {/* These are lists of the items and fundraisers a user has posted */}
           <h2>ITEMS POSTED</h2>
           <div className="scrollmenu">
-            {this.state.items.map(item => <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage} />)}
+            {this.state.items.sort().reverse().map(item => <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage} />)}
           </div>
           <h2>FUNDRAISERS POSTED</h2>
           <div className="scrollmenu">
-          {this.state.funds.map(item =>
+          {this.state.funds.sort().reverse().map(item =>
             <FundraiserCard id={item.id} title={item.title} description={item.description} image={item.image} endorsement={item.endorsement} requiredAmount={item.requiredAmount} />
           )}
           </div>

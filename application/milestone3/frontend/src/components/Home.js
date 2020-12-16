@@ -70,7 +70,7 @@ class Home extends Component {
          */}
         <Link className='buttonLink' to={"/Products"}>View All Products</Link>
         <div className="scrollmenu">
-          {this.state.items.map(item => <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage} />)}
+          {this.state.items.sort().reverse().map(item => <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage} />)}
         </div>
         <hr />
 
@@ -80,7 +80,7 @@ class Home extends Component {
          */}
         <Link className='buttonLink' to={"/Fundraisers"}>View All Fundraisers</Link>
         <div className="scrollmenu">
-        {this.state.funds.map(item =>
+        {this.state.funds.sort().reverse().map(item =>
             <FundraiserCard id={item.id} title={item.title} description={item.description} image={item.image} endorsement={item.endorsement} requiredAmount={item.requiredAmount} />
           )}
         </div>

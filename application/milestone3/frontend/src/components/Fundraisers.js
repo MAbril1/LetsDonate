@@ -220,7 +220,7 @@ class Fundraisers extends Component {
 
         {this.createPost()}
         <div>
-          {this.state.items.map(item =>
+          {this.state.items.sort().reverse().map(item =>
             <FundraiserCard id={item.id} title={item.title} description={item.description} image={item.image} endorsement={item.endorsement} requiredAmount={item.requiredAmount} />
           )}
         </div>
