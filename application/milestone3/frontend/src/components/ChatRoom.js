@@ -12,19 +12,19 @@ const ChatRoom = ({ location }) => {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        //const { name, room } = queryString.parse(location.search);
+        const { name, room } = queryString.parse(location.search);
         
         socket = io('localhost:5000');
-        setName("Rajj");
-        setRoom("room");
-        socket.emit('joinedChat', {name:"name", room:"GANG"}, ()=>{
+        setName(name);
+        setRoom(room);
+        socket.emit('joinedChat', {name, room}, ()=>{
 
         });
 
-        return () =>{
-            socket.emit('disconnect');
-            socket.off();
-        }
+        // return () =>{
+        //     socket.emit('disconnect');
+        //     socket.off();
+        // }
 
     },['localhost:5000', location.search]);
 

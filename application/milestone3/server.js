@@ -60,6 +60,7 @@ io.on('connection', (socket) =>{
 
   socket.on('disconnect', () => {
     console.log("Disconnected");
+    const user = removeUser(socket.id);
   });
 });
 
