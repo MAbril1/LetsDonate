@@ -11,6 +11,8 @@ import FundraiserPost from './components/FundraiserPost.js';
 import SearchResult from './components/searchResult.js';
 import Chat from './components/Chat.js';
 import ChatRoom from './components/ChatRoom.js';
+import MessageList from './components/MessageList.js';
+
 import history from './components/backend/history.js';
 
 import register from './components/register.js'
@@ -44,7 +46,7 @@ class App extends Component {
           <Route path="/chat" component={ChatRoom} />
           <Route component={Error} />
         </Switch>
-        <Chat></Chat>
+        <MessageList/>
       </div>
     </Router>
   );}
