@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Chat from './Chat.js';
 import './css/Chat.css';
+import { Link } from 'react-router-dom';
 
 class MessageList extends Component {
     openList() {
@@ -41,7 +42,10 @@ class MessageList extends Component {
         ]
         return (
             <div>
-                <button className="open-button" onClick={this.openList}>Messages</button>
+                <Link className="link" to={`/users`}>
+                    {/*onClick={this.openList*/}
+                    <button className="open-button">Messages</button>
+                </Link>
                 {/* list of users that have a chat history */}
                 <div className="userList" id="userList">
                     <div className="container">

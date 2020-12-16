@@ -17,6 +17,7 @@ import history from './components/backend/history.js';
 
 import register from './components/register.js'
 import recovery from './components/recovery.js'
+import AvailableChatUsers from './components/AvailableChatUsers';
 
 /*
 **  App.js
@@ -44,6 +45,7 @@ class App extends Component {
           <Route path="/register" component={register} />
           <Route path="/recovery" component={recovery} />
           <Route path="/chat" component={ChatRoom} />
+          <Route path="/users" component={AvailableChatUsers} />
           <Route component={Error} />
         </Switch>
         <MessageList/>
