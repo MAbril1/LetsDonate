@@ -206,7 +206,7 @@ class ProductPost extends Component {
               {this.deletePost()}
               {this.editPost()}
             </div>
-            <h3>{description}</h3>
+            <h3>{productItem.description}</h3>
           </div>
 
         </div>

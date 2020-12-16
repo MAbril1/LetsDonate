@@ -3,22 +3,38 @@ import Grid from '@material-ui/core/Grid';
 import './css/Chat.css';
 
 class Chat extends Component {
+    scrollToBottom = () => {
+        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
+
+    openList() {
+        document.getElementById("userList").style.display = "block";
+    }
+      
+    closeList() {
+        document.getElementById("userList").style.display = "none";
+    }
+
+    openChat() {
+        document.getElementById("chat").style.display = "block";
+    }
+      
+    closeChat() {
+        document.getElementById("chat").style.display = "none";
+    }
+
     componentDidMount() {
+        this.scrollToBottom();
     }
       
     componentDidUpdate() {
-    }
-
-    openForm() {
-        document.getElementById("myForm").style.display = "block";
-    }
-      
-    closeForm() {
-        document.getElementById("myForm").style.display = "none";
+        this.scrollToBottom();
     }
   
     render() {
         const DUMMY_DATA = [
+            { sender: "perborgen",
+            messages: [ 
             {
               senderId: "perborgen",
               text: "who'll win?",
@@ -49,14 +65,37 @@ class Chat extends Component {
                 text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
                 user: true,
             }
+            ]},
+            { sender: "n",
+            messages: [
+            {
+                senderId: "n",
+                text: "lorem ipsum",
+                user: false,
+            },
+            {
+                senderId: "janedoe",
+                text: "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                user: true,
+            },
+            {
+                senderId: "n",
+                text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                user: false,
+            },
+            {
+                senderId: "janedoe",
+                text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                user: true,
+            }
+            ]},
         ]
 
-      
       return (
         <div>
-            <button className="open-button" onClick={this.openForm}>Chat</button>
-            <div className="chat-popup" id="myForm">
-                <form className="form-container">
+            {/* chat */}
+            <div className="chat" id="chat">
+                <form className="container">
                     <Grid container>
                     <Grid item xs={12}>
                     <ul>  
@@ -70,14 +109,17 @@ class Chat extends Component {
                                 </div>
                             </li>
                         )
-                    })}              
+                    })} 
+                    <div style={{ float:"left", clear: "both" }}
+                        ref={(el) => { this.messagesEnd = el; }}>
+                    </div>             
                     </ul>
                     </Grid>
                     <Grid item>
                     <textarea placeholder="Type message.." name="msg" required></textarea>
 
                     <button type="button" className="btn">Send</button>
-                    <button type="button" className="btn cancel" onClick={this.closeForm}>Close</button>
+                    <button type="button" className="btn cancel" onClick={this.closeChat}>Close</button>
                     </Grid>
                     </Grid>
                 </form>
