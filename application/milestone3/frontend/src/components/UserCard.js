@@ -7,7 +7,7 @@ import "./css/Card.css";
 **
 **  This component is the thumbnail for each user post
 */
-function UserCard( {id, name, email, userImage} ) {
+function UserCard( {id, name, zipcode, email, userImage} ) {
 
     let image;
     
@@ -31,6 +31,7 @@ function UserCard( {id, name, email, userImage} ) {
                 alt=""/>
 
                 <h2>{name}</h2>
+                <h3>Location: {zipcode}</h3>
             </div>
         </Link>
     )

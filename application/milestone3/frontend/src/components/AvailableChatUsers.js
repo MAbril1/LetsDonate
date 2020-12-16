@@ -19,7 +19,7 @@ export class AvailableChatUsers extends Component {
         return (
             <div className="items">
                 {this.state.items.map(item => 
-                    <UserCard id={item.id} name={item.name} email={item.email} userImage={item.userImage}/>
+                    <UserCard id={item.id} name={item.name} zipcode={item.zipcode} email={item.email} userImage={item.userImage}/>
                 )}
             </div>
         )
