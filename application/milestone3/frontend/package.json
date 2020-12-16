@@ -21,7 +21,9 @@
     "react-modal": "^3.11.2",
     "react-native-elements": "^3.0.0-alpha.1",
     "react-scripts": "4.0.0",
+    "react-scroll-to-bottom": "^4.0.0",
     "reactstrap": "^8.7.1",
+    "scroll": "^3.0.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
