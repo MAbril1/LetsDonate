@@ -115,6 +115,7 @@ class Fundraisers extends Component {
                         .then((result) => {
                           if (result.data.success) {
                             alert("Successfully Posted");
+                            window.location.reload();
                           } else {
                             alert("Post Failure Occurred");
                           }
