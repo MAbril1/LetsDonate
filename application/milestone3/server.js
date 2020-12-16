@@ -8,10 +8,11 @@ const server = http.createServer(app);
 const socketio = require('socket.io');
 const io = socketio(server);
 const parser = require('body-parser');
-
+const { addUser, removeUser, getUser, getUsersInRoom } = require('./frontend/src/components/backend/users');
 const aws = require('aws-sdk');
 const multer = require("multer");
 const multerS3 = require('multer-s3');
+const cors = require('cors');
 
 const s3 = new aws.S3({
   accessKeyId: 'AKIAU6B7MVGXEDMQVM37',
@@ -20,7 +21,7 @@ const s3 = new aws.S3({
 });
 
 app.use(parser.json());
-
+app.use(cors());
 const upload = multer({
   storage: multerS3({
     s3: s3,
@@ -35,6 +36,31 @@ const upload = multer({
 
 io.on('connection', (socket) =>{
   console.log("Connection established");
+  
+  socket.on('joinedChat', ({name, room}, cb) => {
+      
+      const {error, newUser} = addUser ({id:socket.id, name, room});
+      
+      if(error) return cb(error);
+      console.log("newUser is" , newUser);
+      socket.join(newUser.room);
+      socket.emit('message', {text: `Hey ${newUser.name}, feel free to drop any message for ${newUser.room}`});
+      socket.broadcast.to(newUser.room).emit('message', {text: `${newUser.name} joined the chat.`})
+      
+
+      cb();
+  });
+
+  socket.on('deliverMessage', (message, cb) => {
+      const user = getUser(socket.id);
+      console.log(user);
+      io.to(user.room).emit('message', {user:user.name, text: message});
+      cb();
+  });
+
+  socket.on('disconnect', () => {
+    console.log("Disconnected");
+  });
 });
 
 // loads all items from the three tables tables
@@ -198,4 +224,4 @@ app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 })
 
-app.listen(5000);
+server.listen(5000);
