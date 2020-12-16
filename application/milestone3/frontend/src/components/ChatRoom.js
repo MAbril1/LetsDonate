@@ -46,7 +46,7 @@ const ChatRoom = ({ location }) => {
     return (
         <div>
             <div>
-                <h1>Name of room {room}</h1>
+                <h2>Welcome to {room}'s chat room</h2>
                 
                 <Scroll>
                     {messages.map((message, i) => <div key={i}>

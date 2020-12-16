@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import "./css/Card.css"; 
+import currentUser from './backend/currentUser.js';
 
 /*
 **  UserCard.js
@@ -21,7 +22,7 @@ function UserCard( {id, name, zipcode, email, userImage} ) {
     }
     
     return (
-        <Link className='link' to={`/chat?name=${name}&room=${name}`}>
+        <Link className='link' to={`/chat?name=${currentUser.getUser().name}&room=${name}`}>
             <div className="card"> 
                 <img  className="cardImage" 
                     src={image}
