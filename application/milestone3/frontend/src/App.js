@@ -9,7 +9,6 @@ import User from './components/User.js';
 import ProductPost from './components/ProductPost.js';
 import FundraiserPost from './components/FundraiserPost.js';
 import SearchResult from './components/searchResult.js';
-import Chat from './components/Chat.js';
 import ChatRoom from './components/ChatRoom.js';
 import MessageList from './components/MessageList.js';
 
