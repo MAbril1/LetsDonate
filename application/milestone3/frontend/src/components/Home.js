@@ -18,7 +18,8 @@ import currentUser from './backend/currentUser.js';
 class Home extends Component {
   // These are to be the products that appear on the featured lists within the page.
   state = {
-    items: []
+    items: [],
+    funds: []
   }
 
   constructor(props) {
@@ -32,12 +33,17 @@ class Home extends Component {
         const items = res.data;
         this.setState({ items });
         console.log("See Below");
-        console.log(this.state.items);
-        //console.log("Current user:", currentUser.getUser());
+      })
+
+    axios.get(`/api/Fundraisers`)
+      .then(res => {
+        const funds = res.data;
+        this.setState({ funds });
       })
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="Home">
 
@@ -74,21 +80,9 @@ class Home extends Component {
          */}
         <Link className='buttonLink' to={"/Fundraisers"}>View All Fundraisers</Link>
         <div className="scrollmenu">
-          <FundraiserCard title="Hospital Expenses"
-            description="Money required for the hospital and medicine expenses."
-            endorsements={4600}
-            requiredAmount="$10,000"
-            image={clinic} />
-          <FundraiserCard title="College Expenses"
-            description="Unable to pay tuition fees. Need money to pay all the money to the university."
-            endorsements={4200}
-            requiredAmount="$5,000"
-            image={college} />
-          <FundraiserCard title="Money for Candies"
-            description="Money required to buy whole lot of candies."
-            endorsements={40}
-            requiredAmount="$100,000"
-            image={candies} />
+        {this.state.funds.map(item =>
+            <FundraiserCard id={item.id} title={item.title} description={item.description} image={item.image} endorsement={item.endorsement} requiredAmount={item.requiredAmount} />
+          )}
         </div>
         <hr />
       </div>

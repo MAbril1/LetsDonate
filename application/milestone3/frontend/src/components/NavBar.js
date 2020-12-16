@@ -56,9 +56,9 @@ class NavBar extends Component {
     // function that checks current logged in user and rederns the appropriate buttons
     reloadButton()
     {
-        let tempUser = "nouser";
+        let tempUserEmail = "noemail@email.com";
         
-        if(tempUser.localeCompare(currentUser.getUser().name) == 0) // checks if there is a current user, if there isn't show login button
+        if(tempUserEmail.localeCompare(currentUser.getUser().email) == 0) // checks if there is a current user, if there isn't show login button
         {
             return (
                 <div>

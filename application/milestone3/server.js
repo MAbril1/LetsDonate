@@ -178,6 +178,13 @@ app.post('/api/findPosts', function (req, res) {
   });
 });
 
+app.post('/api/findFundraisers', function (req, res) {
+  config.query(`SELECT * FROM fundraisers WHERE owner LIKE '%${req.body.searchEmail}%'`, function (e, response, f) {
+    res.json({ success: true, fundraisers: response });
+    console.log(response);
+  });
+});
+
 // category filters
 app.post('/api/filterClothes', function (req, res) {
 
@@ -189,6 +196,13 @@ app.post('/api/filterClothes', function (req, res) {
 app.post('/api/filterFurniture', function (req, res) {
   config.query("SELECT * FROM products WHERE productType LIKE 'furniture'", function (e, response, f) {
     res.json({ success: true, products: response });
+  });
+});
+
+app.post('/api/updateEndorsement', function (req, res) {
+  console.log(req);
+  config.query(`UPDATE fundraisers SET endorsement = '${req.body.endorsement}' WHERE id = '${req.body.id}';`, function (e, response, f) {
+    res.json({success: true});
   });
 });
 

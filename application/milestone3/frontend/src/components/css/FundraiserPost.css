@@ -56,3 +56,17 @@ img{
     background-color: #ff7779;
     text-transform: inherit;
 }
+
+#myProgress {
+    width: 100%;
+    background-color: #ddd;
+  }
+  
+  #myBar {
+    width: 10%;
+    height: 30px;
+    background-color: #205472;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+  }
