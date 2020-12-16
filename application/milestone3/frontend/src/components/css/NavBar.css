@@ -1,10 +1,8 @@
 .logo {
-  height: 70px;
-  width: 70px;
-  margin-left: 30px;
-  margin-top: 20px;
-  margin-bottom: 1px;
-  padding-bottom: 10px;
+  height: 64px;
+  width: auto;
+  margin: 5px 5px 5px 5px;
+  border-radius: 15px;
 }
 
 .NavBar{

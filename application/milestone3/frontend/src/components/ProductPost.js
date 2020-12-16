@@ -173,6 +173,25 @@ class ProductPost extends Component {
 
     return (
       <div>
+        <div className="topBar">
+
+
+          <div className="editButton">
+            <Button variant='outlined'>Edit</Button>
+          </div>
+
+          <div className="leftSide">
+            <div className="saveButton">
+              <Button variant='outlined'>Save</Button>
+            </div>
+
+            <div className="deleteButton">
+              <Button variant='outlined'>Delete</Button>
+            </div>
+          </div>
+
+
+        </div>
         <div className="topSection">
           <img class="productImg" src={productItem.productImage} onError={(e) => {
             e.target.src = '../images/charity.png' // fallback image
@@ -187,7 +206,9 @@ class ProductPost extends Component {
               {this.deletePost()}
               {this.editPost()}
             </div>
+            <h3>{productItem.description}</h3>
           </div>
+
         </div>
         <div className="bottomSection">
           <div className="heading">
@@ -201,12 +222,10 @@ class ProductPost extends Component {
                 {/* <strong>{likes}</strong> */}
               </p>
             </div>
-            {/* <div className="spamProduct">
-              <Report />
-            </div> */}
           </div>
           <h2>{productItem.description}</h2>
         </div>
+
       </div>
     )
   }
