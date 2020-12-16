@@ -10,7 +10,6 @@ import Select from '@material-ui/core/Select';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import axios from 'axios';
-import { Modal } from '@material-ui/core';
 
 import loginData from './backend/loginBackend.js'; // sends login form data to check against the database
 import currentUser from './backend/currentUser.js'; // helper functions to set and get current logged in user

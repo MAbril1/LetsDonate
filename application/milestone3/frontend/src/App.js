@@ -9,7 +9,7 @@ import User from './components/User.js';
 import ProductPost from './components/ProductPost.js';
 import FundraiserPost from './components/FundraiserPost.js';
 import SearchResult from './components/searchResult.js';
-import Chat from './components/Chat.js';
+import MessageList from './components/MessageList.js';
 
 import history from './components/backend/history.js';
 
@@ -43,7 +43,7 @@ class App extends Component {
           <Route path="/recovery" component={recovery} />
           <Route component={Error} />
         </Switch>
-        <Chat></Chat>
+        <MessageList/>
       </div>
     </Router>
   );}
