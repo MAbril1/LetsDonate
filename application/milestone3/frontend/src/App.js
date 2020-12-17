@@ -17,6 +17,7 @@ import history from './components/backend/history.js';
 import register from './components/register.js'
 import recovery from './components/recovery.js'
 import AvailableChatUsers from './components/AvailableChatUsers';
+import currentUser from './components/backend/currentUser.js'; // helper functions to set and get current logged in user
 
 /*
 **  App.js
@@ -25,16 +26,19 @@ import AvailableChatUsers from './components/AvailableChatUsers';
 */
 
 class App extends Component {
-  render() { return (
+  render() {
+    var client = currentUser.getUser().email;
+    return (
     <Router history={history}>
       <div className="App">
         {/* This NavBar component will stay at the top regardless of what page the user is on.*/}
-        <NavBar />
+        <NavBar currentUser={client}/>
         {/* This switch will allow the user to navigate between each page and url extension. */}
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/Products" component={Products} />
-          <Route path="/Fundraisers" component={Fundraisers} />
+          {/* <Route path="/Fundraisers" component={Fundraisers} /> */}
+          <Route path="/Fundraisers" component={() => <Fundraisers currentUser={client}/>}/>
           {/* Dynamic route for users by using email */}
           <Route path="/User/:email" component={User} />
           {/* Dynamic route for products by using the product name */}

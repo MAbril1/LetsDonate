@@ -34,13 +34,13 @@ class Fundraisers extends Component {
     var title;
     var description;
     var amountRequired;
-    var owner = currentUser.getUser().email;
+    var owner = this.props.currentUser;
 
     // edit profile if current user is profile owner or an admin
 
     let tempUserEmail = "noemail@email.com";
 
-    if (tempUserEmail.localeCompare(currentUser.getUser().email) !== 0) // checks if there is a current user, if there isn't show login button
+    if (tempUserEmail.localeCompare(owner) !== 0) // checks if there is a current user, if there isn't show login button
     {
       return (
         <Popup
