@@ -198,6 +198,13 @@ app.post('/api/makeSearch', function (req, res) {
   });
 });
 
+app.post('/api/makeFundSearch', function (req, res) {
+  config.query(`SELECT * FROM fundraisers WHERE title LIKE '%${req.body.searchItem}%'`, function (e, response, f) {
+    res.json({ success: true, fundraisers: response });
+    console.log(response);
+  });
+})
+
 app.post('/api/findPosts', function (req, res) {
   config.query(`SELECT * FROM products WHERE owner LIKE '%${req.body.searchEmail}%'`, function (e, response, f) {
     res.json({ success: true, products: response });

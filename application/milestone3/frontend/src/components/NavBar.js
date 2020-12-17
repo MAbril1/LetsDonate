@@ -19,34 +19,59 @@ import currentUser from './backend/currentUser.js'; // helper functions to set a
 class NavBar extends Component {
     // These are the filtered items that will be passed should a user add keywords for the search.
     state = {
-        allProducts: [],
-        items: []
+        items: [],
+        fundraisers: [],
       }
 
     constructor(props) {
         super(props);
     }
 
+    componentDidMount() {
+        axios.get(`/api`)
+        .then(res => {
+            const items = res.data;
+            this.setState({ items });
+        }).catch(exception => {
+            alert("Failed Search");
+        })
+    }
+
     // This function uses the keyword input in the searchbar to get a filtered list of items from the backend
     getKey() {
         const keySearch = document.getElementById("searchType").value;
         
-        let searchable = {};
-        
-        searchable["searchItem"] = keySearch;
-        axios.post("api/makeSearch", searchable)
-        .then((result) => {
-            if(!result.data.success){
+        if (keySearch) {
+            let searchable = {};
+            console.log(keySearch)
+            searchable["searchItem"] = keySearch;
+            axios.post("api/makeSearch", searchable)
+            .then((result) => {
+                if(!result.data.success){
+                    alert("Failed Search");
+                }else{
+                    const items = result.data.products;
+                    console.log(items);
+                    this.setState({ items: items });
+                }
+            })
+            .catch(exception => {
                 alert("Failed Search");
-            }else{
-                const items = result.data.products;
-                console.log(items);
-                this.setState({ items });
-            }
-        })
-        .catch(exception => {
-            alert("Failed Search");
-        })
+            })
+            axios.post("api/makeFundSearch", searchable)
+            .then((result) => {
+                if(!result.data.success){
+                    alert("Failed Search");
+                }else{
+                    const fundraisers = result.data.products;
+                    console.log(fundraisers);
+                    this.setState({ fundraisers: fundraisers });
+                }
+            })
+            .catch(exception => {
+                alert("Failed Search");
+            })
+        }
     }
 
     // function that checks current logged in user and rederns the appropriate buttons
@@ -132,7 +157,7 @@ class NavBar extends Component {
         <div className="NavBar">
 
             {/* This is the logo at the top left of the screen that also takes the user to the landing page */}
-            <Link className='link' to={"/"}>
+            <Link className="link home" to={"/"}>
                 <div style={{display:"flex", alignItems:"center"}}>
                     <img className="logo" 
                         src={charity}
@@ -149,9 +174,18 @@ class NavBar extends Component {
                 <input id="searchType" type="text" placeholder="Search for" onChange={this.getKey.bind(this)}/>
                 <div className="searchLine"/>
                 in:
-                <button className="buttonLink">Products</button>
-                <button className="buttonLink">Fundraisers</button>
-                {/* <Link className='link' to={{pathname: "/searchResult", products: this.state.items}}><SearchIcon /></Link> */}
+                <Link className='link' to={{
+                    pathname: "/searchResult",
+                    products: this.state.items
+                }}>
+                    <button className="buttonLink">Products</button>
+                </Link>
+                <Link className='link' to={{
+                    pathname: "/searchFundResult",
+                    fundraisers: this.state.fundraisers
+                }}>
+                    <button className="buttonLink">Fundraisers</button>
+                </Link>
             </div>
 
             {/* This is the button to allow users to log in/sign up through a pop up */}
