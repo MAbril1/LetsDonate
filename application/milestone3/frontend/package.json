@@ -21,6 +21,7 @@
     "react-horizontal-scroll-container": "^1.0.1",
     "react-modal": "^3.11.2",
     "react-native-elements": "^3.0.0-alpha.1",
+    "react-router-bootstrap": "^0.25.0",
     "react-scripts": "4.0.0",
     "react-scroll-to-bottom": "^4.0.0",
     "reactstrap": "^8.7.1",

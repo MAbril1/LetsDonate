@@ -1,5 +1,8 @@
 import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
+import { Navbar, Nav, Form, FormControl, Button, InputGroup  } from 'react-bootstrap';
+import { LinkContainer,  } from 'react-router-bootstrap';
+import "bootstrap/dist/css/bootstrap.min.css";
 import './css/NavBar.css';
 import './css/PopUps.css';
 import charity from '../images/charity.png';
@@ -151,14 +154,10 @@ class NavBar extends Component {
         }
     }
         
-    render() { 
-        
-        return (
-        <div className="NavBar">
-
-            {/* This is the logo at the top left of the screen that also takes the user to the landing page */}
-            <Link className="link home" to={"/"}>
-                <div style={{display:"flex", alignItems:"center"}}>
+    render() { return (
+        <Navbar className="NavBar" collapseOnSelect expand="lg">
+            <LinkContainer className='link' to={"/"}>
+                <Navbar.Brand>
                     <img className="logo" 
                         src={charity}
                         alt=""
@@ -166,32 +165,36 @@ class NavBar extends Component {
                     <div className='appTitle'>
                         <p>let'sDonate</p>
                     </div>
-                </div>
-            </Link>
-
-            {/* This is the searchbar */}
-            <div className="search">
-                <input id="searchType" type="text" placeholder="Search for" onChange={this.getKey.bind(this)}/>
-                <div className="searchLine"/>
-                in:
-                <Link className='link' to={{
-                    pathname: "/searchResult",
-                    products: this.state.items
-                }}>
-                    <button className="buttonLink">Products</button>
-                </Link>
-                <Link className='link' to={{
-                    pathname: "/searchFundResult",
-                    fundraisers: this.state.fundraisers
-                }}>
-                    <button className="buttonLink">Fundraisers</button>
-                </Link>
-            </div>
-
-            {/* This is the button to allow users to log in/sign up through a pop up */}
-            {this.reloadButton()}
-            
-        </div>
+                </Navbar.Brand>
+            </LinkContainer>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="mr-auto search">
+                    {/* This is the searchbar */}
+                    <Form inline>
+                        <FormControl id="searchType" type="text" placeholder="Search" className="mr-sm-2" onChange={this.getKey.bind(this)}></FormControl>
+                        in:
+                        <Link className='link' to={{
+                            pathname: "/searchResult",
+                            products: this.state.items
+                        }}>
+                            <button className="buttonLink">Products</button>
+                        </Link>
+                        <div className="searchLine"/>
+                        <Link className='link' to={{
+                            pathname: "/searchFundResult",
+                            fundraisers: this.state.fundraisers
+                        }}>
+                            <button className="buttonLink">Fundraisers</button>
+                        </Link>
+                    </Form>
+                </Nav>
+                <Nav>
+                    {/* This is the button to allow users to log in/sign up through a pop up */}
+                    {this.reloadButton()}
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
     );}
 }
 
