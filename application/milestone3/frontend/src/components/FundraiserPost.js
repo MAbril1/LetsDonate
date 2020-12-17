@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import { Button } from "@material-ui/core";
 
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import deleteFundFunction from './backend/deleteFund.js';
 import editFund from './backend/editFund.js';
 
@@ -173,12 +173,12 @@ class FundraiserPost extends Component {
                   <br />
                   <label><strong>Type: </strong></label>
                   <select name="productType" id="productType">
-                      <option value="default" selected disabled>Please select a type</option>
-                      <option value="Medical">Medical</option>
-                      <option value="Education">Education</option>
-                      <option value="Community">Community</option>
-                      <option value="Other">Other</option>
-                    </select>
+                    <option value="default" selected disabled>Please select a type</option>
+                    <option value="Medical">Medical</option>
+                    <option value="Education">Education</option>
+                    <option value="Community">Community</option>
+                    <option value="Other">Other</option>
+                  </select>
 
                   <br />
                   <label><strong>Amount Required in USD: </strong></label>
@@ -206,17 +206,49 @@ class FundraiserPost extends Component {
     }
   }
 
-  copyText()
-  {
-    return(
+  copyText() {
+    return (
       <div>
         <CopyToClipboard text={this.state.owner.email}
-          onCopy={() => this.setState({copied: true})}>
-          <FileCopyOutlinedIcon/>
+          onCopy={() => this.setState({ copied: true })}>
+          <button className="postButton">Copy Email</button>
         </CopyToClipboard>
 
-        {this.state.copied ? <span style={{color: 'red'}}> Copied Email to Clipboard</span> : null}
+        {this.state.copied ? <span style={{ color: 'red' }}> Copied Email to Clipboard</span> : null}
       </div>
+    )
+  }
+
+  donateButton() {
+    return (
+      <Popup
+        trigger={<button className="postButton"> Donate Now </button>}
+        modal
+        nested
+      >
+        {close => (
+          <div className="popup">
+            <button className="close" onClick={close}>
+              &times;
+            </button>
+            <div className="header"> <strong> Choose a service </strong></div>
+            <div className="content">
+              {this.copyText()}
+              <div>
+                <a href="https://www.paypal.com/us/home">
+                  <img alt="PayPal" src="https://miro.medium.com/max/4000/1*SaXNDepA2B9V5pFiof1Q3A.png" width="60%" height="60%"></img>
+                </a>
+              </div>
+              <div>
+                <a href="https://venmo.com/">
+                  <img alt="Venmo" src="https://www.breakwaterfinancial.com/sites/default/files/users/aberinger/Venmo.png" width="60%" height="60%"></img>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        )}
+      </Popup>
     )
   }
 
@@ -250,7 +282,7 @@ class FundraiserPost extends Component {
               <Grid xs={12} sm={6}>
                 <div className="rating">
                   <p>
-                    <Star className="star"/>
+                    <Star className="star" />
                     <strong>{fundraiserItem.endorsement}</strong>
                     {this.endorsePost(fundraiserItem)}
                   </p>
@@ -273,9 +305,8 @@ class FundraiserPost extends Component {
               <h4>Contact: {productOwner.email}</h4>
               <h4>Category: {fundraiserItem.fundType}</h4>
               <h5>{fundraiserItem.description}</h5>
-              {this.copyText()}
               <div className="donateButton">
-                <Button variant='outlined'>Donate Now</Button>
+                {this.donateButton()}
               </div>
             </div>
           </Grid>
