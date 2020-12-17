@@ -236,53 +236,6 @@ class FundraiserPost extends Component {
     //
 
     return (
-      // <div>
-      //   <div className="topSection">
-      //     <img src={fundraiserItem.image} onError={(e) => { e.target.src = '../images/charity.png' }} alt="" />
-      //     <div className="donationPrompt">
-      //     {this.deletePost()}
-      //         {this.editPost()}
-            // <div className="amountRequired">
-            //   <h3>${receviedDonations} out of ${fundraiserItem.requiredAmount} raised.</h3>
-            //   <div id="myProgress">
-            //     <div id="myBar"></div>
-            //   </div>
-            // </div>
-
-      //       {/* Owner imformation*/}
-      //       {/*<img src={productOwner.userImage} onError={(e) => {e.target.src = user}} alt=""/>*/}
-      //       <div className="productTitle">
-      //         <h2>{productOwner.name}</h2>
-      //         <h2>Location: {productOwner.zipcode}</h2>
-      //         <h2>Contact: {productOwner.email}</h2>
-      //         {this.copyText()}
-      //       </div>
-
-      //       <div className="donateButton">
-      //         <Button variant='outlined'>Donate Now</Button>
-      //       </div>
-      //     </div>
-      //   </div>
-      //   <div className="bottomSection">
-      //     <div className="heading">
-      //       <div className="productTitle">
-      //         <h1>{fundraiserItem.title}</h1>
-      //       </div>
-      //       <div className="starRating">
-      //         <Star className="star" />
-      //         <p>
-      //           <strong>{fundraiserItem.endorsement}</strong>
-      //         </p>
-      //         {this.endorsePost(fundraiserItem)}
-      //       </div>
-      //       {/* <div className="spamProduct">
-      //         <Report />
-      //       </div> */}
-      //     </div>
-      //     <h3>Category: {fundraiserItem.fundType}</h3>
-      //     <h2>{fundraiserItem.description}</h2>
-      //   </div>
-      // </div>
       <div className="h-75 x-1 body">
         <Grid container spacing={3}>
           {/* image column */}
