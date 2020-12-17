@@ -12,7 +12,7 @@ import SearchResult from './components/searchResult.js';
 import MessageList from './components/MessageList.js';
 
 import history from './components/backend/history.js';
-
+import ChatSpace from './components/ChatSpace.js';
 import register from './components/register.js'
 import recovery from './components/recovery.js'
 import AvailableChatUsers from './components/AvailableChatUsers';

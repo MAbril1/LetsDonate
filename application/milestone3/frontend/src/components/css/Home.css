@@ -42,8 +42,9 @@ div.scrollmenu {
     overflow-y: hidden;
     margin: 15px 0;
 }
-h2 {
-    margin-top: 10px;
+
+.LandingBanner > h1 {
+    font-size: 3vw;
 }
 h3 {
     margin-bottom: 0;

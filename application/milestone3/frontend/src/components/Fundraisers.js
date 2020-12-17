@@ -44,6 +44,7 @@ class Fundraisers extends Component {
     {
       return (
         <Popup
+          contentStyle={{width: "auto"}}
           trigger={<button className="postButton"> Create a new Fundraiser </button>}
           modal
           nested
@@ -55,7 +56,7 @@ class Fundraisers extends Component {
                   </button>
               <div className="header"> <strong>CREATE NEW FUNDRAISER </strong></div>
               <div className="content">
-                <Form>
+                <Form id='newFundraiserForm'>
                   <FormGroup>
                     <Label><strong>Title: </strong></Label>
                     <Input value={title}

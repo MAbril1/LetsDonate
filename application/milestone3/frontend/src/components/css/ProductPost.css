@@ -1,4 +1,10 @@
-
+#editUserForm{
+    text-align: right;
+    margin-left: auto;
+    margin-bottom: -10px;
+    padding: 10px;
+    display: inline-block;
+}
 
 .topSection .productImage{
     margin: 20px;

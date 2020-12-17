@@ -115,7 +115,7 @@ class FundraiserPost extends Component {
               <div className="header"> <strong> This Action Cannot Be Undone </strong></div>
               <div className="content">
                 <form id="deleteUserForm" method="post">
-                  <label><strong>Type "YES to Confirm Deletion" </strong></label>
+                  <label><strong>Type "YES" to Confirm Deletion </strong></label>
                   <input type="text" name="response" placeholder="YES" />
                   <br />
                 </form>
