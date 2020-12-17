@@ -5,8 +5,10 @@
 }
 
 .userImage > img{
-    width: 400px;
-    height: 400px;
+    width: 150px;
+    height: 150px;
+    margin-top: 30px;       /* this will change the height of banner */
+    margin-bottom: 30px;    /* this will change the height of banner */
 }
 
 .topSection{
@@ -14,6 +16,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
+    background-color: rgb(123, 132, 141);   /* color of the banner */
 }
 
 .scrollmenu{
@@ -28,6 +31,7 @@
 }
 
 .button{
+    width: 100px;
     color: white;
     background-color: #ff7779;
     padding: 10px;
@@ -48,4 +52,24 @@ input{
     padding: 10px;
     border: none;
     margin-left: 70px;
+}
+
+/* text style in the user dashboard banner */
+.userName{
+    margin-left: 20px;
+}
+.userName > h1{
+    margin-left: 0px;
+}
+.userName > h2{
+    font-size: 17px;
+}
+
+/* edit form content style & new post form style */
+#editUserForm, #newPostForm{
+    text-align: right;
+    margin-left: auto;
+    margin-bottom: -10px;
+    padding: 10px;
+    display: inline-block;
 }

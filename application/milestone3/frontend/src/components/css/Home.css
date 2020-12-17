@@ -43,7 +43,7 @@ div.scrollmenu {
     margin: 15px 0;
 }
 
-h1 {
+.LandingBanner > h1 {
     font-size: 3vw;
 }
 h3 {

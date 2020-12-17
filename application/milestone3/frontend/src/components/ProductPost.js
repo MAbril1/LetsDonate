@@ -66,6 +66,7 @@ class ProductPost extends Component {
     {
       return (
         <Popup
+          contentStyle={{width: "auto"}}
           trigger={<button className="postButton"> Delete Post </button>}
           modal
           nested
@@ -79,7 +80,7 @@ class ProductPost extends Component {
               <div className="header"> <strong> This Action Cannot Be Undone </strong></div>
               <div className="content">
                 <form id="deleteUserForm" method="post">
-                  <label><strong>Type "YES to Confirm Deletion" </strong></label>
+                  <label><strong>Type "YES" to Confirm Deletion </strong></label>
                   <input type="text" name="response" placeholder="YES" />
                   <br />
                 </form>
@@ -115,6 +116,7 @@ class ProductPost extends Component {
     {
       return (
         <Popup
+          contentStyle={{width: "auto"}}
           trigger={<button className="postButton"> Edit Post </button>}
           modal
           nested
