@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import './css/FundraiserPost.css';
-import { Button } from "@material-ui/core";
+import './css/Posts.css';
+import Grid from '@material-ui/core/Grid';
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
-import Report from './Report.js';
 import axios from 'axios';
-import user from '../images/user.jpg';
 
 import Popup from 'reactjs-popup';
 import currentUser from './backend/currentUser.js';
@@ -19,7 +17,7 @@ import editPost from './backend/editPost.js';
 class ProductPost extends Component {
   state = {
     items: [], // saves entire list of products from database
-    item: {},  // saves a single product which will be displayed
+    item: {},  // saves a single product hich will be displayed
     owner: {} // saves the owner of the product
   }
 
@@ -66,6 +64,7 @@ class ProductPost extends Component {
     {
       return (
         <Popup
+          contentStyle={{width: "auto"}}
           trigger={<button className="postButton"> Delete Post </button>}
           modal
           nested
@@ -79,7 +78,7 @@ class ProductPost extends Component {
               <div className="header"> <strong> This Action Cannot Be Undone </strong></div>
               <div className="content">
                 <form id="deleteUserForm" method="post">
-                  <label><strong>Type "YES to Confirm Deletion" </strong></label>
+                  <label><strong>Type "YES" to Confirm Deletion </strong></label>
                   <input type="text" name="response" placeholder="YES" />
                   <br />
                 </form>
@@ -115,6 +114,7 @@ class ProductPost extends Component {
     {
       return (
         <Popup
+          contentStyle={{width: "auto"}}
           trigger={<button className="postButton"> Edit Post </button>}
           modal
           nested
@@ -172,60 +172,40 @@ class ProductPost extends Component {
     const productOwner = this.state.owner;
 
     return (
-      <div>
-        <div className="topBar">
-
-
-          <div className="editButton">
-            <Button variant='outlined'>Edit</Button>
-          </div>
-
-          <div className="leftSide">
-            <div className="saveButton">
-              <Button variant='outlined'>Save</Button>
-            </div>
-
-            <div className="deleteButton">
-              <Button variant='outlined'>Delete</Button>
-            </div>
-          </div>
-
-
-        </div>
-        <div className="topSection">
-          <img class="productImg" src={productItem.productImage} onError={(e) => {
-            e.target.src = '../images/charity.png' // fallback image
-          }} alt="" />
-          <div className="donationPrompt">
-            {/* Owner imformation*/}
-            {/*<img src={productOwner.userImage} onError={(e) => {e.target.src = user}} alt=""/>*/}
+      <div className="h-75 x-1 body">
+        <Grid container spacing={3}>
+          {/* image column */}
+          <Grid item xs={12} sm={5}>
+            <img className="w-100 border border-light" src={productItem.productImage} onError={(e) => {
+              e.target.src = '../images/charity.png' // fallback image
+            }} alt="" />
+          </Grid>
+          {/* Description column */}
+          <Grid item xs={12} sm={7} container spacing={3} className="px-5">
+            <Grid xs={12} sm={12} container spacing={3}>
+              <Grid xs={12} sm={6}>
+                <h1>{productItem.name}</h1>
+                <div className="rating">
+                  <FavoriteBorder className="star"/>
+                  <p>
+                    {/* <strong>{likes}</strong> */}
+                  </p>
+                </div>
+              </Grid>
+              <Grid xs={12} sm={6}>
+                {this.deletePost()}
+                {this.editPost()}
+              </Grid>
+            </Grid>
             <div className="productTitle">
-              <h2>{productOwner.name}</h2>
-              <h2>Location: {productOwner.zipcode}</h2>
-              <h2>Contact: {productOwner.email}</h2>
-              {this.deletePost()}
-              {this.editPost()}
+              <h4>{productOwner.name}</h4>
+              <h4>Location: {productOwner.zipcode}</h4>
+              <h4>Contact: {productOwner.email}</h4>
+              <h4>Category: {productItem.productType}</h4>
+              <h5>{productItem.description}</h5>
             </div>
-            <h3>{productItem.description}</h3>
-          </div>
-
-        </div>
-        <div className="bottomSection">
-          <div className="heading">
-            <div className="productTitle">
-              <h1>{productItem.name}</h1>
-            </div>
-            <div className="starRating">
-              <FavoriteBorder className="star" />
-              <h3>Category: {productItem.productType}</h3>
-              <p>
-                {/* <strong>{likes}</strong> */}
-              </p>
-            </div>
-          </div>
-          <h2>{productItem.description}</h2>
-        </div>
-
+          </Grid>
+        </Grid>
       </div>
     )
   }

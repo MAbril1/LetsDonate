@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Grid from '@material-ui/core/Grid';
 import Card from './Card.js';
 import './css/Products.css';
 
@@ -16,51 +16,15 @@ class Products extends Component {
         items: []
       }
 
-    //   constructor(props) {
-    //     super(props);
-    //     this.filterClothes = this.filterClothes.bind(this);
-    //     this.filterFurniture = this.filterFurniture.bind(this);
-    //     this.allProducts = this.allProducts.bind(this);
-    //   }
-
     //gets the whole list of items from the backend.
     componentDidMount() {
         axios.get(`/api`)
           .then(res => {
             const items = res.data;
             this.setState({ items });
-          })
+        })
       }
 
-    // //The next three functions filter the map based on categories
-    // filterClothes() {
-    //     axios.post("api/filterClothes", {"clothes": "cloth"})
-    //     .then((result) => {
-    //         if(!result.data.success){
-    //             alert("Failed Search");
-    //         }else{
-    //             const items = result.data.products;
-    //             this.setState({ items });
-    //         }
-    //     })
-    //     .catch(exception => {
-    //         alert(exception);
-    //     })
-    // }
-    // filterFurniture() {
-    //     axios.post("api/filterFurniture", {"furniture": "furniture"})
-    //     .then((result) => {
-    //         if(!result.data.success){
-    //             alert("Failed Search");
-    //         }else{
-    //             const items = result.data.products;
-    //             this.setState({ items });
-    //         }
-    //     })
-    //     .catch(exception => {
-    //         alert(exception);
-    //     })
-    // }
     allProducts() {
         axios.get(`/api`)
           .then(res => {
@@ -98,30 +62,29 @@ class Products extends Component {
         // returns a map of the categories and their count
         return (
             Object.keys(occurrences).sort().map(item => 
-            <div className="checkbox"><label><input type="checkbox" id={item} onClick={() => {this.setCategory(item)}}/>{item} ({occurrences[item]})</label></div>
+            <div><label><input type="checkbox" id={item} onClick={() => {this.setCategory(item)}}/>{item} ({occurrences[item]})</label></div>
             )
         );
     }
 
   render() {
     return (
-        <div className="Products">
-
-            {/* left sticky side of filters and sort bys */}
-            <div className="filters">
-                <h1 className="leftSide">Filters</h1>
-                {/* Calls function to get the categories loaded to the state*/}
-                {this.getCategories()}            
-            </div>
-
-            <div className="split"></div>
-
-            {/* map of items from backend */}
-            <div className="items">
+        <div className="h-75 x-1 grid">
+          <Grid container spacing={3}>
+            {/* filters */}
+            <Grid item sm={12} md={2} className="filters border-right border-dark">
+              <h1>Filters</h1>
+              {this.getCategories()}
+            </Grid>
+            {/* products */}
+            <Grid item sm={12} md={10}>
+              <div className="items">
                 {this.state.items.sort().reverse().map(item => 
-                    <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage}/>
+                  <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage}/>
                 )}
-            </div>
+              </div>
+            </Grid>
+          </Grid>
         </div>
     );
   }

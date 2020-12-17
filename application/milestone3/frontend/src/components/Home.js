@@ -4,11 +4,6 @@ import axios from 'axios';
 import Card from './Card.js';
 import './css/Home.css';
 import FundraiserCard from './FundraiserCard';
-import candies from '../images/candies.jpg';
-import clinic from '../images/clinic.jpg';
-import college from '../images/college.jpg';
-
-import currentUser from './backend/currentUser.js';
 
 /*
 **  Home.js
@@ -50,17 +45,17 @@ class Home extends Component {
         {/* This is the landing banner and is supposed to be what draws users in and explains what the website is about. */}
         <div className="LandingBanner-bg"><div className="LandingBanner">
           <h1>Let's Donate</h1>
-          <p><h3>
+          <p className="statement">
             Let's Donate is the inbetween <br />
             for people that want to give  <br />
             donations directly to those that <br />
             need it and people that seek <br />
             out help in their time of need. <br />
-          </h3></p>
+          </p>
         </div></div>
         <hr className="separator"></hr>
         <div>
-          <h2>Featured</h2>
+          <h2 className="featured">Featured</h2>
         </div>
         <hr />
 

@@ -43,7 +43,7 @@ function FundraiserCard( {id, title, description, image, endorsement, requiredAm
                                     </p>
                             </div>
                             <div className="amountRequired">
-                                <h2>Goal {requiredAmount}</h2>
+                                <h2>Goal ${requiredAmount}</h2>
                             </div>
                         </div>
                     </div>

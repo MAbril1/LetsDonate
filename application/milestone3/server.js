@@ -12,8 +12,8 @@ const { addUser, removeUser, getUser, getUsersInRoom } = require('./frontend/src
 const aws = require('aws-sdk');
 const multer = require("multer");
 const multerS3 = require('multer-s3');
-const cors = require('cors');
-
+var cors = require('cors');
+app.use(cors());
 const s3 = new aws.S3({
   accessKeyId: 'AKIAU6B7MVGXEDMQVM37',
   secretAccessKey: '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',
@@ -21,7 +21,7 @@ const s3 = new aws.S3({
 });
 
 app.use(parser.json());
-app.use(cors());
+
 const upload = multer({
   storage: multerS3({
     s3: s3,
@@ -34,35 +34,35 @@ const upload = multer({
   })
 });
 
-io.on('connection', (socket) =>{
-  console.log("Connection established");
+// io.on('connection', (socket) =>{
+//   console.log("Connection established");
   
-  socket.on('joinedChat', ({name, room}, cb) => {
+//   socket.on('joinedChat', ({name, room}, cb) => {
       
-      const {error, newUser} = addUser ({id:socket.id, name, room});
+//       const {error, newUser} = addUser ({id:socket.id, name, room});
       
-      if(error) return cb(error);
-      console.log("newUser is" , newUser);
-      socket.join(newUser.room);
-      socket.emit('message', {text: `Hey ${newUser.name}, feel free to drop any message for ${newUser.room}`});
-      socket.broadcast.to(newUser.room).emit('message', {text: `${newUser.name} joined the chat.`})
+//       if(error) return cb(error);
+//       console.log("newUser is" , newUser);
+//       socket.join(newUser.room);
+//       socket.emit('message', {text: `Hey ${newUser.name}, feel free to drop any message for ${newUser.room}`});
+//       socket.broadcast.to(newUser.room).emit('message', {text: `${newUser.name} joined the chat.`})
       
 
-      cb();
-  });
+//       cb();
+//   });
 
-  socket.on('deliverMessage', (message, cb) => {
-      const user = getUser(socket.id);
-      console.log(user);
-      io.to(user.room).emit('message', {user:user.name, text: message});
-      cb();
-  });
+//   socket.on('deliverMessage', (message, cb) => {
+//       const user = getUser(socket.id);
+//       console.log(user);
+//       io.to(user.room).emit('message', {user:user.name, text: message});
+//       cb();
+//   });
 
-  socket.on('disconnect', () => {
-    console.log("Disconnected");
-    const user = removeUser(socket.id);
-  });
-});
+//   socket.on('disconnect', () => {
+//     console.log("Disconnected");
+//     const user = removeUser(socket.id);
+//   });
+// });
 
 // loads all items from the three tables tables
 app.get('/api', function (req, res) {
@@ -166,8 +166,36 @@ app.post('/api/editPost', upload.single("imageFile"), function (req, res) {
   }
 });
 
+// api to edit a fundraiser post
+app.post('/api/editFundraiser', upload.single("imageFile"), function (req, res) {
+  console.log(req.body);
+
+  if (!req.body.imageFile) // updating image
+  {
+    config.query(`UPDATE fundraisers SET
+                  title = '${req.body.title}', description = '${req.body.description}', fundType = '${req.body.fundType}', requiredAmount = '${req.body.requiredAmount}',
+                  endorsement = '${req.body.endorsement}', image = '${req.file.location}', owner = '${req.body.owner}' WHERE id = '${req.body.id}'`, function (e, response, f) { });
+    res.send({ success: true, fileLocation: req.file.location });
+
+    console.log("Image URL: ", req.file.location);
+  }
+  else // if not updating user image
+  {
+    config.query(`UPDATE fundraisers SET
+                  title = '${req.body.title}', description = '${req.body.description}', fundType = '${req.body.fundType}',  requiredAmount = '${req.body.requiredAmount}',
+                  endorsement = '${req.body.endorsement}', image = '${req.body.imageFile}', owner = '${req.body.owner}' WHERE id = '${req.body.id}'`, function (e, response, f) { });
+    res.send({ success: true });
+  }
+});
+
 app.post('/api/deleteProduct', function (req, res) {
   config.query(`DELETE FROM products WHERE id = '${req.body.id}'`, function (e, response, f) {
+    res.json({ success: true });
+  });
+});
+
+app.post('/api/deleteFundraiser', function (req, res) {
+  config.query(`DELETE FROM fundraisers WHERE id = '${req.body.id}'`, function (e, response, f) {
     res.json({ success: true });
   });
 });
@@ -184,8 +212,8 @@ app.post('/api/postProduct', upload.single("imageFile"), function (req, res) {
 app.post('/api/postFundraiser', upload.single("imageFile"), function (req, res) {
   req.body.description = req.body.description.replace(/'/g, "''"); // replaces ' so sql will not get confused
 
-  config.query(`INSERT INTO fundraisers (title, description, requiredAmount, image, endorsement, owner)
-                VALUES ('${req.body.title}', '${req.body.description}', '${req.body.requiredAmount}', '${req.file.location}', '${req.body.endorsement}', '${req.body.owner}')`, function (e, response, f) {
+  config.query(`INSERT INTO fundraisers (title, description, fundType, requiredAmount, image, endorsement, owner)
+                VALUES ('${req.body.title}', '${req.body.description}', '${req.body.fundType}', '${req.body.requiredAmount}', '${req.file.location}', '${req.body.endorsement}', '${req.body.owner}')`, function (e, response, f) {
   });
   res.send({ success: true });
 });
@@ -196,6 +224,29 @@ app.post('/api/makeSearch', function (req, res) {
     res.json({ success: true, products: response });
     console.log(response);
   });
+});
+app.post('/api/makeFundSearch', function (req, res) {
+  config.query(`SELECT * FROM fundraisers WHERE title LIKE '%${req.body.searchItem}%'`, function (e, response, f) {
+    res.json({ success: true, fundraisers: response });
+    console.log(response);
+  });
+})
+app.post('/api/getMessages', function (req, res) {
+  console.log(req.body.roomName);
+  config.query(`SELECT * FROM chat WHERE room = '${req.body.roomName}'`, function (e, response, f) {
+    console.log(response);
+    if(!e){
+      res.json({ success: true, messages: response });
+    }
+  });
+});
+
+app.post('/api/addMessage', function(req, res) {
+  
+  config.query(`INSERT INTO chat (room, message) VALUES ('${req.body.room}', '${req.body.message}')`, function (e, response, f){
+    
+  });
+  res.send({ success: true });
 });
 
 app.post('/api/findPosts', function (req, res) {
@@ -236,7 +287,7 @@ app.post('/api/updateEndorsement', function (req, res) {
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
 })
 
-server.listen(5000);
+app.listen(5000);

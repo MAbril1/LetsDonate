@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import './css/FundraiserPost.css';
-import { Button } from "@material-ui/core";
 import Star from "@material-ui/icons/Star";
-import Report from './Report.js';
 import axios from 'axios';
-import user from '../images/user.jpg';
 import currentUser from './backend/currentUser.js';
+import Popup from 'reactjs-popup';
+import Grid from '@material-ui/core/Grid';
+import { Button } from "@material-ui/core";
+
+import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import deleteFundFunction from './backend/deleteFund.js';
+import editFund from './backend/editFund.js';
 
 /*
 **  FundraiserPost.js
@@ -17,7 +22,9 @@ class FundraiserPost extends Component {
     items: [], // saves entire list of products from database
     item: {},  // saves a single product which will be displayed
     owner: {}, // saves the owner of the product
-    random: 0 // stores random raised amount
+    random: 0, // stores random raised amount
+    value: '',
+    copied: false
   }
 
   componentDidMount() {
@@ -86,6 +93,165 @@ class FundraiserPost extends Component {
     }
   }
 
+  deletePost() {
+    console.log(this.props);
+    let currentUserEmail = currentUser.getUser().email;
+    let currentProfileEmail = this.state.owner.email;
+
+    if ((currentUserEmail.localeCompare("admin@admin.com") === 0) || (currentUserEmail.localeCompare(currentProfileEmail) === 0)) // edit profile if current user is profile owner or an admin
+    {
+      return (
+        <Popup
+          trigger={<button className="postButton"> Delete Post </button>}
+          modal
+          nested
+        >
+          {close => (
+            <div className="popup">
+              <button className="close" onClick={close}>
+                &times;
+            </button>
+              <div className="header"> <strong> Delete Post </strong></div>
+              <div className="header"> <strong> This Action Cannot Be Undone </strong></div>
+              <div className="content">
+                <form id="deleteUserForm" method="post">
+                  <label><strong>Type "YES" to Confirm Deletion </strong></label>
+                  <input type="text" name="response" placeholder="YES" />
+                  <br />
+                </form>
+              </div>
+              <div className="actions">
+                <button
+                  className="button"
+                  onClick={() => {
+                    let pageRedirect = deleteFundFunction(this.props.match.params.id);
+
+                    if (pageRedirect) {
+                      console.log("HERE");
+                      window.location.replace('/');
+                      //history.push('/');
+                    }
+                  }}
+                >DELETE
+              </button>
+              </div>
+
+            </div>
+          )}
+        </Popup>
+      )
+    }
+  }
+
+  editPost() {
+    let currentUserEmail = currentUser.getUser().email;
+    let currentProfileEmail = this.state.owner.email;
+
+    if ((currentUserEmail.localeCompare("admin@admin.com") === 0) || (currentUserEmail.localeCompare(currentProfileEmail) === 0)) // edit profile if current user is profile owner or an admin
+    {
+      return (
+        <Popup
+          trigger={<button className="postButton"> Edit Post </button>}
+          modal
+          nested
+        >
+          {close => (
+            <div className="popup">
+              <button className="close" onClick={close}>
+                &times;
+            </button>
+              <div className="header"> <strong> Edit Post </strong></div>
+              <div className="content">
+                <form id="editUserForm" method="post">
+                  <label><strong>Title: </strong></label>
+                  <input type="text" name="name" placeholder={this.state.item.title} />
+
+                  <br />
+                  <label><strong>Description: </strong></label>
+                  <input type="text" name="description" placeholder={this.state.item.description} />
+
+                  <br />
+                  <label><strong>Type: </strong></label>
+                  <select name="productType" id="productType">
+                    <option value="default" selected disabled>Please select a type</option>
+                    <option value="Medical">Medical</option>
+                    <option value="Education">Education</option>
+                    <option value="Community">Community</option>
+                    <option value="Other">Other</option>
+                  </select>
+
+                  <br />
+                  <label><strong>Amount Required in USD: </strong></label>
+                  <input type="number" name="requiredAmount" placeholder={this.state.item.requiredAmount} />
+
+                  <br />
+                  <label><strong>New Post Image: </strong></label>
+                  <input type="file" id="productImage" accept="image/jpg,image/jpeg,image/png" />
+                </form>
+              </div>
+              <div className="actions">
+
+                {/* This posts the input data into the backend */}
+                <button
+                  className="button"
+                  onClick={() => { editFund(this.state.item) }}
+                >SUBMIT
+              </button>
+              </div>
+
+            </div>
+          )}
+        </Popup>
+      )
+    }
+  }
+
+  copyText() {
+    return (
+      <div>
+        <CopyToClipboard text={this.state.owner.email}
+          onCopy={() => this.setState({ copied: true })}>
+          <button className="postButton">Copy Email</button>
+        </CopyToClipboard>
+
+        {this.state.copied ? <span style={{ color: 'red' }}> Copied Email to Clipboard</span> : null}
+      </div>
+    )
+  }
+
+  donateButton() {
+    return (
+      <Popup
+        trigger={<button className="postButton"> Donate Now </button>}
+        modal
+        nested
+      >
+        {close => (
+          <div className="popup">
+            <button className="close" onClick={close}>
+              &times;
+            </button>
+            <div className="header"> <strong> Choose a service </strong></div>
+            <div className="content">
+              {this.copyText()}
+              <div>
+                <a href="https://www.paypal.com/us/home">
+                  <img alt="PayPal" src="https://miro.medium.com/max/4000/1*SaXNDepA2B9V5pFiof1Q3A.png" width="60%" height="60%"></img>
+                </a>
+              </div>
+              <div>
+                <a href="https://venmo.com/">
+                  <img alt="Venmo" src="https://www.breakwaterfinancial.com/sites/default/files/users/aberinger/Venmo.png" width="60%" height="60%"></img>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        )}
+      </Popup>
+    )
+  }
+
   render() {
     let fundraiserItem = this.state.item;
     let productOwner = this.state.owner;
@@ -102,51 +268,49 @@ class FundraiserPost extends Component {
     //
 
     return (
-      <div>
-        <div className="topSection">
-          <img src={fundraiserItem.image} onError={(e) => { e.target.src = '../images/charity.png' }} alt="" />
-          <div className="donationPrompt">
-            <div className="amountRequired">
-              <h3>${receviedDonations} out of ${fundraiserItem.requiredAmount} raised.</h3>
-              <div id="myProgress">
-                <div id="myBar"></div>
+      <div className="h-75 x-1 body">
+        <Grid container spacing={3}>
+          {/* image column */}
+          <Grid item xs={12} sm={5}>
+            <img className="w-100 border border-light" src={fundraiserItem.image} onError={(e) => {
+              e.target.src = '../images/charity.png' // fallback image
+            }} alt="" />
+          </Grid>
+          {/* Description column */}
+          <Grid item xs={12} sm={7} container spacing={3} className="px-5">
+            <Grid xs={12} sm={12} container spacing={3}>
+              <Grid xs={12} sm={6}>
+                <div className="rating">
+                  <p>
+                    <Star className="star" />
+                    <strong>{fundraiserItem.endorsement}</strong>
+                    {this.endorsePost(fundraiserItem)}
+                  </p>
+                  <div className="amountRequired">
+                    <h3>${receviedDonations} out of ${fundraiserItem.requiredAmount} raised.</h3>
+                    <div id="myProgress">
+                      <div id="myBar"></div>
+                    </div>
+                  </div>
+                </div>
+              </Grid>
+              <Grid xs={12} sm={6}>
+                {this.deletePost()}
+                {this.editPost()}
+              </Grid>
+            </Grid>
+            <div className="productTitle">
+              <h4>{productOwner.name}</h4>
+              <h4>Location: {productOwner.zipcode}</h4>
+              <h4>Contact: {productOwner.email}</h4>
+              <h4>Category: {fundraiserItem.fundType}</h4>
+              <h5>{fundraiserItem.description}</h5>
+              <div className="donateButton">
+                {this.donateButton()}
               </div>
             </div>
-
-            {/* Owner imformation*/}
-            {/*<img src={productOwner.userImage} onError={(e) => {e.target.src = user}} alt=""/>*/}
-            <div className="productTitle">
-              <h2>{productOwner.name}</h2>
-              <h2>Location: {productOwner.zipcode}</h2>
-              <h2>Contact: {productOwner.email}</h2>
-              {/*this.deletePost()*/}
-              {/*this.editPost()*/}
-
-            </div>
-
-            <div className="donateButton">
-              <Button variant='outlined'>Donate Now</Button>
-            </div>
-          </div>
-        </div>
-        <div className="bottomSection">
-          <div className="heading">
-            <div className="productTitle">
-              <h1>{fundraiserItem.title}</h1>
-            </div>
-            <div className="starRating">
-              <Star className="star" />
-              <p>
-                <strong>{fundraiserItem.endorsement}</strong>
-              </p>
-              {this.endorsePost(fundraiserItem)}
-            </div>
-            {/* <div className="spamProduct">
-              <Report />
-            </div> */}
-          </div>
-          <h2>{fundraiserItem.description}</h2>
-        </div>
+          </Grid>
+        </Grid>
       </div>
     )
   }

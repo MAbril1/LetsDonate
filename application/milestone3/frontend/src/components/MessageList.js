@@ -118,10 +118,13 @@ class MessageList extends Component {
             "perborgen",
             "n"
         ]
+        let tempUserEmail = "noemail@email.com";
 
         return (
             <div>
-                {this.redirectClick()}
+                {tempUserEmail.localeCompare(currentUser.getUser().email) !== 0 && // checks if there is a current user, if there isn't show login
+                    this.redirectClick()
+                }
                 {/* list of users that have a chat history */}
                 <div className="userList" id="userList">
                     <div className="container">

@@ -22,17 +22,18 @@ function UserCard( {id, name, zipcode, email, userImage} ) {
     }
     
     return (
-        <Link className='link' to={`/chat?name=${currentUser.getUser().name}&room=${name}`}>
+        ///chat?name=${currentUser.getUser().name}&room=${name}
+        <Link className='link' to={`/chatSpace?name=${currentUser.getUser().name}&room=${name}`}>
             <div className="card"> 
-                <img  className="cardImage" 
+                <img  className="cardImage border border-light" 
                     src={image}
                     onError={(e) => {
                         e.target.src = '../images/nopic.png' // fallback image
                     }} 
                 alt=""/>
 
-                <h2>{name}</h2>
-                <h3>Location: {zipcode}</h3>
+                <h3>{name}</h3>
+                <h4>Location: {zipcode}</h4>
             </div>
         </Link>
     )
