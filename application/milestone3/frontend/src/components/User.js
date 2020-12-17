@@ -84,6 +84,7 @@ class User extends Component {
     {
       return (
         <Popup
+          contentStyle={{width: "auto"}}
           trigger={<button className="postButton"> Delete Profile </button>}
           modal
           nested
@@ -97,7 +98,7 @@ class User extends Component {
               <div className="header"> <strong> This Action Cannot Be Undone </strong></div>
               <div className="content">
                 <form id="deleteUserForm" method="post">
-                  <label><strong>Type "YES to Confirm Deletion" </strong></label>
+                  <label><strong>Type "YES" to Confirm Deletion</strong></label>
                   <input type="text" name="response" placeholder="YES" />
                   <br />
                 </form>
@@ -131,7 +132,8 @@ class User extends Component {
     if ((currentUserEmail.localeCompare("admin@admin.com") === 0) || (currentUserEmail.localeCompare(currentProfileEmail) === 0)) // edit profile if current user is profile owner or an admin
     {
       return (
-        <Popup
+        <Popup 
+          contentStyle={{width: "auto"}}
           trigger={<button className="postButton"> Edit Profile </button>}
           modal
           nested
@@ -140,34 +142,34 @@ class User extends Component {
             <div className="popup">
               <button className="close" onClick={close}>
                 &times;
-            </button>
+              </button>
               <div className="header"> <strong> Edit Profile </strong></div>
-              <div className="content">
-                <form id="editUserForm" method="post">
-                  <label><strong>Name: </strong></label>
-                  <input type="text" name="newName" placeholder={this.state.user.name} />
+                <div className="content">
+                  <form id="editUserForm" method="post">
+                    <label><strong>Name: </strong></label>
+                    <input type="text" name="newName" placeholder={this.state.user.name} />
 
-                  <br />
-                  <label><strong>Email: </strong></label>
-                  <input type="text" name="newEmail" placeholder={this.state.user.email} />
+                    <br />
+                    <label><strong>Email: </strong></label>
+                    <input type="text" name="newEmail" placeholder={this.state.user.email} />
 
-                  <br />
-                  <label><strong>Zipcode: </strong></label>
-                  <input type="number" name="newZipcode" placeholder={this.state.user.zipcode} />
+                    <br />
+                    <label><strong>Zipcode: </strong></label>
+                    <input type="number" name="newZipcode" placeholder={this.state.user.zipcode} />
 
-                  <br />
-                  <label><strong>Current Password: </strong></label>
-                  <input type="password" name="currentPassword" placeholder="password" />
+                    <br />
+                    <label><strong>Current Password: </strong></label>
+                    <input type="password" name="currentPassword" placeholder="password" />
 
-                  <br />
-                  <label><strong>New Password: </strong></label>
-                  <input type="password" name="newPassword" placeholder="password" />
+                    <br />
+                    <label><strong>New Password: </strong></label>
+                    <input type="password" name="newPassword" placeholder="password" />
 
-                  <br />
-                  <label><strong>New Profile Image: </strong></label>
-                  <input type="file" id="newProfileImage" accept="image/jpg,image/jpeg,image/png" />
-                </form>
-              </div>
+                    <br />
+                    <label><strong>New Profile Image: </strong></label>
+                    <input type="file" id="newProfileImage" accept="image/jpg,image/jpeg,image/png" />
+                  </form>
+                </div>
               <div className="actions">
 
                 {/* This posts the input data into the backend */}
@@ -196,6 +198,7 @@ class User extends Component {
     {
       return (
         <Popup
+          contentStyle={{width: "auto"}}
           trigger={<button className="postButton"> Create a new Post </button>}
           modal
           nested
@@ -207,7 +210,7 @@ class User extends Component {
                   </button>
               <div className="header"> <strong>CREATE A POST </strong></div>
               <div className="content">
-                <Form>
+                <Form id="newPostForm">
                   <FormGroup>
                     <Label><strong>Name of Product: </strong></Label>
                     <Input value={productName}

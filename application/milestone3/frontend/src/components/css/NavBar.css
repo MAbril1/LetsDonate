@@ -124,16 +124,11 @@ input{
   font-size: 16px;
 }
 .login-button:hover {
-  background-color:  rgba(88, 88, 250, 0.979);
+  background-color: rgba(88, 88, 250, 0.979);
   border-color: rgba(88, 88, 250, 0.979);
-  border-radius: 5px;
-  padding: 10px;
-  color:  white;  
+  color: white;  
   text-align: center;
   font-size: 16px;
-  width: 150px;
-  margin-bottom: 20px;
-  display: inline-block;
 }
 /***************************/
 
@@ -141,28 +136,16 @@ input{
 .signup-button {
   background-color: white;
   border-color: rgba(88, 88, 250, 0.979);
-  border-radius: 5px;
+  /* border-radius: 5px; */
   padding: 10px;
   color: black;  
   text-align: center;
   font-size: 16px;
-  width: 150px;
+  /* width: 150px; */
   margin-bottom: 10px;
   display: inline-block;
+  text-decoration: underline
 }
-.signup-button:hover {
-  background-color:  rgba(88, 88, 250, 0.979);
-  border-color: rgba(88, 88, 250, 0.979);
-  border-radius: 5px;
-  padding: 10px;
-  color:  white;  
-  text-align: center;
-  font-size: 16px;
-  width: 150px;
-  margin-bottom: 10px;
-  display: inline-block;
-}
-/*************************/
 
 .reset-password-button {
   border: none;
