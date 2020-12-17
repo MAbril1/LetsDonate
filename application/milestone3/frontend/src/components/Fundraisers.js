@@ -83,10 +83,21 @@ class Fundraisers extends Component {
                   </FormGroup>
                   <FormGroup>
                     <br />
+                    <Label><strong>Type: </strong></Label>
+                    <select name="productType" id="productType">
+                      <option value="1" selected disabled>Please select a type</option>
+                      <option value="Medical">Medical</option>
+                      <option value="Education">Education</option>
+                      <option value="Community">Community</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </FormGroup>
+                  <FormGroup>
+                    <br />
                     <Label><strong>Amount Required in USD: </strong></Label>
                     <Input value={amountRequired}
-                      onChange={(productType) => {
-                        amountRequired = (productType.target.value);
+                      onChange={(amountNeeded) => {
+                        amountRequired = (amountNeeded.target.value);
                       }}
                     />
                   </FormGroup>
@@ -110,6 +121,7 @@ class Fundraisers extends Component {
                       form.append("description", description);
                       form.append("requiredAmount", amountRequired);
                       form.append("endorsement", 0);
+                      form.append("fundType", document.getElementById("productType").value);
                       form.append("owner", owner);
                       axios.post("/api/postFundraiser", form, { headers: { 'content-type': "multipart/form-data" } })
                         .then((result) => {
@@ -201,9 +213,53 @@ class Fundraisers extends Component {
 
   }
 
+  allProducts() {
+    axios.get(`/api/Fundraisers`)
+      .then(res => {
+        const items = res.data;
+        this.setState({ items });
+      })
+}
+
+  setCategory(filterCategory)
+    {      
+        // change state based on checked box
+        let checkBox = document.getElementById(filterCategory);
+        if(checkBox.checked == true)
+        {
+            // filters to searched category
+            let countCategory = this.state.items.filter((obj) => {return obj.fundType === filterCategory});
+            const items = countCategory; 
+            this.setState({items});
+            //console.log("State:", this.state);
+            //console.log("Filtered", countCategory);
+        }
+        else this.allProducts();
+    }
+
+    getCategories()
+    {
+        // gets the list of categories and the count in each
+        let occurrences = { };
+        for(let i = 0, j = this.state.items.length; i < j; i++) 
+        {
+            occurrences[this.state.items[i].fundType] = (occurrences[this.state.items[i].fundType] || 0) + 1;
+        }
+        //console.log(occurrences);
+
+        // returns a map of the categories and their count
+        return (
+            Object.keys(occurrences).sort().map(item => 
+            <div className="checkbox"><label><input type="checkbox" id={item} onClick={() => {this.setCategory(item)}}/>{item} ({occurrences[item]})</label></div>
+            )
+        );
+    }
+
   render() {
 
     return (
+
+      
       <div>
         <div className="donationHeading">
           <div className="heading">
@@ -219,8 +275,17 @@ class Fundraisers extends Component {
           </div>
         </div>
 
+        {/* left sticky side of filters and sort bys */}
+        <div className="filters">
+                <h1 className="leftSide">Filters</h1>
+                {/* Calls function to get the categories loaded to the state*/}
+                {this.getCategories()}            
+            </div>
+
+            <div className="split"></div>
+
         {this.createPost()}
-        <div>
+        <div className="items">
           {this.state.items.sort().reverse().map(item =>
             <FundraiserCard id={item.id} title={item.title} description={item.description} image={item.image} endorsement={item.endorsement} requiredAmount={item.requiredAmount} />
           )}

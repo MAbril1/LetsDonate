@@ -7,6 +7,9 @@ import axios from 'axios';
 import user from '../images/user.jpg';
 import currentUser from './backend/currentUser.js';
 
+import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+
 /*
 **  FundraiserPost.js
 **
@@ -17,7 +20,9 @@ class FundraiserPost extends Component {
     items: [], // saves entire list of products from database
     item: {},  // saves a single product which will be displayed
     owner: {}, // saves the owner of the product
-    random: 0 // stores random raised amount
+    random: 0, // stores random raised amount
+    value: '',
+    copied: false
   }
 
   componentDidMount() {
@@ -86,6 +91,20 @@ class FundraiserPost extends Component {
     }
   }
 
+  copyText()
+  {
+    return(
+      <div>
+        <CopyToClipboard text={this.state.owner.email}
+          onCopy={() => this.setState({copied: true})}>
+          <FileCopyOutlinedIcon/>
+        </CopyToClipboard>
+
+        {this.state.copied ? <span style={{color: 'red'}}> Copied Email to Clipboard</span> : null}
+      </div>
+    )
+  }
+
   render() {
     let fundraiserItem = this.state.item;
     let productOwner = this.state.owner;
@@ -119,6 +138,7 @@ class FundraiserPost extends Component {
               <h2>{productOwner.name}</h2>
               <h2>Location: {productOwner.zipcode}</h2>
               <h2>Contact: {productOwner.email}</h2>
+              {this.copyText()}
               {/*this.deletePost()*/}
               {/*this.editPost()*/}
 
@@ -145,6 +165,7 @@ class FundraiserPost extends Component {
               <Report />
             </div> */}
           </div>
+          <h3>Category: {fundraiserItem.fundType}</h3>
           <h2>{fundraiserItem.description}</h2>
         </div>
       </div>

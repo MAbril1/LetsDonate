@@ -206,7 +206,6 @@ class ProductPost extends Component {
               {this.deletePost()}
               {this.editPost()}
             </div>
-            <h3>{productItem.description}</h3>
           </div>
 
         </div>
@@ -217,12 +216,12 @@ class ProductPost extends Component {
             </div>
             <div className="starRating">
               <FavoriteBorder className="star" />
-              <h3>Category: {productItem.productType}</h3>
               <p>
                 {/* <strong>{likes}</strong> */}
               </p>
             </div>
           </div>
+          <h3>Category: {productItem.productType}</h3>
           <h2>{productItem.description}</h2>
         </div>
 
