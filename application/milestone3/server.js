@@ -184,8 +184,8 @@ app.post('/api/postProduct', upload.single("imageFile"), function (req, res) {
 app.post('/api/postFundraiser', upload.single("imageFile"), function (req, res) {
   req.body.description = req.body.description.replace(/'/g, "''"); // replaces ' so sql will not get confused
 
-  config.query(`INSERT INTO fundraisers (title, description, requiredAmount, image, endorsement, owner)
-                VALUES ('${req.body.title}', '${req.body.description}', '${req.body.requiredAmount}', '${req.file.location}', '${req.body.endorsement}', '${req.body.owner}')`, function (e, response, f) {
+  config.query(`INSERT INTO fundraisers (title, description, fundType, requiredAmount, image, endorsement, owner)
+                VALUES ('${req.body.title}', '${req.body.description}', '${req.body.fundType}', '${req.body.requiredAmount}', '${req.file.location}', '${req.body.endorsement}', '${req.body.owner}')`, function (e, response, f) {
   });
   res.send({ success: true });
 });
