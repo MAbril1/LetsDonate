@@ -37,6 +37,14 @@ config.connect(function(fault){
                     "owner varchar(255), " +
                     "PRIMARY KEY (id) );",
                 function(e,r,f){console.log(e)});
+        
+        // creates chat table
+        config.query("CREATE TABLE IF NOT EXISTS chat("+ 
+        "id int NOT NULL AUTO_INCREMENT, " + 
+        "room varchar(30) NOT NULL, " + 
+        "message varchar(255) NOT NULL, " +
+        "PRIMARY KEY (id) );",
+    function(e,r,f){console.log(e)});
 
         // creates users table
         config.query("CREATE TABLE IF NOT EXISTS users("+ 

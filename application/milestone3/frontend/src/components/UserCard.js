@@ -22,7 +22,8 @@ function UserCard( {id, name, zipcode, email, userImage} ) {
     }
     
     return (
-        <Link className='link' to={`/chat?name=${currentUser.getUser().name}&room=${name}`}>
+        ///chat?name=${currentUser.getUser().name}&room=${name}
+        <Link className='link' to={`/chatSpace?name=${currentUser.getUser().name}&room=${name}`}>
             <div className="card"> 
                 <img  className="cardImage" 
                     src={image}

@@ -10,7 +10,8 @@ import ProductPost from './components/ProductPost.js';
 import FundraiserPost from './components/FundraiserPost.js';
 import SearchResult from './components/searchResult.js';
 import Chat from './components/Chat.js';
-import ChatRoom from './components/ChatRoom.js';
+//import ChatRoom from './components/ChatRoom.js';
+import ChatSpace from './components/ChatSpace.js';
 import MessageList from './components/MessageList.js';
 
 import history from './components/backend/history.js';
@@ -44,8 +45,9 @@ class App extends Component {
           <Route path="/searchResult" component={SearchResult} />
           <Route path="/register" component={register} />
           <Route path="/recovery" component={recovery} />
-          <Route path="/chat" component={ChatRoom} />
+          {/*<Route path="/chat" component={ChatRoom} />*/}
           <Route path="/users" component={AvailableChatUsers} />
+          <Route path="/chatSpace" component={ChatSpace} />
           <Route component={Error} />
         </Switch>
         <MessageList/>

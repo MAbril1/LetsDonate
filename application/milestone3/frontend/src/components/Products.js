@@ -29,7 +29,7 @@ class Products extends Component {
           .then(res => {
             const items = res.data;
             this.setState({ items });
-          })
+        })
       }
 
     // //The next three functions filter the map based on categories

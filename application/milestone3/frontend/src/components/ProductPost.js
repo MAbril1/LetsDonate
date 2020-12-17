@@ -19,7 +19,7 @@ import editPost from './backend/editPost.js';
 class ProductPost extends Component {
   state = {
     items: [], // saves entire list of products from database
-    item: {},  // saves a single product which will be displayed
+    item: {},  // saves a single product hich will be displayed
     owner: {} // saves the owner of the product
   }
 
