@@ -12,8 +12,8 @@ const { addUser, removeUser, getUser, getUsersInRoom } = require('./frontend/src
 const aws = require('aws-sdk');
 const multer = require("multer");
 const multerS3 = require('multer-s3');
-const cors = require('cors');
-
+var cors = require('cors');
+app.use(cors());
 const s3 = new aws.S3({
   accessKeyId: 'AKIAU6B7MVGXEDMQVM37',
   secretAccessKey: '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',
@@ -21,7 +21,7 @@ const s3 = new aws.S3({
 });
 
 app.use(parser.json());
-app.use(cors());
+
 const upload = multer({
   storage: multerS3({
     s3: s3,
@@ -34,35 +34,35 @@ const upload = multer({
   })
 });
 
-io.on('connection', (socket) =>{
-  console.log("Connection established");
+// io.on('connection', (socket) =>{
+//   console.log("Connection established");
   
-  socket.on('joinedChat', ({name, room}, cb) => {
+//   socket.on('joinedChat', ({name, room}, cb) => {
       
-      const {error, newUser} = addUser ({id:socket.id, name, room});
+//       const {error, newUser} = addUser ({id:socket.id, name, room});
       
-      if(error) return cb(error);
-      console.log("newUser is" , newUser);
-      socket.join(newUser.room);
-      socket.emit('message', {text: `Hey ${newUser.name}, feel free to drop any message for ${newUser.room}`});
-      socket.broadcast.to(newUser.room).emit('message', {text: `${newUser.name} joined the chat.`})
+//       if(error) return cb(error);
+//       console.log("newUser is" , newUser);
+//       socket.join(newUser.room);
+//       socket.emit('message', {text: `Hey ${newUser.name}, feel free to drop any message for ${newUser.room}`});
+//       socket.broadcast.to(newUser.room).emit('message', {text: `${newUser.name} joined the chat.`})
       
 
-      cb();
-  });
+//       cb();
+//   });
 
-  socket.on('deliverMessage', (message, cb) => {
-      const user = getUser(socket.id);
-      console.log(user);
-      io.to(user.room).emit('message', {user:user.name, text: message});
-      cb();
-  });
+//   socket.on('deliverMessage', (message, cb) => {
+//       const user = getUser(socket.id);
+//       console.log(user);
+//       io.to(user.room).emit('message', {user:user.name, text: message});
+//       cb();
+//   });
 
-  socket.on('disconnect', () => {
-    console.log("Disconnected");
-    const user = removeUser(socket.id);
-  });
-});
+//   socket.on('disconnect', () => {
+//     console.log("Disconnected");
+//     const user = removeUser(socket.id);
+//   });
+// });
 
 // loads all items from the three tables tables
 app.get('/api', function (req, res) {
@@ -226,6 +226,24 @@ app.post('/api/makeSearch', function (req, res) {
   });
 });
 
+app.post('/api/getMessages', function (req, res) {
+  console.log(req.body.roomName);
+  config.query(`SELECT * FROM chat WHERE room = '${req.body.roomName}'`, function (e, response, f) {
+    console.log(response);
+    if(!e){
+      res.json({ success: true, messages: response });
+    }
+  });
+});
+
+app.post('/api/addMessage', function(req, res) {
+  
+  config.query(`INSERT INTO chat (room, message) VALUES ('${req.body.room}', '${req.body.message}')`, function (e, response, f){
+    
+  });
+  res.send({ success: true });
+});
+
 app.post('/api/findPosts', function (req, res) {
   config.query(`SELECT * FROM products WHERE owner LIKE '%${req.body.searchEmail}%'`, function (e, response, f) {
     res.json({ success: true, products: response });
@@ -267,4 +285,4 @@ app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 })
 
-server.listen(5000);
+app.listen(5000);
