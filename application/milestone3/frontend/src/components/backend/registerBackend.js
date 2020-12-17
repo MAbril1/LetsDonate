@@ -87,13 +87,10 @@ const formData = function() {
                     .then((result) => {
                         if(result.data.success){
                             alert("Successfully created account");
-                            history.push('/');
+                            window.location.replace('/');
                         }else{
                             alert("Account Failure Occurred");
                         }
-                    })
-                    .catch(exception => {
-                        alert("Account Failure Occurred");
                     })
                 }
                 else // account exists

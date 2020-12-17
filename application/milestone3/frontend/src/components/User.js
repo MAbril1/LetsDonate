@@ -29,7 +29,8 @@ class User extends Component {
   state = {
     users: [], // saves entire list of users from database
     user: {},  // saves a single user which will be displayed
-    items: [] // saves all products posted by user
+    items: [], // saves all products posted by user
+    funds: [] // saves all fundraisers posted by user
   }
 
   componentDidMount() {
@@ -61,6 +62,20 @@ class User extends Component {
         else {
           products = result.data.products; // returns the data from the database
           this.setState({ items: products });
+        }
+      })
+
+    // find fundtaisers posted by user
+    // similar code to searching api
+    let fundraisers;
+    axios.post('/api/findFundraisers', searchable)
+      .then((result) => {
+        if (!result.data.success) {
+          alert("Failed Search");
+        }
+        else {
+          fundraisers = result.data.fundraisers; // returns the data from the database
+          this.setState({ funds: fundraisers });
         }
       })
   }
@@ -250,12 +265,10 @@ class User extends Component {
                         .then((result) => {
                           if (result.data.success) {
                             alert("Successfully Posted");
+                            window.location.reload(); // reloads page to render proper buttons on navbar
                           } else {
                             alert("Post Failure Occurred");
                           }
-                        })
-                        .catch(exception => {
-                          alert("Post Failure Occurred");
                         })
                     }
                   }}
@@ -326,15 +339,13 @@ class User extends Component {
           {/* These are lists of the items and fundraisers a user has posted */}
           <h2>ITEMS POSTED</h2>
           <div className="scrollmenu">
-            {this.state.items.map(item => <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage} />)}
+            {this.state.items.sort().reverse().map(item => <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage} />)}
           </div>
           <h2>FUNDRAISERS POSTED</h2>
           <div className="scrollmenu">
-            <FundraiserCard title="Help required for new city Expenses"
-              description="Recently shifted to the city of New York and it is highly difficult for me to manage daily expenses."
-              rating={2.6}
-              requiredAmount="$3500"
-              image={city} />
+          {this.state.funds.sort().reverse().map(item =>
+            <FundraiserCard id={item.id} title={item.title} description={item.description} image={item.image} endorsement={item.endorsement} requiredAmount={item.requiredAmount} />
+          )}
           </div>
         </div>
         {/* This is a pop up for deleting the profile */}

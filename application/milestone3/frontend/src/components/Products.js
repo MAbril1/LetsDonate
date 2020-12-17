@@ -118,7 +118,7 @@ class Products extends Component {
 
             {/* map of items from backend */}
             <div className="items">
-                {this.state.items.map(item => 
+                {this.state.items.sort().reverse().map(item => 
                     <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage}/>
                 )}
             </div>

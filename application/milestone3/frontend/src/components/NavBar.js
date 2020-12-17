@@ -55,9 +55,9 @@ class NavBar extends Component {
     // function that checks current logged in user and rederns the appropriate buttons
     reloadButton()
     {
-        let tempUser = "nouser";
+        let tempUserEmail = "noemail@email.com";
         
-        if(tempUser.localeCompare(currentUser.getUser().name) == 0) // checks if there is a current user, if there isn't show login button
+        if(tempUserEmail.localeCompare(this.props.currentUser) == 0) // checks if there is a current user, if there isn't show login button
         {
             return (
                 <div>
@@ -109,8 +109,6 @@ class NavBar extends Component {
                         </div>
                     )}
                 </Popup>
-                {/* This button takes a user to their user page if their signed in */}
-                { /* <Link className='userLink' to={"/User"}><AccountCircleIcon /></Link> */}
             </div>
             )
         }
@@ -123,19 +121,11 @@ class NavBar extends Component {
                         window.location.replace('/');}}> Logout </button>
 
                     {/* This button takes a user to their user page if their signed in */}
-                    <Link className='userLink' to={`/User/${currentUser.getUser().email}`/* links to product page using product name */}><AccountCircleIcon /></Link>
+                    <Link className='userLink' to={`/User/${this.props.currentUser}`/* links to product page using product name */}><AccountCircleIcon /></Link>
                 </div>
             )
         }
     }
-
-    // getType(selected) {
-        // console.log(selected.value)
-        // this.setState({ 
-        //     browseType: selected.value 
-        // })
-        // console.log(this.browseType)
-    // }
         
     render() { 
         
@@ -150,7 +140,7 @@ class NavBar extends Component {
                         alt=""
                     />
                     <div className='appTitle'>
-                        <p>letsDonate</p>
+                        <p>let'sDonate</p>
                     </div>
                 </div>
             </Link>
