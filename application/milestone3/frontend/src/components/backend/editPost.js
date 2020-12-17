@@ -7,13 +7,6 @@ const editPost = function(item) {
     let productType;
     let productImage;
 
-    // for (var i, j = 0; i = mySelect.options[j]; j++) {
-    //   if (i.value == temp) {
-    //     mySelect.selectedIndex = j;
-    //     break;
-    //   }
-    // }
-
     // checks if form is empty
     if(!document.forms.editUserForm.name.value && 
         !document.forms.editUserForm.description.value &&
@@ -58,12 +51,11 @@ const editPost = function(item) {
     .then((result) => {
         if(result.data.success){
             alert("Post Updated Successfully");
+            window.location.reload();
         }else{
             alert("Post Update Failed");
         }
     })
-
-    //window.location.reload(); // needed to refresh what is rendered on the navbar
 }
 
 export default editPost;

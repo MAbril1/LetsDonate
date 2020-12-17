@@ -21,7 +21,7 @@ class Products extends Component {
           .then(res => {
             const items = res.data;
             this.setState({ items });
-          })
+        })
       }
 
     allProducts() {
