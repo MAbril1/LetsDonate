@@ -15,9 +15,9 @@ export class searchResult extends Component {
         items: [],
         fundraisers: [],
         searchTable: ''
-      }
+    }
 
-      componentDidMount() {
+    componentDidMount() {
         let keySearch = this.props.match.params.term;
 
         if (keySearch) {
@@ -53,10 +53,10 @@ export class searchResult extends Component {
                     alert("Failed Search");
                 })
         }
-      }
-    
+    }
+
     render() {
-        console.log(this.props);
+        console.log(this.state);
 
         let searchTable = this.state.searchTable;
 
@@ -90,8 +90,7 @@ export class searchResult extends Component {
             )
         }
 
-        else
-        {
+        else {
             return (
                 <div>
                     <div>
