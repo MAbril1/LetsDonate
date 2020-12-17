@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import './css/FundraiserPost.css';
-import { Button } from "@material-ui/core";
 import Star from "@material-ui/icons/Star";
-import Report from './Report.js';
 import axios from 'axios';
-import user from '../images/user.jpg';
 import currentUser from './backend/currentUser.js';
 import Popup from 'reactjs-popup';
+import Grid from '@material-ui/core/Grid';
+import { Button } from "@material-ui/core";
 
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
@@ -237,52 +236,97 @@ class FundraiserPost extends Component {
     //
 
     return (
-      <div>
-        <div className="topSection">
-          <img src={fundraiserItem.image} onError={(e) => { e.target.src = '../images/charity.png' }} alt="" />
-          <div className="donationPrompt">
-          {this.deletePost()}
-              {this.editPost()}
-            <div className="amountRequired">
-              <h3>${receviedDonations} out of ${fundraiserItem.requiredAmount} raised.</h3>
-              <div id="myProgress">
-                <div id="myBar"></div>
+      // <div>
+      //   <div className="topSection">
+      //     <img src={fundraiserItem.image} onError={(e) => { e.target.src = '../images/charity.png' }} alt="" />
+      //     <div className="donationPrompt">
+      //     {this.deletePost()}
+      //         {this.editPost()}
+            // <div className="amountRequired">
+            //   <h3>${receviedDonations} out of ${fundraiserItem.requiredAmount} raised.</h3>
+            //   <div id="myProgress">
+            //     <div id="myBar"></div>
+            //   </div>
+            // </div>
+
+      //       {/* Owner imformation*/}
+      //       {/*<img src={productOwner.userImage} onError={(e) => {e.target.src = user}} alt=""/>*/}
+      //       <div className="productTitle">
+      //         <h2>{productOwner.name}</h2>
+      //         <h2>Location: {productOwner.zipcode}</h2>
+      //         <h2>Contact: {productOwner.email}</h2>
+      //         {this.copyText()}
+      //       </div>
+
+      //       <div className="donateButton">
+      //         <Button variant='outlined'>Donate Now</Button>
+      //       </div>
+      //     </div>
+      //   </div>
+      //   <div className="bottomSection">
+      //     <div className="heading">
+      //       <div className="productTitle">
+      //         <h1>{fundraiserItem.title}</h1>
+      //       </div>
+      //       <div className="starRating">
+      //         <Star className="star" />
+      //         <p>
+      //           <strong>{fundraiserItem.endorsement}</strong>
+      //         </p>
+      //         {this.endorsePost(fundraiserItem)}
+      //       </div>
+      //       {/* <div className="spamProduct">
+      //         <Report />
+      //       </div> */}
+      //     </div>
+      //     <h3>Category: {fundraiserItem.fundType}</h3>
+      //     <h2>{fundraiserItem.description}</h2>
+      //   </div>
+      // </div>
+      <div className="h-75 x-1 body">
+        <Grid container spacing={3}>
+          {/* image column */}
+          <Grid item xs={12} sm={5}>
+            <img className="w-100 border border-light" src={fundraiserItem.image} onError={(e) => {
+              e.target.src = '../images/charity.png' // fallback image
+            }} alt="" />
+          </Grid>
+          {/* Description column */}
+          <Grid item xs={12} sm={7} container spacing={3} className="px-5">
+            <Grid xs={12} sm={12} container spacing={3}>
+              <Grid xs={12} sm={6}>
+                <div className="rating">
+                  <p>
+                    <Star className="star"/>
+                    <strong>{fundraiserItem.endorsement}</strong>
+                    {this.endorsePost(fundraiserItem)}
+                  </p>
+                  <div className="amountRequired">
+                    <h3>${receviedDonations} out of ${fundraiserItem.requiredAmount} raised.</h3>
+                    <div id="myProgress">
+                      <div id="myBar"></div>
+                    </div>
+                  </div>
+                </div>
+              </Grid>
+              <Grid xs={12} sm={6}>
+                {this.deletePost()}
+                {this.editPost()}
+              </Grid>
+            </Grid>
+            <div className="productTitle">
+              <h4>{productOwner.name}</h4>
+              <h4>Location: {productOwner.zipcode}</h4>
+              <h4>Contact: {productOwner.email}</h4>
+              <h4>Category: {fundraiserItem.fundType}</h4>
+              <h5>{fundraiserItem.description}</h5>
+              {this.copyText()}
+              <div className="donateButton">
+                <Button variant='outlined'>Donate Now</Button>
               </div>
             </div>
-
-            {/* Owner imformation*/}
-            {/*<img src={productOwner.userImage} onError={(e) => {e.target.src = user}} alt=""/>*/}
-            <div className="productTitle">
-              <h2>{productOwner.name}</h2>
-              <h2>Location: {productOwner.zipcode}</h2>
-              <h2>Contact: {productOwner.email}</h2>
-              {this.copyText()}
-            </div>
-
-            <div className="donateButton">
-              <Button variant='outlined'>Donate Now</Button>
-            </div>
-          </div>
-        </div>
-        <div className="bottomSection">
-          <div className="heading">
-            <div className="productTitle">
-              <h1>{fundraiserItem.title}</h1>
-            </div>
-            <div className="starRating">
-              <Star className="star" />
-              <p>
-                <strong>{fundraiserItem.endorsement}</strong>
-              </p>
-              {this.endorsePost(fundraiserItem)}
-            </div>
-            {/* <div className="spamProduct">
-              <Report />
-            </div> */}
-          </div>
-          <h3>Category: {fundraiserItem.fundType}</h3>
-          <h2>{fundraiserItem.description}</h2>
-        </div>
+          </Grid>
+        </Grid>
       </div>
     )
   }

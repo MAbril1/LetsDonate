@@ -27,6 +27,7 @@ import currentUser from './components/backend/currentUser.js'; // helper functio
 
 class App extends Component {
   render() {
+    let tempUserEmail = "noemail@email.com";
     var client = currentUser.getUser().email;
     return (
     <Router history={history}>
@@ -54,7 +55,9 @@ class App extends Component {
           <Route path="/chatSpace" component={ChatSpace} />
           <Route component={Error} />
         </Switch>
-        <MessageList/>
+        {tempUserEmail.localeCompare(client) !== 0 &&
+          <MessageList/>
+        }
       </div>
     </Router>
   );}

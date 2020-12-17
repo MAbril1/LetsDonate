@@ -62,7 +62,7 @@ export class ChatSpace extends Component {
             return (
                 <div>
                     {console.log(this.state.items)}
-                    <h2>Welcome to {this.state.room}'s chat room</h2>
+                    <h2 className="welcome">Welcome to {this.state.room}'s chat room</h2>
                     <div className="items">
                         {console.log("Itemsssssss", this.state.items)}
                         

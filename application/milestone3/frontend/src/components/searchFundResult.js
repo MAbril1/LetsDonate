@@ -13,9 +13,6 @@ export class searchFundResult extends Component {
 
         const items = this.props.location.fundraisers;
 
-        // console.log(items);
-        // console.log(items);
-        // console.log(items);
         return (
             <div>
                 <div>

@@ -170,40 +170,6 @@ class ProductPost extends Component {
     const productOwner = this.state.owner;
 
     return (
-      // <div>
-      //   <div className="topSection">
-      //     <img class="productImg" src={productItem.productImage} onError={(e) => {
-      //       e.target.src = '../images/charity.png' // fallback image
-      //     }} alt="" />
-      //     <div className="donationPrompt">
-      //       {/* Owner imformation*/}
-      //       {/*<img src={productOwner.userImage} onError={(e) => {e.target.src = user}} alt=""/>*/}
-            // <div className="productTitle">
-            //   <h4>{productOwner.name}</h4>
-            //   <h4>Location: {productOwner.zipcode}</h4>
-            //   <h4>Contact: {productOwner.email}</h4>
-            //   {this.deletePost()}
-            //   {this.editPost()}
-            // </div>
-      //     </div>
-
-      //   </div>
-      //   <div className="bottomSection">
-      //     <div className="heading">
-      //       <div className="productTitle">
-      //         <h1>{productItem.name}</h1>
-      //       </div>
-            // <div className="starRating">
-            //   <FavoriteBorder className="star" />
-            //   <p>
-            //     {/* <strong>{likes}</strong> */}
-            //   </p>
-            // </div>
-      //     </div>
-          // <h3>Category: {productItem.productType}</h3>
-          // <h4>{productItem.description}</h4>
-      //   </div>
-      // </div>
       <div className="h-75 x-1 body">
         <Grid container spacing={3}>
           {/* image column */}
