@@ -6,9 +6,12 @@ import Report from './Report.js';
 import axios from 'axios';
 import user from '../images/user.jpg';
 import currentUser from './backend/currentUser.js';
+import Popup from 'reactjs-popup';
 
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import deleteFundFunction from './backend/deleteFund.js';
+import editFund from './backend/editFund.js';
 
 /*
 **  FundraiserPost.js
@@ -91,6 +94,119 @@ class FundraiserPost extends Component {
     }
   }
 
+  deletePost() {
+    console.log(this.props);
+    let currentUserEmail = currentUser.getUser().email;
+    let currentProfileEmail = this.state.owner.email;
+
+    if ((currentUserEmail.localeCompare("admin@admin.com") === 0) || (currentUserEmail.localeCompare(currentProfileEmail) === 0)) // edit profile if current user is profile owner or an admin
+    {
+      return (
+        <Popup
+          trigger={<button className="postButton"> Delete Post </button>}
+          modal
+          nested
+        >
+          {close => (
+            <div className="popup">
+              <button className="close" onClick={close}>
+                &times;
+            </button>
+              <div className="header"> <strong> Delete Post </strong></div>
+              <div className="header"> <strong> This Action Cannot Be Undone </strong></div>
+              <div className="content">
+                <form id="deleteUserForm" method="post">
+                  <label><strong>Type "YES to Confirm Deletion" </strong></label>
+                  <input type="text" name="response" placeholder="YES" />
+                  <br />
+                </form>
+              </div>
+              <div className="actions">
+                <button
+                  className="button"
+                  onClick={() => {
+                    let pageRedirect = deleteFundFunction(this.props.match.params.id);
+
+                    if (pageRedirect) {
+                      console.log("HERE");
+                      window.location.replace('/');
+                      //history.push('/');
+                    }
+                  }}
+                >DELETE
+              </button>
+              </div>
+
+            </div>
+          )}
+        </Popup>
+      )
+    }
+  }
+
+  editPost() {
+    let currentUserEmail = currentUser.getUser().email;
+    let currentProfileEmail = this.state.owner.email;
+
+    if ((currentUserEmail.localeCompare("admin@admin.com") === 0) || (currentUserEmail.localeCompare(currentProfileEmail) === 0)) // edit profile if current user is profile owner or an admin
+    {
+      return (
+        <Popup
+          trigger={<button className="postButton"> Edit Post </button>}
+          modal
+          nested
+        >
+          {close => (
+            <div className="popup">
+              <button className="close" onClick={close}>
+                &times;
+            </button>
+              <div className="header"> <strong> Edit Post </strong></div>
+              <div className="content">
+                <form id="editUserForm" method="post">
+                  <label><strong>Title: </strong></label>
+                  <input type="text" name="name" placeholder={this.state.item.title} />
+
+                  <br />
+                  <label><strong>Description: </strong></label>
+                  <input type="text" name="description" placeholder={this.state.item.description} />
+
+                  <br />
+                  <label><strong>Type: </strong></label>
+                  <select name="productType" id="productType">
+                      <option value="default" selected disabled>Please select a type</option>
+                      <option value="Medical">Medical</option>
+                      <option value="Education">Education</option>
+                      <option value="Community">Community</option>
+                      <option value="Other">Other</option>
+                    </select>
+
+                  <br />
+                  <label><strong>Amount Required in USD: </strong></label>
+                  <input type="number" name="requiredAmount" placeholder={this.state.item.requiredAmount} />
+
+                  <br />
+                  <label><strong>New Post Image: </strong></label>
+                  <input type="file" id="productImage" accept="image/jpg,image/jpeg,image/png" />
+                </form>
+              </div>
+              <div className="actions">
+
+                {/* This posts the input data into the backend */}
+                <button
+                  className="button"
+                  onClick={() => { editFund(this.state.item) }}
+                >SUBMIT
+              </button>
+              </div>
+
+            </div>
+          )}
+        </Popup>
+      )
+    }
+  }
+
   copyText()
   {
     return(
@@ -125,6 +241,8 @@ class FundraiserPost extends Component {
         <div className="topSection">
           <img src={fundraiserItem.image} onError={(e) => { e.target.src = '../images/charity.png' }} alt="" />
           <div className="donationPrompt">
+          {this.deletePost()}
+              {this.editPost()}
             <div className="amountRequired">
               <h3>${receviedDonations} out of ${fundraiserItem.requiredAmount} raised.</h3>
               <div id="myProgress">
@@ -139,9 +257,6 @@ class FundraiserPost extends Component {
               <h2>Location: {productOwner.zipcode}</h2>
               <h2>Contact: {productOwner.email}</h2>
               {this.copyText()}
-              {/*this.deletePost()*/}
-              {/*this.editPost()*/}
-
             </div>
 
             <div className="donateButton">

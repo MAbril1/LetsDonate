@@ -166,8 +166,36 @@ app.post('/api/editPost', upload.single("imageFile"), function (req, res) {
   }
 });
 
+// api to edit a fundraiser post
+app.post('/api/editFundraiser', upload.single("imageFile"), function (req, res) {
+  console.log(req.body);
+
+  if (!req.body.imageFile) // updating image
+  {
+    config.query(`UPDATE fundraisers SET
+                  title = '${req.body.title}', description = '${req.body.description}', fundType = '${req.body.fundType}', requiredAmount = '${req.body.requiredAmount}',
+                  endorsement = '${req.body.endorsement}', image = '${req.file.location}', owner = '${req.body.owner}' WHERE id = '${req.body.id}'`, function (e, response, f) { });
+    res.send({ success: true, fileLocation: req.file.location });
+
+    console.log("Image URL: ", req.file.location);
+  }
+  else // if not updating user image
+  {
+    config.query(`UPDATE fundraisers SET
+                  title = '${req.body.title}', description = '${req.body.description}', fundType = '${req.body.fundType}',  requiredAmount = '${req.body.requiredAmount}',
+                  endorsement = '${req.body.endorsement}', image = '${req.body.imageFile}', owner = '${req.body.owner}' WHERE id = '${req.body.id}'`, function (e, response, f) { });
+    res.send({ success: true });
+  }
+});
+
 app.post('/api/deleteProduct', function (req, res) {
   config.query(`DELETE FROM products WHERE id = '${req.body.id}'`, function (e, response, f) {
+    res.json({ success: true });
+  });
+});
+
+app.post('/api/deleteFundraiser', function (req, res) {
+  config.query(`DELETE FROM fundraisers WHERE id = '${req.body.id}'`, function (e, response, f) {
     res.json({ success: true });
   });
 });
