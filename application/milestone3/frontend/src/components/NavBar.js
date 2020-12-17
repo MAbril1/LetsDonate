@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
-import './NavBar.css';
-import './PopUps.css';
+import './css/NavBar.css';
+import './css/PopUps.css';
 import charity from '../images/charity.png';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -10,6 +10,9 @@ import Select from '@material-ui/core/Select';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import axios from 'axios';
+
+import loginData from './backend/loginBackend.js'; // sends login form data to check against the database
+import currentUser from './backend/currentUser.js'; // helper functions to set and get current logged in user
 
 /*
 **  NavBar.js
@@ -49,13 +52,80 @@ class NavBar extends Component {
         })
     }
 
-    // getType(selected) {
-        // console.log(selected.value)
-        // this.setState({ 
-        //     browseType: selected.value 
-        // })
-        // console.log(this.browseType)
-    // }
+    // function that checks current logged in user and rederns the appropriate buttons
+    reloadButton()
+    {
+        let tempUserEmail = "noemail@email.com";
+        
+        if(tempUserEmail.localeCompare(this.props.currentUser) == 0) // checks if there is a current user, if there isn't show login button
+        {
+            return (
+                <div>
+                <Popup contentStyle={{width: "auto"}}
+                    trigger={<button className="buttonLink"> Login/SignUp </button>}
+                    modal
+                    nested
+                
+                >
+                    {close => (
+                        <div>
+                        <form id="loginForm" className='login-form'>
+                            <h1>Login to Let's Donate</h1>
+                                <input
+                                    className='email'
+                                    type='email'
+                                    name='email'
+                                    placeholder="Email"
+                                />
+                                <input
+                                    className='password'
+                                    type='password'
+                                    name='password'
+                                    placeholder="Password"
+                                />
+                                <br/>
+                                <input
+                                    className='login-button'
+                                    type='button'
+                                    value='Log In'
+                                    onClick={() => {loginData()}}
+                                    // calls function from loginBackend.js and passes login information
+                                />
+                                <br/>
+                                <Link 
+                                    className='signup-button' 
+                                    type='button'
+                                    to={"/register"}
+                                    onClick={close}
+                                >SignUp</Link>
+                                <br/>
+                                <Link
+                                    className='reset-password-button'
+                                    type='button'
+                                    to={"/recovery"}
+                                    onClick={close}
+                                >Reset Password</Link>
+                        </form>
+                        </div>
+                    )}
+                </Popup>
+            </div>
+            )
+        }
+        else // if logged in, show logout button
+        {
+            return(
+                <div>
+                    <button className="buttonLink" onClick={() => {
+                        currentUser.setUserLogout();
+                        window.location.replace('/');}}> Logout </button>
+
+                    {/* This button takes a user to their user page if their signed in */}
+                    <Link className='userLink' to={`/User/${this.props.currentUser}`/* links to product page using product name */}><AccountCircleIcon /></Link>
+                </div>
+            )
+        }
+    }
         
     render() { 
         
@@ -70,14 +140,14 @@ class NavBar extends Component {
                         alt=""
                     />
                     <div className='appTitle'>
-                        <p>letsDonate</p>
+                        <p>let'sDonate</p>
                     </div>
                 </div>
             </Link>
 
             {/* This is the searchbar */}
             <div className="search">
-                <input id="searchType" type="text" onChange={this.getKey.bind(this)}/>
+                <input id="searchType" type="text" placeholder="Search for products or fundraisers" onChange={this.getKey.bind(this)}/>
                 
                 {/* At the moment, the dropdown acts as the links to the browsing pages */}
                 <Select
@@ -95,54 +165,8 @@ class NavBar extends Component {
             </div>
 
             {/* This is the button to allow users to log in/sign up through a pop up */}
-            <div>
-                <Popup
-                    trigger={<button className="buttonLink"> Login/SignUp </button>}
-                    modal
-                    nested
-                >
-                    {close => (
-                        <div className="popup">
-                            <button className="close" onClick={close}>
-                                &times;
-                            </button>
-                            <div className="header"> <strong>Login/Sign Up </strong></div>
-                            <div className="content">
-                                <div className="forms"><strong>Username: </strong><input type="text" /></div>
-                                <div className="forms"><strong>Password: </strong><input type="text" /></div>
-                            </div>
-                            <div className="actions">
-                                <button
-                                    className="button"
-                                    onClick={() => {
-                                        
-                                    }}
-                                >
-                                    Login
-                                </button>
-                                <button
-                                    className="button"
-                                    onClick={() => {
-                      
-                                    }}
-                                >
-                                    Sign Up
-                                </button>
-                            </div>
-                            <button className="button"
-                                onClick={() => {
-                                    
-                                }}
-                            >
-                                Trouble signing in?
-                            </button>
-                        </div>
-                    )}
-                </Popup>
-
-                {/* This button takes a user to their user page if their signed in */}
-                <Link className='userLink' to={"/User"}><AccountCircleIcon /></Link>
-            </div>
+            {this.reloadButton()}
+            
         </div>
     );}
 }

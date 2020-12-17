@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card from './Card.js';
-import './Products.css';
+import './css/Products.css';
 
 /*
 **  Products.js
@@ -16,12 +16,12 @@ class Products extends Component {
         items: []
       }
 
-      constructor(props) {
-        super(props);
-        this.filterClothes = this.filterClothes.bind(this);
-        this.filterFurniture = this.filterFurniture.bind(this);
-        this.allProducts = this.allProducts.bind(this);
-      }
+    //   constructor(props) {
+    //     super(props);
+    //     this.filterClothes = this.filterClothes.bind(this);
+    //     this.filterFurniture = this.filterFurniture.bind(this);
+    //     this.allProducts = this.allProducts.bind(this);
+    //   }
 
     //gets the whole list of items from the backend.
     componentDidMount() {
@@ -32,41 +32,75 @@ class Products extends Component {
           })
       }
 
-    //The next three functions filter the map based on categories
-    filterClothes() {
-        axios.post("api/filterClothes", {"clothes": "cloth"})
-        .then((result) => {
-            if(!result.data.success){
-                alert("Failed Search");
-            }else{
-                const items = result.data.products;
-                this.setState({ items });
-            }
-        })
-        .catch(exception => {
-            alert(exception);
-        })
-    }
-    filterFurniture() {
-        axios.post("api/filterFurniture", {"furniture": "furniture"})
-        .then((result) => {
-            if(!result.data.success){
-                alert("Failed Search");
-            }else{
-                const items = result.data.products;
-                this.setState({ items });
-            }
-        })
-        .catch(exception => {
-            alert(exception);
-        })
-    }
+    // //The next three functions filter the map based on categories
+    // filterClothes() {
+    //     axios.post("api/filterClothes", {"clothes": "cloth"})
+    //     .then((result) => {
+    //         if(!result.data.success){
+    //             alert("Failed Search");
+    //         }else{
+    //             const items = result.data.products;
+    //             this.setState({ items });
+    //         }
+    //     })
+    //     .catch(exception => {
+    //         alert(exception);
+    //     })
+    // }
+    // filterFurniture() {
+    //     axios.post("api/filterFurniture", {"furniture": "furniture"})
+    //     .then((result) => {
+    //         if(!result.data.success){
+    //             alert("Failed Search");
+    //         }else{
+    //             const items = result.data.products;
+    //             this.setState({ items });
+    //         }
+    //     })
+    //     .catch(exception => {
+    //         alert(exception);
+    //     })
+    // }
     allProducts() {
         axios.get(`/api`)
           .then(res => {
             const items = res.data;
             this.setState({ items });
           })
+    }
+
+    setCategory(filterCategory)
+    {      
+        // change state based on checked box
+        let checkBox = document.getElementById(filterCategory);
+        if(checkBox.checked == true)
+        {
+            // filters to searched category
+            let countCategory = this.state.items.filter((obj) => {return obj.productType === filterCategory});
+            const items = countCategory; 
+            this.setState({items});
+            //console.log("State:", this.state);
+            //console.log("Filtered", countCategory);
+        }
+        else this.allProducts();
+    }
+
+    getCategories()
+    {
+        // gets the list of categories and the count in each
+        let occurrences = { };
+        for(let i = 0, j = this.state.items.length; i < j; i++) 
+        {
+            occurrences[this.state.items[i].productType] = (occurrences[this.state.items[i].productType] || 0) + 1;
+        }
+        //console.log(occurrences);
+
+        // returns a map of the categories and their count
+        return (
+            Object.keys(occurrences).sort().map(item => 
+            <div className="checkbox"><label><input type="checkbox" id={item} onClick={() => {this.setCategory(item)}}/>{item} ({occurrences[item]})</label></div>
+            )
+        );
     }
 
   render() {
@@ -76,23 +110,16 @@ class Products extends Component {
             {/* left sticky side of filters and sort bys */}
             <div className="filters">
                 <h1 className="leftSide">Filters</h1>
-                <div className="checkbox">
-                    <label><input type="checkbox" rel="clothes" onClick={this.filterClothes}/>Clothes</label>
-                </div>
-                <div className="checkbox">
-                    <label><input type="checkbox" rel="furniture" onClick={this.filterFurniture}/>Furniture</label>
-                </div>
-                <div className="checkbox">
-                    <label><input type="checkbox" rel="allItems" onClick={this.allProducts}/>All Items</label>
-                </div>            
+                {/* Calls function to get the categories loaded to the state*/}
+                {this.getCategories()}            
             </div>
 
             <div className="split"></div>
 
             {/* map of items from backend */}
             <div className="items">
-                {this.state.items.map(item => 
-                    <Card name={item.name} description={item.description} productImage={item.productImage}/>
+                {this.state.items.sort().reverse().map(item => 
+                    <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage}/>
                 )}
             </div>
         </div>
