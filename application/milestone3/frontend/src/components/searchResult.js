@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Card from './Card.js';
+import FundraiserCard from './FundraiserCard.js';
 import './css/searchResult.css';
 
 /*
@@ -11,23 +12,51 @@ import './css/searchResult.css';
 export class searchResult extends Component {
     render() {
 
-        const items = this.props.location.products;
+        let searchTable = this.props.location.searchTable;
 
-        // console.log(items);
-        // console.log(items);
-        // console.log(items);
-        return (
-            <div>
+        if (searchTable.localeCompare("products") === 0) {
+            let items = this.props.location.products;
+            return (
                 <div>
-                    <h1> SEARCH RESULTS</h1>
+                    <div>
+                        <h1> SEARCH RESULTS</h1>
+                    </div>
+                    <div className="items">
+                        {items.sort().reverse().map(item =>
+                            <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage} />
+                        )}
+                    </div>
                 </div>
-                <div className="items">
-                    {items.map(item =>
-                        <Card name={item.name} description={item.description} productImage={item.productImage} />
-                    )}
+            )
+        }
+
+        else if (searchTable.localeCompare("fundraiser") === 0) {
+            let items = this.props.location.fundraisers;
+            return (
+                <div>
+                    <div>
+                        <h1> SEARCH RESULTS</h1>
+                    </div>
+                    <div className="items">
+                        {items.sort().reverse().map(item =>
+                            <FundraiserCard id={item.id} title={item.title} description={item.description} image={item.image} endorsement={item.endorsement} requiredAmount={item.requiredAmount} />
+                        )}
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+
+        else
+        {
+            return (
+                <div>
+                    <div>
+                        <h1> SEARCH RESULTS</h1>
+                        <h1>WRONG SEARCH PARAMETER</h1>
+                    </div>
+                </div>
+            )
+        }
     }
 }
 

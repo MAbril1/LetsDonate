@@ -63,7 +63,7 @@ class NavBar extends Component {
                 if(!result.data.success){
                     alert("Failed Search");
                 }else{
-                    const fundraisers = result.data.products;
+                    const fundraisers = result.data.fundraisers;
                     console.log(fundraisers);
                     this.setState({ fundraisers: fundraisers });
                 }
@@ -176,13 +176,15 @@ class NavBar extends Component {
                 in:
                 <Link className='link' to={{
                     pathname: "/searchResult",
-                    products: this.state.items
+                    products: this.state.items,
+                    searchTable: "products"
                 }}>
                     <button className="buttonLink">Products</button>
                 </Link>
                 <Link className='link' to={{
-                    pathname: "/searchFundResult",
-                    fundraisers: this.state.fundraisers
+                    pathname: "/searchResult",
+                    fundraisers: this.state.fundraisers,
+                    searchTable: "fundraiser"
                 }}>
                     <button className="buttonLink">Fundraisers</button>
                 </Link>
