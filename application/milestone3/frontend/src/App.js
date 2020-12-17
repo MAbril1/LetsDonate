@@ -9,6 +9,7 @@ import User from './components/User.js';
 import ProductPost from './components/ProductPost.js';
 import FundraiserPost from './components/FundraiserPost.js';
 import SearchResult from './components/searchResult.js';
+import ChatSpace from './components/ChatSpace.js';
 import MessageList from './components/MessageList.js';
 
 import history from './components/backend/history.js';

@@ -45,13 +45,13 @@ class Home extends Component {
         {/* This is the landing banner and is supposed to be what draws users in and explains what the website is about. */}
         <div className="LandingBanner-bg"><div className="LandingBanner">
           <h1>Let's Donate</h1>
-          <p className="statement"><h3>
+          <p className="statement">
             Let's Donate is the inbetween <br />
             for people that want to give  <br />
             donations directly to those that <br />
             need it and people that seek <br />
             out help in their time of need. <br />
-          </h3></p>
+          </p>
         </div></div>
         <hr className="separator"></hr>
         <div>

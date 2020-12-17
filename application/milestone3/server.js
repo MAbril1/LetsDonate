@@ -225,7 +225,6 @@ app.post('/api/makeSearch', function (req, res) {
     console.log(response);
   });
 });
-
 app.post('/api/makeFundSearch', function (req, res) {
   config.query(`SELECT * FROM fundraisers WHERE title LIKE '%${req.body.searchItem}%'`, function (e, response, f) {
     res.json({ success: true, fundraisers: response });
