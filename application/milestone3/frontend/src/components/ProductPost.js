@@ -173,25 +173,6 @@ class ProductPost extends Component {
 
     return (
       <div>
-        <div className="topBar">
-
-
-          <div className="editButton">
-            <Button variant='outlined'>Edit</Button>
-          </div>
-
-          <div className="leftSide">
-            <div className="saveButton">
-              <Button variant='outlined'>Save</Button>
-            </div>
-
-            <div className="deleteButton">
-              <Button variant='outlined'>Delete</Button>
-            </div>
-          </div>
-
-
-        </div>
         <div className="topSection">
           <img class="productImg" src={productItem.productImage} onError={(e) => {
             e.target.src = '../images/charity.png' // fallback image
