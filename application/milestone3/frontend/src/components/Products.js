@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Grid from '@material-ui/core/Grid';
 import Card from './Card.js';
 import './css/Products.css';
 
@@ -61,30 +62,29 @@ class Products extends Component {
         // returns a map of the categories and their count
         return (
             Object.keys(occurrences).sort().map(item => 
-            <div className="checkbox"><label><input type="checkbox" id={item} onClick={() => {this.setCategory(item)}}/>{item} ({occurrences[item]})</label></div>
+            <div><label><input type="checkbox" id={item} onClick={() => {this.setCategory(item)}}/>{item} ({occurrences[item]})</label></div>
             )
         );
     }
 
   render() {
     return (
-        <div className="Products">
-
-            {/* left sticky side of filters and sort bys */}
-            <div className="filters">
-                <h1 className="leftSide">Filters</h1>
-                {/* Calls function to get the categories loaded to the state*/}
-                {this.getCategories()}            
-            </div>
-
-            <div className="split"></div>
-
-            {/* map of items from backend */}
-            <div className="items">
+        <div className="h-75 x-1 grid">
+          <Grid container spacing={3}>
+            {/* filters */}
+            <Grid item sm={12} md={2} className="filters border-right border-dark">
+              <h1>Filters</h1>
+              {this.getCategories()}
+            </Grid>
+            {/* products */}
+            <Grid item sm={12} md={10}>
+              <div className="items">
                 {this.state.items.sort().reverse().map(item => 
-                    <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage}/>
+                  <Card id={item.id} name={item.name} description={item.description} productImage={item.productImage}/>
                 )}
-            </div>
+              </div>
+            </Grid>
+          </Grid>
         </div>
     );
   }

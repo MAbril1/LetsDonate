@@ -42,6 +42,9 @@ div.scrollmenu {
     overflow-y: hidden;
     margin: 15px 0;
 }
+.featured{
+    margin-left: 15px;;
+}
 h2 {
     margin-top: 10px;
 }
