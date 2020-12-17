@@ -6,6 +6,7 @@ import './css/Fundraisers.css';
 import axios from 'axios';
 import { Form, Label, Input, FormGroup, CustomInput } from 'reactstrap';
 import Popup from 'reactjs-popup';
+import Grid from '@material-ui/core/Grid';
 
 import currentUser from './backend/currentUser.js';
 import loginData from './backend/loginBackend.js';
@@ -248,41 +249,25 @@ class Fundraisers extends Component {
     }
 
   render() {
-
     return (
-
-      
-      <div>
-        <div className="donationHeading">
-          <div className="heading">
-            <h1>Fundraisers</h1>
+      <div className="h-75 x-1 grid">
+      <Grid container spacing={3}>
+        {/* filters */}
+        <Grid item sm={12} md={2} className="filters border-right border-dark">
+          <h1>Filters</h1>
+          {this.getCategories()}
+        </Grid>
+        {/* products */}
+        <Grid item sm={12} md={10}>
+          <div className="makePost">{this.createPost()}</div>
+          <div className="items">
+            {this.state.items.sort().reverse().map(item =>
+              <FundraiserCard id={item.id} title={item.title} description={item.description} image={item.image} endorsement={item.endorsement} requiredAmount={item.requiredAmount} />
+            )}
           </div>
-          <div classname="fundButton">
-
-            {/* <button
-                    className="button"
-                    onClick={() => { }}
-                  >Create Fundraiser
-            </button> */}
-          </div>
-        </div>
-
-        {/* left sticky side of filters and sort bys */}
-        <div className="filters">
-                <h1 className="leftSide">Filters</h1>
-                {/* Calls function to get the categories loaded to the state*/}
-                {this.getCategories()}            
-            </div>
-
-            <div className="split"></div>
-
-        {this.createPost()}
-        <div className="items">
-          {this.state.items.sort().reverse().map(item =>
-            <FundraiserCard id={item.id} title={item.title} description={item.description} image={item.image} endorsement={item.endorsement} requiredAmount={item.requiredAmount} />
-          )}
-        </div>
-      </div>
+        </Grid>
+      </Grid>
+    </div>
     );
   }
 }

@@ -55,7 +55,7 @@ class Home extends Component {
         </div></div>
         <hr className="separator"></hr>
         <div>
-          <h2>Featured</h2>
+          <h2 className="featured">Featured</h2>
         </div>
         <hr />
 
