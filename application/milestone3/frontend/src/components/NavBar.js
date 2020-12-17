@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom';
 import './css/NavBar.css';
 import './css/PopUps.css';
 import charity from '../images/charity.png';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import axios from 'axios';
@@ -115,13 +112,15 @@ class NavBar extends Component {
         else // if logged in, show logout button
         {
             return(
-                <div>
+                <div className="accountViews">
                     <button className="buttonLink" onClick={() => {
                         currentUser.setUserLogout();
                         window.location.replace('/');}}> Logout </button>
 
                     {/* This button takes a user to their user page if their signed in */}
-                    <Link className='userLink' to={`/User/${this.props.currentUser}`/* links to product page using product name */}><AccountCircleIcon /></Link>
+                    <Link className='userLink' to={`/User/${this.props.currentUser}`/* links to product page using product name */}>
+                        <AccountCircleIcon/>
+                    </Link>
                 </div>
             )
         }
@@ -147,21 +146,12 @@ class NavBar extends Component {
 
             {/* This is the searchbar */}
             <div className="search">
-                <input id="searchType" type="text" placeholder="Search for products or fundraisers" onChange={this.getKey.bind(this)}/>
-                
-                {/* At the moment, the dropdown acts as the links to the browsing pages */}
-                <Select
-                    id="browseType"
-                    // onChange={this.getType.bind(this)}
-                >
-                    <Link className='link' to={{
-                        pathname: "/Products",
-                        keySearch: this.keySearch,
-                    }}><MenuItem value="/Products">Products</MenuItem></Link>
-                    <Link className='link' to={"/Fundraisers"}><MenuItem value="/Fundraisers">Fundraisers</MenuItem></Link>
-                </Select>
-                {console.log(this.state.items)}
-                <Link className='link' to={{pathname: "/searchResult", products: this.state.items}}><SearchIcon /></Link>
+                <input id="searchType" type="text" placeholder="Search for" onChange={this.getKey.bind(this)}/>
+                <div className="searchLine"/>
+                in:
+                <button className="buttonLink">Products</button>
+                <button className="buttonLink">Fundraisers</button>
+                {/* <Link className='link' to={{pathname: "/searchResult", products: this.state.items}}><SearchIcon /></Link> */}
             </div>
 
             {/* This is the button to allow users to log in/sign up through a pop up */}
