@@ -146,14 +146,14 @@ class NavBar extends Component {
                         <FormControl id="searchType" type="text" placeholder="Search" className="mr-sm-2" onChange={this.getKey.bind(this)}></FormControl>
                         in:
                         <Link className='link' to={{
-                            pathname: "/searchResult",
+                            pathname: `/search/${"products"}/${this.state.searchTerm}`,
                             products: this.state.items
                         }}>
                             <button className="buttonLink">Products</button>
                         </Link>
                         <div className="searchLine"/>
                         <Link className='link' to={{
-                            pathname: "/searchFundResult",
+                            pathname: `/search/${"fundraisers"}/${this.state.searchTerm}`,
                             fundraisers: this.state.fundraisers
                         }}>
                             <button className="buttonLink">Fundraisers</button>
