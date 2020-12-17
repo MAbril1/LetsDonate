@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import FundraiserCard from './FundraiserCard';
-import candies from '../images/candies.jpg';
-import clinic from '../images/clinic.jpg';
-import college from '../images/college.jpg';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import homeless from '../images/homeless.jpg';
-import city from '../images/city.jpg';
-import grocery from '../images/grocery.jpg';
-import travel from '../images/travel.jpg';
 import './css/Fundraisers.css';
 import axios from 'axios';
 import { Form, Label, Input, FormGroup, CustomInput } from 'reactstrap';
@@ -41,14 +34,13 @@ class Fundraisers extends Component {
     var title;
     var description;
     var amountRequired;
-    var endorsement = 0;
-    var owner = currentUser.getUser().email;
+    var owner = this.props.currentUser;
 
     // edit profile if current user is profile owner or an admin
 
     let tempUserEmail = "noemail@email.com";
 
-    if (tempUserEmail.localeCompare(currentUser.getUser().email) !== 0) // checks if there is a current user, if there isn't show login button
+    if (tempUserEmail.localeCompare(owner) !== 0) // checks if there is a current user, if there isn't show login button
     {
       return (
         <Popup

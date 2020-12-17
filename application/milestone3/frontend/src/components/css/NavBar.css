@@ -5,6 +5,10 @@
   border-radius: 15px;
 }
 
+.home {
+  /* background-color: #ff7779;  */
+}
+
 .NavBar{
   display: flex;
   position: sticky;
@@ -27,21 +31,11 @@
 }
 
 input{
-  margin: 3px;
+  margin: 7px;
 }
-
-.topRight{
-  display: flex;
-  align-items: center;
-  margin-right: 70px;
-  justify-content: space-between;
-  width: 10vw;
-}
-
-.topRight > button{
-  color: white;
-  background-color: #ff7779;
-  text-transform: inherit;
+.accountViews {
+  height: auto;
+  margin-right: 30px;
 }
 
 .createPostButton > button{
@@ -53,7 +47,7 @@ input{
 .search{
   display: flex;
   align-items: center;
-  height: 15px;
+  height: 42px;
   padding: 15px;
   max-width: fit-content;
   border: 1px solid lightgray;
@@ -66,6 +60,12 @@ input{
   outline-width: 0;
   border: none;
   width: 300px;
+}
+
+.searchLine {
+  height: 36px;
+  border-left: 1px solid rgba(56, 56, 56, 0.144);
+  margin: 7px
 }
 
 .dropDown {
@@ -83,8 +83,7 @@ input{
 }
 
 .userLink{
-  margin: 30px;
-  padding: 10px;
+  margin-left: 24px;
 }
 
 .popup {
@@ -117,14 +116,9 @@ input{
 .login-button {
   background-color: white;
   border-color: rgba(88, 88, 250, 0.979);
-  border-radius: 5px;
-  padding: 10px;
   color: black;  
   text-align: center;
   font-size: 16px;
-  width: 150px;
-  margin-bottom: 20px;
-  display: inline-block;
 }
 .login-button:hover {
   background-color:  rgba(88, 88, 250, 0.979);

@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import Card from './Card.js';
+import FundraiserCard from './FundraiserCard.js';
 import './css/searchResult.css';
 
 /*
-**  searchResult.js
+**  searchFundResult.js
 **
 **  This page is a temporary fill in for the browsing pages in order to get items with the same name as the
 **  input keywords
 */
-export class searchResult extends Component {
+export class searchFundResult extends Component {
     render() {
 
-        const items = this.props.location.products;
+        const items = this.props.location.fundraisers;
 
         // console.log(items);
         // console.log(items);
@@ -23,7 +23,7 @@ export class searchResult extends Component {
                 </div>
                 <div className="items">
                     {items.map(item =>
-                        <Card name={item.name} description={item.description} productImage={item.productImage} />
+                        <FundraiserCard id={item.id} title={item.title} description={item.description} image={item.image} endorsement={item.endorsement} requiredAmount={item.requiredAmount} />
                     )}
                 </div>
             </div>
@@ -31,4 +31,4 @@ export class searchResult extends Component {
     }
 }
 
-export default searchResult
+export default searchFundResult
