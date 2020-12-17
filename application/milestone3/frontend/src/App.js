@@ -14,6 +14,7 @@ import MessageList from './components/MessageList.js';
 
 import history from './components/backend/history.js';
 
+import ChatSpace from './components/ChatSpace.js';
 import register from './components/register.js'
 import recovery from './components/recovery.js'
 import AvailableChatUsers from './components/AvailableChatUsers';
@@ -44,7 +45,9 @@ class App extends Component {
           {/* Dynamic route for products by using the product name */}
           <Route path="/Product/:id" component={ProductPost} />
           <Route path="/Fundraiser/:id" component={FundraiserPost} />
-          <Route path="/searchResult" component={SearchResult} />
+          <Route path="/search/:table/:term" component={SearchResult} />
+          <Route path="/search/products" component={Products} />
+          <Route path="/search/fundraisers" component={Fundraisers} />
           <Route path="/register" component={register} />
           <Route path="/recovery" component={recovery} />
           {/*<Route path="/chat" component={ChatRoom} />*/}
